@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DrinkOS – Projektwebsite</title>
+  <meta name="description" content="Projektwebsite für DrinkOS – Projektmanagement Internetpräsentation (BBS1 Mainz)" />
+  <style>
+    :root{
+      --blue:#0a2a66; /* dunkles Blau (Hintergrund/Marke) */
+      --blue-700:#123780;
+      --yellow:#f6c646;
+      --bg:#0b1220;
+      --text:#0f172a;
+      --muted:#334155;
+      --surface:#ffffff;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Liberation Sans", sans-serif; color:#0b1220; background:#f8fafc}
+    a{color:var(--blue)}
+    header{position:sticky; top:0; z-index:50; background:linear-gradient(180deg,#0a2a66 0%, #123780 100%); color:white; border-bottom:1px solid rgba(255,255,255,.15)}
+    .container{max-width:1100px; margin:0 auto; padding:0 1rem}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:0.8rem 0}
+    .brand{display:flex; align-items:center; gap:.75rem}
+    .brand img{height:42px; width:auto}
+    .brand .title{font-weight:800; letter-spacing:.5px}
+    .brand .subtitle{font-size:.8rem; opacity:.85}
+    .menu{display:flex; gap:1rem; flex-wrap:wrap}
+    .menu a{color:white; text-decoration:none; font-weight:600; opacity:.95}
+    .menu a:hover{opacity:1; text-decoration:underline}
+
+    .hero{background: radial-gradient(1000px 500px at 70% -100px, #2a4faa 0%, transparent 70%), var(--blue); color:white;}
+    .hero .wrap{display:grid; grid-template-columns: 1.2fr .8fr; gap:2rem; padding:3rem 0}
+    .hero h1{font-size:clamp(1.8rem,4vw,3rem); margin:.2rem 0 .6rem}
+    .hero p{line-height:1.6}
+    .cta{display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap}
+    .btn{display:inline-block; padding:.75rem 1rem; border-radius:999px; text-decoration:none; font-weight:700}
+    .btn-primary{background:var(--yellow); color:#1f2937}
+    .btn-outline{border:1.5px solid rgba(255,255,255,.6); color:white}
+
+    section{padding:3rem 0}
+    h2{font-size:clamp(1.4rem,3vw,2rem); margin:0 0 1rem}
+    .grid{display:grid; gap:1rem}
+    .grid-2{grid-template-columns:repeat(2, minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3, minmax(0,1fr))}
+    @media (max-width: 900px){ .hero .wrap{grid-template-columns: 1fr;} .grid-2,.grid-3{grid-template-columns:1fr} }
+
+    .card{background:var(--surface); border:1px solid #e5e7eb; border-radius:18px; padding:1rem}
+    .badge{display:inline-block; padding:.25rem .6rem; border-radius:999px; font-size:.75rem; background:#eef2ff; color:#3730a3}
+    .muted{color:#475569}
+    .list{padding-left:1.25rem}
+    .list li{margin:.3rem 0}
+
+    .timeline{position:relative; margin-left:.5rem}
+    .timeline::before{content:""; position:absolute; left:.6rem; top:.2rem; bottom:.2rem; width:2px; background:#dbeafe}
+    .tl-item{position:relative; padding-left:1.8rem; margin:.8rem 0}
+    .tl-item::before{content:""; position:absolute; left:0; top:.2rem; width:.9rem; height:.9rem; border-radius:999px; background:var(--yellow); border:2px solid #1d4ed8}
+
+    footer{background:#0b1220; color:#cbd5e1; padding:2.5rem 0; margin-top:2rem}
+    footer a{color:#cbd5e1}
+    .small{font-size:.9rem}
+    .impressum{font-size:.9rem; line-height:1.6}
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+  </style>
+</head>
+<body>
+  <!-- Kopfzeile / Navigation -->
+  <header>
+    <div class="container nav">
+      <div class="brand" aria-label="DrinkOS">
+        <!-- Ersetze src durch den echten Logo-Pfad (blauer Hintergrund): drinkos_logo_bluebg.png oder transparent -->
+        <img src="drinkos_logo_bluebg.png" alt="DrinkOS Logo" />
+        <div>
+          <div class="title">DrinkOS</div>
+          <div class="subtitle">Operating System für Cocktails</div>
+        </div>
+      </div>
+      <nav class="menu" aria-label="Hauptnavigation">
+        <a href="#start">Start</a>
+        <a href="#projekt">Projekt</a>
+        <a href="#ziele">Ziele</a>
+        <a href="#blog">Blog</a>
+        <a href="#team">Team</a>
+        <a href="#meilensteine">Meilensteine</a>
+        <a href="#downloads">Downloads</a>
+        <a href="#en">EN</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="start">
+    <div class="container wrap">
+      <div>
+        <span class="badge">Projektarbeit Fachschule Automatisierungstechnik</span>
+        <h1>DrinkOS – Smarte Cocktail-Steuerung als Lern- & Technikprojekt</h1>
+        <p class="muted">Diese Internetpräsentation dient der sachlichen Außendarstellung des Projekts. Sie beschreibt Planung, Ziele, Inhalte und dokumentiert Fortschritte in einem öffentlichen Blog. (Vorgaben gemäß BBS1 Mainz)</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#projekt">Zum Projekt</a>
+          <a class="btn btn-outline" href="#en">Kurzfassung (EN)</a>
+        </div>
+      </div>
+      <figure aria-label="Logo-Vorschau" style="display:flex; align-items:center; justify-content:center">
+        <img src="drinkos_logo_noslogan_transparent.png" alt="DrinkOS Logo" style="max-width:5000px; width:100%; height:auto" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- Projektbeschreibung -->
+  <section id="projekt">
+    <div class="container grid grid-2">
+      <div class="card">
+        <h2>Projektbeschreibung</h2>
+        <p>DrinkOS ist eine modulare, sensorgestützte Plattform zur automatisierten Zubereitung von Cocktails. Ziel ist es, typische Methoden der Automatisierungstechnik (Aktoren, Sensorik, Steuerung, HMI, Datenlogging) praxisnah zu planen, umzusetzen und zu evaluieren.</p>
+        <ul class="list">
+          <li>💡 <strong>Planung:</strong> Anforderungsanalyse, Architektur, Sicherheits- & Hygiene-Konzept</li>
+          <li>🛠️ <strong>Umsetzung:</strong> Konstruktion, Verdrahtung, Programmierung (z.&nbsp;B. SPS/Mikrocontroller), HMI</li>
+          <li>🧪 <strong>Tests:</strong> Rezept-Validierung, Durchsatz, Fehlerfälle, Wartbarkeit</li>
+          <li>📊 <strong>Dokumentation:</strong> Laufende Blogeinträge, Schaltpläne, Stücklisten, CAD</li>
+        </ul>
+        <p class="muted small">Verlinkung zu <a href="https://bbs1-mainz.jimdofree.com/projektmanagement/internetpr%C3%A4sentation/" target="_blank" rel="noopener">BBS1 Mainz – Internetpräsentation</a> und den Projektseiten ist vorgesehen.</p>
+      </div>
+	  <div class="card">
+        <h2>Projektbeschreibung</h2>
+        <p>DrinkOS ist eine modulare, sensorgestützte Plattform zur automatisierten Zubereitung von Cocktails. Ziel ist es, typische Methoden der Automatisierungstechnik (Aktoren, Sensorik, Steuerung, HMI, Datenlogging) praxisnah zu planen, umzusetzen und zu evaluieren.</p>
+        <ul class="list">
+          <li>💡 <strong>Planung:</strong> Anforderungsanalyse, Architektur, Sicherheits- & Hygiene-Konzept</li>
+          <li>🛠️ <strong>Umsetzung:</strong> Konstruktion, Verdrahtung, Programmierung (z.&nbsp;B. SPS/Mikrocontroller), HMI</li>
+          <li>🧪 <strong>Tests:</strong> Rezept-Validierung, Durchsatz, Fehlerfälle, Wartbarkeit</li>
+          <li>📊 <strong>Dokumentation:</strong> Laufende Blogeinträge, Schaltpläne, Stücklisten, CAD</li>
+        </ul>
+        <p class="muted small">Verlinkung zu <a href="https://bbs1-mainz.jimdofree.com/projektmanagement/internetpr%C3%A4sentation/" target="_blank" rel="noopener">BBS1 Mainz – Internetpräsentation</a> und den Projektseiten ist vorgesehen.</p>
+      </div>
+      <div class="card">
+        <h2 id="ziele">Ziele & Kennzahlen</h2>
+        <ul class="list">
+          <li>🎯 Funktionsnachweis durch Demo-Station inkl. HMI</li>
+          <li>⏱️ Bedienung & Ausgabe &lt; 90&nbsp;s pro Drink</li>
+          <li>📈 Verfügbarkeit ≥ 95&nbsp;% im Testzeitraum</li>
+          <li>🔁 Modulares Design (Pumpen, Sensoren, Rezepte)</li>
+          <li>🔒 Sicherheit (Leckage-Erkennung, Not-Aus, Hygiene)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog / Arbeitstagebuch (öffentlich) -->
+  <section id="blog">
+    <div class="container">
+      <h2>Blog / Arbeitstagebuch</h2>
+      <p class="muted">Jeder Projektteilnehmer führt und aktualisiert ein öffentliches Arbeitstagebuch: </p>
+      <div class="grid grid-3">
+        <article class="card" aria-labelledby="b1">
+          <div class="badge">KW 36</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b1">Erstellung des Pflichtenheftes</h3>
+          <p>In der ersten Woche ist meine Hauptaufgabe zu gucken was wir machen wollen, wie sinnvoll das ist, ohne das mian später in Zeitprobleme kommt.
+		  Dabei ist meine Hauptaufgabe Ideen zu sammeln wie das Programm aussehen kann</p>
+        </article>
+        <article class="card" aria-labelledby="b2">
+          <div class="badge">KW 36</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b2">Planung Antrieb</h3>
+          <p>Möglichkeiten alternativer Antriebstechniken überprüft. Lösungsansatz: Schrittmotor über Schrittmotortreiber wird vond er SPS angesteuert.</p>
+        </article>
+        <article class="card" aria-labelledby="b3">
+          <div class="badge">KW 37</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b3">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b4">
+          <div class="badge">KW 37</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b4">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b5">
+          <div class="badge">KW 38</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b5">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b6">
+          <div class="badge">KW 38</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b6">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b7">
+          <div class="badge">KW 39</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b7">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b8">
+          <div class="badge">KW 39</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b8">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b9">
+          <div class="badge">KW 40</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b9">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b10">
+          <div class="badge">KW 40</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b10">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b11">
+          <div class="badge">KW 41</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b11">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b12">
+          <div class="badge">KW 41</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b12">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b13">
+          <div class="badge">KW 42</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b13">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b14">
+          <div class="badge">KW 42</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b14">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b15">
+          <div class="badge">KW 43</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b15">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b16">
+          <div class="badge">KW 43</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b16">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b17">
+          <div class="badge">KW 44</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b17">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b18">
+          <div class="badge">KW 44</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b18">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b19">
+          <div class="badge">KW 45</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b19">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b20">
+          <div class="badge">KW 45</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b20">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b21">
+          <div class="badge">KW 46</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b21">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b22">
+          <div class="badge">KW 46</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b22">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b23">
+          <div class="badge">KW 47</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b23">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b24">
+          <div class="badge">KW 47</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b24">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b25">
+          <div class="badge">KW 48</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b25">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b26">
+          <div class="badge">KW 48</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b26">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b27">
+          <div class="badge">KW 49</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b27">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b28">
+          <div class="badge">KW 49</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b28">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b29">
+          <div class="badge">KW 50</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b29">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b30">
+          <div class="badge">KW 50</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b30">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b31">
+          <div class="badge">KW 51</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b31">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b32">
+          <div class="badge">KW 51</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b32">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b33">
+          <div class="badge">KW 52</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b33">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b34">
+          <div class="badge">KW 52</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b34">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b35">
+          <div class="badge">KW 01</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b35">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b36">
+          <div class="badge">KW 01</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b36">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b37">
+          <div class="badge">KW 02</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b37">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b38">
+          <div class="badge">KW 02</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b38">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b39">
+          <div class="badge">KW 03</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b39">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b40">
+          <div class="badge">KW 03</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b40">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b41">
+          <div class="badge">KW 04</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b41">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b42">
+          <div class="badge">KW 04</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b42">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b43">
+          <div class="badge">KW 05</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b43">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b44">
+          <div class="badge">KW 05</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b44">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b45">
+          <div class="badge">KW 06</div>
+		  <div class="badge">Dario</div>
+          <h3 id="b45">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+		<article class="card" aria-labelledby="b46">
+          <div class="badge">KW 06</div>
+		  <div class="badge">Noah</div>
+          <h3 id="b46">Sicherheitskonzept</h3>
+          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team">
+    <div class="container grid grid-3">
+      <div class="card">
+        <h2>Team & Arbeitsteilung</h2>
+        <p>Die Inhalte der Seiten werden von allen Teammitgliedern nach festgelegter Arbeitsteilung erstellt und gepflegt.</p>
+        <ul class="list">
+          <li><strong>Projektleitung:</strong> Planung, Meilensteine, Reviews</li>
+          <li><strong>Hardware:</strong> Mechanik, Elektrik, Sicherheit</li>
+          <li><strong>Software:</strong> Steuerung, HMI, Daten</li>
+          <li><strong>Dokumentation:</strong> Blog, Schaltpläne, Stückliste</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Kontakt / Betreuung</h2>
+        <p>Fachschule für Automatisierungstechnik – BBS&nbsp;1 Mainz</p>
+        <p class="small muted">Bitte beachten: sensible personenbezogene Daten nur nach Maßgabe von Datenschutz und Urheberrecht veröffentlichen.</p>
+        <ul class="list">
+          <li>E-Mail: <a href="mailto:dariobeg2000@gmail.com">projekt@drinkos.example</a></li>
+          <li>Ort: Mainz</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Projektlinks</h2>
+        <ul class="list">
+          <li><a href="#downloads">Dokumente/Pläne</a></li>
+          <li><a href="#meilensteine">Zeitplan</a></li>
+          <li><a href="https://bbs1-mainz.jimdofree.com/projektmanagement/internetpr%C3%A4sentation/" target="_blank" rel="noopener">Vorgaben Internetpräsentation (BBS1)</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meilensteine -->
+  <section id="meilensteine">
+    <div class="container">
+      <h2>Meilensteine & Fortschritt</h2>
+      <div class="card timeline">
+        <div class="tl-item"><strong>Kick-off:</strong> Projektziele, Teamrollen, Risikoanalyse</div>
+        <div class="tl-item"><strong>Design Freeze:</strong> Schaltplan, BOM, Software-Architektur</div>
+        <div class="tl-item"><strong>Integrationstest:</strong> Pumpen + Sensorik + HMI</div>
+        <div class="tl-item"><strong>Abnahme-Demo:</strong> Funktionsnachweis, Messwerte, Lessons Learned</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Downloads -->
+  <section id="downloads">
+    <div class="container grid grid-2">
+      <div class="card">
+        <h2>Downloads & Dokumentation</h2>
+        <ul class="list">
+          <li><a href="docs/DrinkOS_Projektbeschreibung.pdf">Projektbeschreibung (PDF)</a></li>
+          <li><a href="docs/DrinkOS_Schaltplan.pdf">Schaltplan (PDF)</a></li>
+          <li><a href="docs/DrinkOS_Stueckliste.xlsx">Stückliste (XLSX)</a></li>
+          <li><a href="docs/DrinkOS_Praesentation.pdf">Präsentation (PDF)</a></li>
+        </ul>
+        <p class="small muted">Hinweis: Bitte Dateien und Bilder nur mit Nutzungsrechten veröffentlichen.</p>
+      </div>
+      <div class="card">
+        <h2>Barrierefreiheit & Performance</h2>
+        <ul class="list">
+          <li>Klare Navigation, ausreichende Kontraste, Alt-Texte an Bildern</li>
+          <li>System-Schriftarten (Arial/Verdana/Georgia/Geneva) – schnelle Ladezeit</li>
+          <li>Optimierte Bilder, Caching, semantisches HTML</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- English Summary -->
+  <section id="en">
+    <div class="container">
+      <div class="card">
+        <h2>Project Summary (EN)</h2>
+        <p><strong>DrinkOS</strong> is a modular, sensor-driven platform for automated cocktail preparation. The project demonstrates core methods of automation engineering: planning, control, HMI, and testing. This site provides a public blog, documentation, and a clear description of the project goals and outcomes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt -->
+  <section id="kontakt">
+    <div class="container grid grid-2">
+      <div class="card">
+        <h2>Kontakt</h2>
+        <form action="#" method="post" class="grid">
+          <label>
+            <span class="sr-only">Name</span>
+            <input required name="name" placeholder="Name" style="width:100%; padding:.8rem; border-radius:10px; border:1px solid #e5e7eb" />
+          </label>
+          <label>
+            <span class="sr-only">E-Mail</span>
+            <input required type="email" name="email" placeholder="E-Mail" style="width:100%; padding:.8rem; border-radius:10px; border:1px solid #e5e7eb" />
+          </label>
+          <label>
+            <span class="sr-only">Nachricht</span>
+            <textarea required name="message" placeholder="Nachricht" rows="5" style="width:100%; padding:.8rem; border-radius:10px; border:1px solid #e5e7eb"></textarea>
+          </label>
+          <button class="btn" style="background:var(--blue); color:white; border:none">Senden</button>
+        </form>
+      </div>
+      <div class="card impressum">
+        <h2>Impressum & Datenschutz (Kurz)</h2>
+        <p>Verantwortlich für den Inhalt: Projektteam DrinkOS (Schulprojekt). Keine Gewähr für Vollständigkeit. Alle Marken sind Eigentum der jeweiligen Inhaber.</p>
+        <p>Bitte beachten: Keine abwertenden Inhalte, sensible personenbezogene Daten nur nach Maßgabe des Datenschutzes. Urheberrechte werden respektiert. (vgl. Vorgaben BBS1)</p>
+        <p class="small"><a href="https://bbs1-mainz.jimdofree.com/projektmanagement/internetpr%C3%A4sentation/" target="_blank" rel="noopener">Richtlinien Internetpräsentation</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container small">
+      <div>© <span id="y"></span> DrinkOS Projektteam • <a href="#impressum">Impressum</a> • <a href="#datenschutz">Datenschutz</a></div>
+      <div class="muted" style="margin-top:.5rem">Diese Seite bleibt mindestens 1 Jahr nach Projektende online. Verlinkt mit BBS1-Seite und den Projektseiten.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
