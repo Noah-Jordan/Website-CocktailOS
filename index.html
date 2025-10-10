@@ -602,21 +602,33 @@
 <section id="galerie" class="gallery">
   <div class="container">
     <h2>Galerie</h2>
-    <p class="muted">
-      Hier zeigen wir Eindrücke aus Planung, Aufbau und Tests. Zum Vergrößern klicken/tippen.
-    </p>
+    <p class="muted">Hier zeigen wir Eindrücke aus Planung, Aufbau und Tests. Zum Vergrößern klicken/tippen.</p>
 
     <div class="grid-auto" id="galleryGrid">
       <!-- Bild -->
-      <a href="Anlage_frontal.jpeg" class="gallery-item" data-type="image" data-caption="Anlage frontal – Schaltschrank">
-        <img src="Anlage_frontal.jpeg" alt="Anlage frontal" loading="lazy">
-      </a>
+      <figure class="gallery-card">
+        <a href="Anlage_frontal.jpeg"
+           class="gallery-item"
+           data-type="image"
+           data-caption="Anlage frontal – Schaltschrank">
+          <img src="Anlage_frontal.jpeg" alt="Anlage frontal – Schaltschrank" loading="lazy">
+        </a>
+        <figcaption class="gallery-caption">Anlage frontal – Schaltschrank</figcaption>
+      </figure>
 
       <!-- Video -->
-      <a href="Steuerung des Antriebs.mp4" class="gallery-item" data-type="video" data-caption="Steuerung des Antriebs – Referenzfahrt">
-        <!-- Vorschau wird automatisch erzeugt -->
-        <span class="badge-video">▶ Video</span>
-      </a>
+      <figure class="gallery-card">
+        <a href="Steuerung des Antriebs.mp4"
+           class="gallery-item"
+           data-type="video"
+           data-caption="Steuerung des Antriebs – Referenzfahrt">
+          <!-- Vorschaubild wird automatisch erzeugt (Zufallsframe) -->
+          <span class="badge-video">▶ Video</span>
+        </a>
+        <figcaption class="gallery-caption">Steuerung des Antriebs – Referenzfahrt</figcaption>
+      </figure>
+
+      <!-- Weitere Einträge: figure.gallery-card duplizieren und Pfade/Text anpassen -->
     </div>
   </div>
 </section>
@@ -632,10 +644,14 @@
 </div>
 
 <style>
+/* --- Galerie Layout --- */
 .gallery { padding: 3rem 0; }
 .gallery .grid-auto {
-  display:grid; gap:12px;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  display:grid; gap:14px;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+}
+.gallery-card{
+  display:flex; flex-direction:column; gap:6px;
 }
 .gallery-item {
   position:relative; overflow:hidden; border-radius:14px;
@@ -646,14 +662,23 @@
   width:100%; height:100%; object-fit:cover; display:block;
 }
 .gallery-item:hover {
-  box-shadow:0 6px 18px rgba(0,0,0,.08); transform:translateY(-1px);
-  transition:all .2s ease;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  transform:translateY(-1px); transition:all .2s ease;
 }
 .gallery-item .badge-video {
   position:absolute; left:8px; bottom:8px;
   padding:.25rem .5rem; background:rgba(10,42,102,.9);
   color:#fff; border-radius:999px; font-size:.75rem;
 }
+
+/* Beschriftung unterm Bild/Video */
+.gallery-caption{
+  font-size:.9rem; line-height:1.35;
+  color:#475569; /* muted */
+  padding:0 2px;
+}
+
+/* --- Lightbox --- */
 .lightbox {
   position:fixed; inset:0; background:rgba(0,0,0,.8);
   display:none; align-items:center; justify-content:center; z-index:1000;
@@ -679,6 +704,7 @@
 </style>
 
 <script>
+/* Galerie-Logik: Vorschaubilder + Lightbox + Captions */
 (function(){
   const grid = document.getElementById('galleryGrid');
   const lb = document.getElementById('lightbox');
@@ -686,21 +712,38 @@
   const btnClose = document.getElementById('lbClose');
   const btnPrev = document.getElementById('lbPrev');
   const btnNext = document.getElementById('lbNext');
-  const items = [];
 
-  grid.querySelectorAll('.gallery-item').forEach((a)=>{
-    items.push(a);
+  // Sammle die klickbaren <a.gallery-item> in Reihenfolge
+  const items = Array.from(grid.querySelectorAll('.gallery-item'));
+
+  // 1) Thumbnails automatisch erzeugen (für Videos/YouTube), Captions synchronisieren
+  items.forEach((a)=>{
     const type = a.dataset.type;
     const href = a.getAttribute('href');
 
-    // Falls kein Bild vorhanden ist -> Vorschau erzeugen
+    // Sicherstellen, dass figcaption Text aus data-caption hat (falls leer)
+    const card = a.closest('.gallery-card');
+    const capEl = card?.querySelector('.gallery-caption');
+    if(capEl && !capEl.textContent.trim() && a.dataset.caption){
+      capEl.textContent = a.dataset.caption;
+    }
+
+    // Falls kein <img> in der Vorschau vorhanden ist → generieren
     if(!a.querySelector('img')){
       const img = document.createElement('img');
       img.alt = a.dataset.caption || 'Vorschau';
       img.loading = 'lazy';
       a.prepend(img);
 
-      if(type === 'video'){
+      if(type === 'youtube'){
+        try{
+          const id = new URL(href).searchParams.get('v') || href.split('/').pop();
+          img.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+        }catch{
+          img.src = '';
+        }
+      } else if(type === 'video'){
+        // Zufälliges Vorschaubild aus MP4 erzeugen
         const video = document.createElement('video');
         video.src = href;
         video.preload = 'metadata';
@@ -709,69 +752,94 @@
         video.addEventListener('loadeddata',()=>{
           const canvas = document.createElement('canvas');
           const ctx = canvas.getContext('2d');
-          canvas.width = video.videoWidth;
-          canvas.height = video.videoHeight;
-          // zufälliger Frame (0–3 s)
-          video.currentTime = Math.random()*Math.min(3, video.duration || 3);
+          canvas.width = video.videoWidth || 1280;
+          canvas.height = video.videoHeight || 720;
+          const target = Math.random() * 3; // 0–3 s
+          // bei sehr kurzen Clips auf 0s bleiben
+          video.currentTime = Math.min(target, (video.duration || 0));
           video.addEventListener('seeked',()=>{
-            ctx.drawImage(video,0,0,canvas.width,canvas.height);
-            img.src = canvas.toDataURL('image/jpeg',0.7);
+            try{
+              ctx.drawImage(video,0,0,canvas.width,canvas.height);
+              img.src = canvas.toDataURL('image/jpeg',0.7);
+            }catch(e){
+              // Wenn drawImage wegen CORS fehlschlägt, nichts tun (oder Fallback)
+            }
           },{once:true});
         });
       } else {
+        // Normales Bild → direkt verlinktes Bild als Vorschau
         img.src = href;
       }
     }
   });
 
+  // 2) Lightbox öffnen
   let idx = -1;
   function openAt(i){
-    idx = ((i%items.length)+items.length)%items.length;
+    if(!items.length) return;
+    idx = ((i % items.length) + items.length) % items.length;
+
     const a = items[idx];
     const type = a.dataset.type;
     const href = a.getAttribute('href');
     const caption = a.dataset.caption || '';
-    content.innerHTML='';
-    if(type==='image'){
-      const img=document.createElement('img');
-      img.src=href; img.alt=caption;
+
+    content.innerHTML = '';
+
+    if(type === 'image'){
+      const img = document.createElement('img');
+      img.src = href; img.alt = caption;
       content.appendChild(img);
-    } else if(type==='video'){
-      const vid=document.createElement('video');
-      vid.src=href; vid.controls=true; vid.playsInline=true;
-      content.appendChild(vid); vid.play().catch(()=>{});
+    } else if(type === 'video'){
+      const vid = document.createElement('video');
+      vid.src = href; vid.controls = true; vid.playsInline = true;
+      content.appendChild(vid);
+      vid.play().catch(()=>{});
+    } else if(type === 'youtube'){
+      const id = new URL(href).searchParams.get('v') || href.split('/').pop();
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.style.width = '100%';
+      iframe.style.height = '70vh';
+      content.appendChild(iframe);
     }
+
     lb.classList.add('open');
-    document.body.style.overflow='hidden';
+    document.body.style.overflow = 'hidden';
   }
 
-  function closeLB(){ lb.classList.remove('open'); content.innerHTML=''; document.body.style.overflow=''; }
-  function prev(){ openAt(idx-1); }
-  function next(){ openAt(idx+1); }
+  function closeLB(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    content.innerHTML = '';
+    idx = -1;
+  }
+  function prev(){ if(items.length) openAt(idx - 1); }
+  function next(){ if(items.length) openAt(idx + 1); }
 
-  grid.addEventListener('click',(e)=>{
-    const a=e.target.closest('.gallery-item');
+  // Klick-Handling auf die Galerie
+  grid.addEventListener('click', (e)=>{
+    const a = e.target.closest('.gallery-item');
     if(!a) return;
     e.preventDefault();
     openAt(items.indexOf(a));
   });
-  btnClose.addEventListener('click',closeLB);
-  btnPrev.addEventListener('click',prev);
-  btnNext.addEventListener('click',next);
-  lb.addEventListener('click',(e)=>{ if(e.target===lb) closeLB(); });
-  document.addEventListener('keydown',(e)=>{
+
+  // Controls + Keyboard
+  document.getElementById('lbClose').addEventListener('click', closeLB);
+  document.getElementById('lbPrev').addEventListener('click', prev);
+  document.getElementById('lbNext').addEventListener('click', next);
+  lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLB(); });
+  document.addEventListener('keydown', (e)=>{
     if(!lb.classList.contains('open')) return;
-    if(e.key==='Escape') closeLB();
-    if(e.key==='ArrowLeft') prev();
-    if(e.key==='ArrowRight') next();
+    if(e.key === 'Escape') closeLB();
+    if(e.key === 'ArrowLeft') prev();
+    if(e.key === 'ArrowRight') next();
   });
 })();
 </script>
-
-        <!-- Weitere Items: duplizieren und Pfade anpassen -->
-      </div>
-    </div>
-  </section>
 
   <!-- Meilensteine -->
   <section id="meilensteine">
