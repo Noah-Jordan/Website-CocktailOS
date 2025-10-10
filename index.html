@@ -35,21 +35,50 @@
     .menu-links a:last-child { border-bottom: none; }
     .menu-links.show { display: flex; }
 
-    .hero{background: radial-gradient(1000px 500px at 70% -100px, #2a4faa 0%, transparent 70%), var(--blue); color:white;}
-    .hero .wrap{display:grid; grid-template-columns: 1.2fr .8fr; gap:2rem; padding:3rem 0}
-    .hero h1{font-size:clamp(1.8rem,4vw,3rem); margin:.2rem 0 .6rem}
-    .hero p{line-height:1.6}
+    /* ===== HERO: Hintergrundbild + Text-/Logo-Boxen ===== */
+    .hero{
+      position: relative;
+      color: #0b1220;
+      background: url('Anlage_frontal.jpeg') center center / cover no-repeat;
+    }
+    .hero::before{
+      /* sanfte Abdunkelung für besseren Kontrast im freien Bereich */
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.35) 100%);
+    }
+    .hero .wrap{
+      position: relative; /* über dem Overlay */
+      display:grid; grid-template-columns: 1.2fr .8fr; gap:2rem;
+      padding:3rem 0; min-height:60vh; align-items:center;
+    }
+    .hero-card{
+      background: rgba(255,255,255,0.92);
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      padding:1.2rem 1.4rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+      backdrop-filter: blur(4px);
+    }
+    .hero-card h1{ font-size:clamp(1.8rem,4vw,3rem); margin:.2rem 0 .6rem; }
+    .hero-card p{ color:#334155; line-height:1.6; }
     .cta{display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap}
     .btn{display:inline-block; padding:.75rem 1rem; border-radius:999px; text-decoration:none; font-weight:700}
     .btn-primary{background:var(--yellow); color:#1f2937}
-    .btn-outline{border:1.5px solid rgba(255,255,255,.6); color:white}
+    .btn-outline{border:1.5px solid var(--blue); color:var(--blue); background:transparent}
+
+    .hero-logo{ display:flex; align-items:center; justify-content:center; }
+    .hero-logo img{ max-width:360px; width:100%; height:auto; display:block; }
 
     section{padding:3rem 0}
     h2{font-size:clamp(1.4rem,3vw,2rem); margin:0 0 1rem}
     .grid{display:grid; gap:1rem}
     .grid-2{grid-template-columns:repeat(2, minmax(0,1fr))}
     .grid-3{grid-template-columns:repeat(3, minmax(0,1fr))}
-    @media (max-width: 900px){ .hero .wrap{grid-template-columns: 1fr;} .grid-2,.grid-3{grid-template-columns:1fr} }
+    @media (max-width: 900px){
+      .hero .wrap{ grid-template-columns: 1fr; gap:1rem; padding:2rem 0; }
+      .hero-logo img{ max-width:280px; }
+      .grid-2,.grid-3{grid-template-columns:1fr}
+    }
 
     .card{background:var(--surface); border:1px solid #e5e7eb; border-radius:18px; padding:1rem}
     .badge{display:inline-block; padding:.25rem .6rem; border-radius:999px; font-size:.75rem; background:#eef2ff; color:#3730a3}
@@ -68,7 +97,7 @@
     .impressum{font-size:.9rem; line-height:1.6}
     .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
 
-    /* --- Galerie --- */
+    /* --- Galerie (bleibt wie gehabt) --- */
     .gallery { padding: 3rem 0; }
     .gallery .grid-auto {
       display:grid; gap:12px;
@@ -77,43 +106,21 @@
     @media (max-width: 1100px){ .gallery .grid-auto{ grid-template-columns: repeat(3, 1fr);} }
     @media (max-width: 700px){ .gallery .grid-auto{ grid-template-columns: repeat(2, 1fr);} }
     @media (max-width: 420px){ .gallery .grid-auto{ grid-template-columns: 1fr;} }
-
     .gallery-item {
       position:relative; overflow:hidden; border-radius:14px;
       border:1px solid #e5e7eb; background:#fff;
       aspect-ratio: 16/10; display:block;
     }
-    .gallery-item img, .gallery-item video {
-      width:100%; height:100%; object-fit:cover; display:block;
-    }
+    .gallery-item img, .gallery-item video { width:100%; height:100%; object-fit:cover; display:block; }
     .gallery-item:hover { box-shadow:0 6px 18px rgba(0,0,0,.08); transform:translateY(-1px); transition:all .2s ease; }
+    .gallery-item .badge-video{ position:absolute; left:8px; bottom:8px; padding:.25rem .5rem; background:rgba(10,42,102,.9); color:#fff; border-radius:999px; font-size:.75rem; }
 
-    .gallery-item .badge-video{
-      position:absolute; left:8px; bottom:8px; padding:.25rem .5rem;
-      background:rgba(10,42,102,.9); color:#fff; border-radius:999px; font-size:.75rem;
-    }
-
-    .lightbox {
-      position:fixed; inset:0; background:rgba(0,0,0,.8);
-      display:none; align-items:center; justify-content:center; z-index:1000;
-    }
+    .lightbox { position:fixed; inset:0; background:rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index:1000; }
     .lightbox.open { display:flex; }
-    .lightbox-inner{
-      width:min(1200px, 92vw); max-height:88vh; position:relative;
-      background:#000; border-radius:14px; overflow:hidden;
-    }
-    .lightbox-content{
-      width:100%; height:100%; display:flex; align-items:center; justify-content:center;
-      background:#000;
-    }
-    .lightbox-content img, .lightbox-content video, .lightbox-content iframe{
-      max-width:100%; max-height:88vh; display:block;
-    }
-    .lightbox-close, .lightbox-prev, .lightbox-next{
-      position:absolute; top:10px; background:rgba(255,255,255,.12); color:#fff;
-      border:none; padding:.6rem .8rem; border-radius:10px; cursor:pointer; font-size:1rem;
-      backdrop-filter: blur(6px);
-    }
+    .lightbox-inner{ width:min(1200px, 92vw); max-height:88vh; position:relative; background:#000; border-radius:14px; overflow:hidden; }
+    .lightbox-content{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#000; }
+    .lightbox-content img, .lightbox-content video, .lightbox-content iframe{ max-width:100%; max-height:88vh; display:block; }
+    .lightbox-close, .lightbox-prev, .lightbox-next{ position:absolute; top:10px; background:rgba(255,255,255,.12); color:#fff; border:none; padding:.6rem .8rem; border-radius:10px; cursor:pointer; font-size:1rem; backdrop-filter: blur(6px); }
     .lightbox-close{ right:10px; }
     .lightbox-prev{ left:10px; top:50%; transform:translateY(-50%); }
     .lightbox-next{ right:10px; top:50%; transform:translateY(-50%); }
@@ -145,25 +152,37 @@
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero (NEU mit Bild + Boxen) -->
   <section class="hero" id="start">
     <div class="container wrap">
-      <div>
-        <span style="color: white;">Projektarbeit Fachschule Automatisierungstechnik</span>
+      <!-- linke Text-Box -->
+      <div class="hero-card">
+        <span class="muted">Projektarbeit Fachschule Automatisierungstechnik</span>
         <h1>DrinkOS – Smarte Cocktail-Steuerung</h1>
-        <br>
-        <p style="color: white;">Diese Internetpräsentation dient der sachlichen Außendarstellung des Projekts. Sie beschreibt Planung, Ziele, Inhalte und dokumentiert Fortschritte in einem öffentlichen Blog.</p>
-        <br>
+        <p>Diese Internetpräsentation dient der sachlichen Außendarstellung des Projekts. Sie beschreibt Planung, Ziele, Inhalte und dokumentiert Fortschritte in einem öffentlichen Blog.</p>
         <div class="cta">
           <a class="btn btn-primary" href="#projekt">Zum Projekt</a>
           <a class="btn btn-outline" href="#blog">Zum Blog</a>
         </div>
       </div>
-      <figure aria-label="Logo-Vorschau" style="display:flex; align-items:center; justify-content:center">
-        <img src="drinkos_logo_noslogan_transparent.png" alt="DrinkOS Logo" style="max-width:5000px; width:100%; height:auto" />
-      </figure>
+      <!-- rechte Logo-Box -->
+      <div class="hero-logo">
+        <div class="hero-card" aria-label="Logo-Vorschau">
+          <img src="drinkos_logo_noslogan_transparent.png" alt="DrinkOS Logo">
+        </div>
+      </div>
     </div>
   </section>
+
+  <script>
+    document.getElementById('y')?.textContent = new Date().getFullYear();
+    function toggleMenu() {
+      const menu = document.getElementById('menuLinks');
+      menu.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>
 
   <!-- Projektbeschreibung -->
   <section id="projekt">
@@ -846,10 +865,11 @@
     <div class="container">
       <h2>Meilensteine & Fortschritt</h2>
       <div class="card timeline">
-        <div class="tl-item"><strong>Kick-off:</strong> Projektziele, Teamrollen, Risikoanalyse</div>
-        <div class="tl-item"><strong>Design Freeze:</strong> Schaltplan, BOM, Software-Architektur</div>
-        <div class="tl-item"><strong>Integrationstest:</strong> Pumpen + Sensorik + HMI</div>
-        <div class="tl-item"><strong>Abnahme-Demo:</strong> Funktionsnachweis, Messwerte, Lessons Learned</div>
+        <div class="tl-item"><strong>25.08.2025 Kickoff: </strong>Das Projekt ist gestartet. Wir dürfen nun offiziell an der Anlage arbeiten.</div>
+        <div class="tl-item"><strong>30.09.2025 Abgabe Pflichtenheft: </strong>Das Pflichtenheft wurde fertig definiert und abgegeben. Gleichzeitig wurden Kernthemen wie: Antrieb, Visualisierung und LED-Steuerung ausgelegt und geplant</div>
+        <div class="tl-item"><strong>06.10.2025 Testen des Antriebs: </strong>Die Positionierung funktioniert und wir können wie im Video oben zu sehen über das HMI positionieren</div>
+        <div class="tl-item"><strong>20.10.2025 Testen der Arduino Verbindung: </strong>Am Montag nach den Ferien wird weiter getestet. Das Programm für den Arduino steht und der Antrieb wird verbaut.</div>
+        <div class="tl-item"><strong>03.11.2025 Zwischenpräsentation: </strong>Dort wird die Zwischenpräsentation gehalten. Probleme als auch erfolge werden gezeigt.</div>
       </div>
     </div>
   </section>
