@@ -7,7 +7,7 @@
   <meta name="description" content="Projektwebsite für DrinkOS – Projektmanagement Internetpräsentation (BBS1 Mainz)" />
   <style>
     :root{
-      --blue:#0a2a66; /* dunkles Blau (Hintergrund/Marke) */
+      --blue:#0a2a66;
       --blue-700:#123780;
       --yellow:#f6c646;
       --bg:#0b1220;
@@ -21,7 +21,7 @@
     a{color:var(--blue)}
     header{position:sticky; top:0; z-index:50; background:linear-gradient(180deg,#0a2a66 0%, #123780 100%); color:white; border-bottom:1px solid rgba(255,255,255,.15)}
     .container{max-width:1100px; margin:0 auto; padding:0 1rem}
-    .nav{display:flex; align-items:center; justify-content:space-between; padding:0.4rem 0; height: 60px;overflow: hidden;}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:0.4rem 0; height: 60px; overflow: hidden;}
     .brand{display:flex; align-items:center; gap:.75rem}
     .brand img{height:80px; width:auto}
     .brand .title{font-weight:800; letter-spacing:.5px}
@@ -29,56 +29,65 @@
     .menu{display:flex; gap:1rem; flex-wrap:wrap}
     .menu a{color:white; text-decoration:none; font-weight:600; opacity:.95}
     .menu a:hover{opacity:1; text-decoration:underline}
-    .menu-button { font-size: 1.5rem; background: none; border: none; cursor: pointer; padding: 10px; color: white; }
-    .menu-links { display: none; flex-direction: column; background-color: #123780; padding: 10px; border-radius: 5px; position: absolute; top: 100%; right: 1rem; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 1000; }
-    .menu-links a { padding: 8px; text-decoration: none; color: white; border-bottom: 1px solid rgba(255,255,255,0.2); }
-    .menu-links a:last-child { border-bottom: none; }
-    .menu-links.show { display: flex; }
+    .menu-button{font-size:1.5rem; background:none; border:none; cursor:pointer; padding:10px; color:white}
+    .menu-links{display:none; flex-direction:column; background-color:#123780; padding:10px; border-radius:5px; position:absolute; top:100%; right:1rem; width:200px; box-shadow:0 2px 8px rgba(0,0,0,0.1); z-index:1000}
+    .menu-links a{padding:8px; text-decoration:none; color:white; border-bottom:1px solid rgba(255,255,255,0.2)}
+    .menu-links a:last-child{border-bottom:none}
+    .menu-links.show{display:flex}
 
-    /* ===== HERO: Hintergrundbild + Text-/Logo-Boxen ===== */
+    /* ===== HERO: Hintergrundbild + Textbox + rundes, freischwebendes Logo ===== */
     .hero{
-      position: relative;
-      color: #0b1220;
-      background: url('Anlage_frontal.jpeg') center center / cover no-repeat;
+      position:relative;
+      color:#0b1220;
+      background:url('Anlage_frontal.jpeg') center center / cover no-repeat;
     }
     .hero::before{
-      /* sanfte Abdunkelung für besseren Kontrast im freien Bereich */
       content:""; position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.35) 100%);
+      background:linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.35) 100%);
     }
     .hero .wrap{
-      position: relative; /* über dem Overlay */
-      display:grid; grid-template-columns: 1.2fr .8fr; gap:2rem;
+      position:relative; /* über dem Overlay */
+      display:grid; grid-template-columns:1fr; gap:2rem;
       padding:3rem 0; min-height:60vh; align-items:center;
     }
     .hero-card{
-      background: rgba(255,255,255,0.92);
+      background:rgba(255,255,255,0.92);
       border:1px solid #e5e7eb;
       border-radius:18px;
       padding:1.2rem 1.4rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,.12);
-      backdrop-filter: blur(4px);
+      box-shadow:0 10px 30px rgba(0,0,0,.12);
+      backdrop-filter:blur(4px);
+      max-width:760px;
     }
-    .hero-card h1{ font-size:clamp(1.8rem,4vw,3rem); margin:.2rem 0 .6rem; }
-    .hero-card p{ color:#334155; line-height:1.6; }
+    .hero-card h1{ font-size:clamp(1.8rem,4vw,3rem); margin:.2rem 0 .6rem }
+    .hero-card p{ color:#334155; line-height:1.6 }
+
+    /* Buttons */
     .cta{display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap}
     .btn{display:inline-block; padding:.75rem 1rem; border-radius:999px; text-decoration:none; font-weight:700}
     .btn-primary{background:var(--yellow); color:#1f2937}
     .btn-outline{border:1.5px solid var(--blue); color:var(--blue); background:transparent}
 
-    .hero-logo{ display:flex; align-items:center; justify-content:center; }
-    .hero-logo img{ max-width:360px; width:100%; height:auto; display:block; }
+    /* Rundes, freischwebendes Logo im Hero */
+    .hero-mark{
+      position:absolute; top:20px; right:20px;
+      width:160px; height:160px;          /* quadratisch für perfekten Kreis */
+      border-radius:50%;                  /* rund */
+      object-fit:contain; background:#fff;
+      padding:10px; border:1px solid #e5e7eb;
+      box-shadow:0 10px 30px rgba(0,0,0,.12);
+      z-index:2;
+    }
+    @media (max-width:900px){
+      .hero-mark{ width:120px; height:120px; padding:8px; }
+    }
 
     section{padding:3rem 0}
     h2{font-size:clamp(1.4rem,3vw,2rem); margin:0 0 1rem}
     .grid{display:grid; gap:1rem}
     .grid-2{grid-template-columns:repeat(2, minmax(0,1fr))}
     .grid-3{grid-template-columns:repeat(3, minmax(0,1fr))}
-    @media (max-width: 900px){
-      .hero .wrap{ grid-template-columns: 1fr; gap:1rem; padding:2rem 0; }
-      .hero-logo img{ max-width:280px; }
-      .grid-2,.grid-3{grid-template-columns:1fr}
-    }
+    @media (max-width:900px){ .grid-2,.grid-3{grid-template-columns:1fr} }
 
     .card{background:var(--surface); border:1px solid #e5e7eb; border-radius:18px; padding:1rem}
     .badge{display:inline-block; padding:.25rem .6rem; border-radius:999px; font-size:.75rem; background:#eef2ff; color:#3730a3}
@@ -97,33 +106,26 @@
     .impressum{font-size:.9rem; line-height:1.6}
     .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
 
-    /* --- Galerie (bleibt wie gehabt) --- */
-    .gallery { padding: 3rem 0; }
-    .gallery .grid-auto {
-      display:grid; gap:12px;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-    @media (max-width: 1100px){ .gallery .grid-auto{ grid-template-columns: repeat(3, 1fr);} }
-    @media (max-width: 700px){ .gallery .grid-auto{ grid-template-columns: repeat(2, 1fr);} }
-    @media (max-width: 420px){ .gallery .grid-auto{ grid-template-columns: 1fr;} }
-    .gallery-item {
-      position:relative; overflow:hidden; border-radius:14px;
-      border:1px solid #e5e7eb; background:#fff;
-      aspect-ratio: 16/10; display:block;
-    }
-    .gallery-item img, .gallery-item video { width:100%; height:100%; object-fit:cover; display:block; }
-    .gallery-item:hover { box-shadow:0 6px 18px rgba(0,0,0,.08); transform:translateY(-1px); transition:all .2s ease; }
-    .gallery-item .badge-video{ position:absolute; left:8px; bottom:8px; padding:.25rem .5rem; background:rgba(10,42,102,.9); color:#fff; border-radius:999px; font-size:.75rem; }
+    /* --- Galerie (falls ihr sie nutzt; sonst entfernen) --- */
+    .gallery{ padding:3rem 0 }
+    .gallery .grid-auto{ display:grid; gap:12px; grid-template-columns:repeat(4, minmax(0,1fr)) }
+    @media (max-width:1100px){ .gallery .grid-auto{ grid-template-columns:repeat(3,1fr) } }
+    @media (max-width:700px){ .gallery .grid-auto{ grid-template-columns:repeat(2,1fr) } }
+    @media (max-width:420px){ .gallery .grid-auto{ grid-template-columns:1fr } }
+    .gallery-item{ position:relative; overflow:hidden; border-radius:14px; border:1px solid #e5e7eb; background:#fff; aspect-ratio:16/10; display:block }
+    .gallery-item img,.gallery-item video{ width:100%; height:100%; object-fit:cover; display:block }
+    .gallery-item:hover{ box-shadow:0 6px 18px rgba(0,0,0,.08); transform:translateY(-1px); transition:all .2s ease }
+    .gallery-item .badge-video{ position:absolute; left:8px; bottom:8px; padding:.25rem .5rem; background:rgba(10,42,102,.9); color:#fff; border-radius:999px; font-size:.75rem }
 
-    .lightbox { position:fixed; inset:0; background:rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index:1000; }
-    .lightbox.open { display:flex; }
-    .lightbox-inner{ width:min(1200px, 92vw); max-height:88vh; position:relative; background:#000; border-radius:14px; overflow:hidden; }
-    .lightbox-content{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#000; }
-    .lightbox-content img, .lightbox-content video, .lightbox-content iframe{ max-width:100%; max-height:88vh; display:block; }
-    .lightbox-close, .lightbox-prev, .lightbox-next{ position:absolute; top:10px; background:rgba(255,255,255,.12); color:#fff; border:none; padding:.6rem .8rem; border-radius:10px; cursor:pointer; font-size:1rem; backdrop-filter: blur(6px); }
-    .lightbox-close{ right:10px; }
-    .lightbox-prev{ left:10px; top:50%; transform:translateY(-50%); }
-    .lightbox-next{ right:10px; top:50%; transform:translateY(-50%); }
+    .lightbox{ position:fixed; inset:0; background:rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index:1000 }
+    .lightbox.open{ display:flex }
+    .lightbox-inner{ width:min(1200px,92vw); max-height:88vh; position:relative; background:#000; border-radius:14px; overflow:hidden }
+    .lightbox-content{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#000 }
+    .lightbox-content img,.lightbox-content video,.lightbox-content iframe{ max-width:100%; max-height:88vh; display:block }
+    .lightbox-close,.lightbox-prev,.lightbox-next{ position:absolute; top:10px; background:rgba(255,255,255,.12); color:#fff; border:none; padding:.6rem .8rem; border-radius:10px; cursor:pointer; font-size:1rem; backdrop-filter:blur(6px) }
+    .lightbox-close{ right:10px }
+    .lightbox-prev{ left:10px; top:50%; transform:translateY(-50%) }
+    .lightbox-next{ right:10px; top:50%; transform:translateY(-50%) }
   </style>
 </head>
 <body>
@@ -131,7 +133,7 @@
   <header>
     <div class="container nav">
       <div class="brand" aria-label="DrinkOS">
-        <img src="drinkos_logo_noslogan Rund" alt="DrinkOS Logo" />
+        <img src="drinkos_logo_noslogan_transparent.png" alt="DrinkOS Logo" />
         <div>
           <div class="title">DrinkOS</div>
           <div class="subtitle">Operating System für Cocktails</div>
@@ -152,10 +154,12 @@
     </div>
   </header>
 
-  <!-- Hero (NEU mit Bild + Boxen) -->
+  <!-- Hero mit rundem, freischwebendem Logo -->
   <section class="hero" id="start">
+    <!-- RUNDES LOGO -->
+    <img class="hero-mark" src="drinkos_logo_noslogan_transparent.png" alt="DrinkOS Logo">
     <div class="container wrap">
-      <!-- linke Text-Box -->
+      <!-- Text-Box -->
       <div class="hero-card">
         <span class="muted">Projektarbeit Fachschule Automatisierungstechnik</span>
         <h1>DrinkOS – Smarte Cocktail-Steuerung</h1>
@@ -165,25 +169,47 @@
           <a class="btn btn-outline" href="#blog">Zum Blog</a>
         </div>
       </div>
-      <!-- rechte Logo-Box -->
-      <div class="hero-logo">
-        <div class="hero-card" aria-label="Logo-Vorschau">
-          <img src="drinkos_logo_noslogan_transparent.png" alt="DrinkOS Logo">
-        </div>
-      </div>
     </div>
   </section>
 
+  <!-- Beispiel-Abschnitte (deine Inhalte hier einfügen) -->
+  <section id="projekt">
+    <div class="container">
+      <h2>Projekt</h2>
+      <p class="muted">Hier folgt eure Projektbeschreibung …</p>
+    </div>
+  </section>
+
+  <!-- Optional: Galerie -->
+  <!--
+  <section id="galerie" class="gallery">
+    <div class="container">
+      <h2>Galerie</h2>
+      <div class="grid-auto" id="galleryGrid">
+        <a href="Anlage_frontal.jpeg" class="gallery-item" data-type="image" data-caption="Anlage frontal">
+          <img src="Anlage_frontal.jpeg" alt="Anlage frontal" loading="lazy">
+        </a>
+        <a href="Steuerung des Antriebs.mp4" class="gallery-item" data-type="video" data-caption="Steuerung des Antriebs – Referenzfahrt">
+          <span class="badge-video">▶ Video</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <footer>
+    <div class="container small">
+      <div>© <span id="y"></span> DrinkOS Projektteam • <a href="#impressum">Impressum</a> • <a href="#datenschutz">Datenschutz</a></div>
+      <div class="muted" style="margin-top:.5rem">Diese Seite bleibt mindestens 1 Jahr nach Projektende online.</div>
+    </div>
+  </footer>
+
   <script>
-    document.getElementById('y')?.textContent = new Date().getFullYear();
-    function toggleMenu() {
-      const menu = document.getElementById('menuLinks');
-      menu.classList.toggle('show');
-    }
+    document.getElementById('y').textContent = new Date().getFullYear();
+    function toggleMenu(){ document.getElementById('menuLinks').classList.toggle('show'); }
   </script>
 </body>
 </html>
-
   <!-- Projektbeschreibung -->
   <section id="projekt">
     <div class="container grid grid-2">
