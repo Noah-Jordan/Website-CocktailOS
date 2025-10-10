@@ -29,43 +29,11 @@
     .menu{display:flex; gap:1rem; flex-wrap:wrap}
     .menu a{color:white; text-decoration:none; font-weight:600; opacity:.95}
     .menu a:hover{opacity:1; text-decoration:underline}
-.menu-button {
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  color: white;
-}
-
-.menu-links {
-  display: none;
-  flex-direction: column;
-  background-color: #123780;
-  padding: 10px;
-  border-radius: 5px;
-  position: absolute;
-  top: 100%;
-  right: 1rem;
-  width: 200px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  z-index: 1000;
-}
-
-.menu-links a {
-  padding: 8px;
-  text-decoration: none;
-  color: white;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-}
-
-.menu-links a:last-child {
-  border-bottom: none;
-}
-
-.menu-links.show {
-  display: flex;
-}
+    .menu-button { font-size: 1.5rem; background: none; border: none; cursor: pointer; padding: 10px; color: white; }
+    .menu-links { display: none; flex-direction: column; background-color: #123780; padding: 10px; border-radius: 5px; position: absolute; top: 100%; right: 1rem; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 1000; }
+    .menu-links a { padding: 8px; text-decoration: none; color: white; border-bottom: 1px solid rgba(255,255,255,0.2); }
+    .menu-links a:last-child { border-bottom: none; }
+    .menu-links.show { display: flex; }
 
     .hero{background: radial-gradient(1000px 500px at 70% -100px, #2a4faa 0%, transparent 70%), var(--blue); color:white;}
     .hero .wrap{display:grid; grid-template-columns: 1.2fr .8fr; gap:2rem; padding:3rem 0}
@@ -99,6 +67,56 @@
     .small{font-size:.9rem}
     .impressum{font-size:.9rem; line-height:1.6}
     .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+
+    /* --- Galerie --- */
+    .gallery { padding: 3rem 0; }
+    .gallery .grid-auto {
+      display:grid; gap:12px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    @media (max-width: 1100px){ .gallery .grid-auto{ grid-template-columns: repeat(3, 1fr);} }
+    @media (max-width: 700px){ .gallery .grid-auto{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 420px){ .gallery .grid-auto{ grid-template-columns: 1fr;} }
+
+    .gallery-item {
+      position:relative; overflow:hidden; border-radius:14px;
+      border:1px solid #e5e7eb; background:#fff;
+      aspect-ratio: 16/10; display:block;
+    }
+    .gallery-item img, .gallery-item video {
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+    .gallery-item:hover { box-shadow:0 6px 18px rgba(0,0,0,.08); transform:translateY(-1px); transition:all .2s ease; }
+
+    .gallery-item .badge-video{
+      position:absolute; left:8px; bottom:8px; padding:.25rem .5rem;
+      background:rgba(10,42,102,.9); color:#fff; border-radius:999px; font-size:.75rem;
+    }
+
+    .lightbox {
+      position:fixed; inset:0; background:rgba(0,0,0,.8);
+      display:none; align-items:center; justify-content:center; z-index:1000;
+    }
+    .lightbox.open { display:flex; }
+    .lightbox-inner{
+      width:min(1200px, 92vw); max-height:88vh; position:relative;
+      background:#000; border-radius:14px; overflow:hidden;
+    }
+    .lightbox-content{
+      width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+      background:#000;
+    }
+    .lightbox-content img, .lightbox-content video, .lightbox-content iframe{
+      max-width:100%; max-height:88vh; display:block;
+    }
+    .lightbox-close, .lightbox-prev, .lightbox-next{
+      position:absolute; top:10px; background:rgba(255,255,255,.12); color:#fff;
+      border:none; padding:.6rem .8rem; border-radius:10px; cursor:pointer; font-size:1rem;
+      backdrop-filter: blur(6px);
+    }
+    .lightbox-close{ right:10px; }
+    .lightbox-prev{ left:10px; top:50%; transform:translateY(-50%); }
+    .lightbox-next{ right:10px; top:50%; transform:translateY(-50%); }
   </style>
 </head>
 <body>
@@ -106,7 +124,6 @@
   <header>
     <div class="container nav">
       <div class="brand" aria-label="DrinkOS">
-        <!-- Ersetze src durch den echten Logo-Pfad (blauer Hintergrund): drinkos_logo_bluebg.png oder transparent -->
         <img src="drinkos_logo_noslogan_transparent.png" alt="DrinkOS Logo" />
         <div>
           <div class="title">DrinkOS</div>
@@ -115,14 +132,15 @@
       </div>
       <nav class="menu" aria-label="Hauptnavigation">
         <button class="menu-button" onclick="toggleMenu()">☰ Menü</button>
-  <div class="menu-links" id="menuLinks">
-    <a href="#start">Start</a>
-    <a href="#projekt">Projekt</a>
-    <a href="#blog">Blog</a>
-    <a href="#team">Team</a>
-    <a href="#meilensteine">Meilensteine</a>
-    <a href="#kontakt">Kontakt</a>
-  </div>
+        <div class="menu-links" id="menuLinks">
+          <a href="#start">Start</a>
+          <a href="#projekt">Projekt</a>
+          <a href="#blog">Blog</a>
+          <a href="#team">Team</a>
+          <a href="#galerie">Galerie</a>
+          <a href="#meilensteine">Meilensteine</a>
+          <a href="#kontakt">Kontakt</a>
+        </div>
       </nav>
     </div>
   </header>
@@ -133,10 +151,9 @@
       <div>
         <span style="color: white;">Projektarbeit Fachschule Automatisierungstechnik</span>
         <h1>DrinkOS – Smarte Cocktail-Steuerung</h1>
-	  <br>
+        <br>
         <p style="color: white;">Diese Internetpräsentation dient der sachlichen Außendarstellung des Projekts. Sie beschreibt Planung, Ziele, Inhalte und dokumentiert Fortschritte in einem öffentlichen Blog.</p>
-		  </p>
-		  <br>
+        <br>
         <div class="cta">
           <a class="btn btn-primary" href="#projekt">Zum Projekt</a>
           <a class="btn btn-outline" href="#blog">Zum Blog</a>
@@ -153,10 +170,9 @@
     <div class="container grid grid-2">
       <div class="card">
         <h2>Projektbeschreibung</h2>
-        <p>DrinkOS ist eine modulare, sensorgestützte Plattform zur automatisierten Zubereitung von Cocktails.</p> 
-	  </p>Das Ziel besteht darin, eine Cocktailstation nach zeitgemäßen Industrie-4.0-Prinzipien zu entwickeln, der eine zuverlässige, sichere und nachvollziehbare Bedienung ermöglicht.</p> 
-		  
-	  </p>Kern des Projekts ist eine neue Bedienoberfläche auf einem Siemens-Touchpanel, mit der sich vordefinierte Rezepturen auswählen sowie individuelle Cocktails erstellen und speichern lassen. Nach der Auswahl steuert eine Siemens-SPS den vollautomatischen Prozess: Ein Becher wird per Linearantrieb zu den Dosierstationen verfahren und die Zutaten werden abgegeben. Die integrierte LED-Beleuchtung visualisiert den Ablauf. Die HMI zeigt den aktuellen Prozessschritt jederzeit transparent an.</p>
+        <p>DrinkOS ist eine modulare, sensorgestützte Plattform zur automatisierten Zubereitung von Cocktails.</p>
+        <p>Das Ziel besteht darin, eine Cocktailstation nach zeitgemäßen Industrie-4.0-Prinzipien zu entwickeln, der eine zuverlässige, sichere und nachvollziehbare Bedienung ermöglicht.</p>
+        <p>Kern des Projekts ist eine neue Bedienoberfläche auf einem Siemens-Touchpanel, mit der sich vordefinierte Rezepturen auswählen sowie individuelle Cocktails erstellen und speichern lassen. Nach der Auswahl steuert eine Siemens-SPS den vollautomatischen Prozess: Ein Becher wird per Linearantrieb zu den Dosierstationen verfahren und die Zutaten werden abgegeben. Die integrierte LED-Beleuchtung visualisiert den Ablauf. Die HMI zeigt den aktuellen Prozessschritt jederzeit transparent an.</p>
         <ul class="list">
           <li>💡 <strong>Planung:</strong> Anforderungsanalyse, Architektur, Sicherheits- & Hygiene-Konzept</li>
           <li>🛠️ <strong>Umsetzung:</strong> Konstruktion, Verdrahtung, Programmierung, HMI</li>
@@ -165,19 +181,19 @@
         </ul>
         <p class="muted small">Verlinkung zu <a href="https://bbs1-mainz.jimdofree.com/projektmanagement/internetpr%C3%A4sentation/" target="_blank" rel="noopener">BBS1 Mainz – Internetpräsentation</a> und den Projektseiten ist vorgesehen.</p>
       </div>
-	  <div class="card">
-        <h2>Project Description</h2><p>DrinkOS is a modular, sensor-based platform for the automated preparation of cocktails.</p>
-	  </p>The goal is to develop a cocktail station based on modern Industry 4.0 principles, enabling reliable, safe, and traceable operation.</p>
-
-		<p>The core of the project is a new user interface on a Siemens touch panel, which allows users to select predefined recipes or create and save custom cocktails. Once a recipe is selected, a Siemens PLC controls the fully automated process: A cup is moved to the dispensing stations via a linear actuator, and the ingredients are dispensed. Integrated LED lighting visualizes the process, while the HMI continuously displays the current step in a transparent and user-friendly way.</p></p>
-		<ul class="list">
-  			<li>💡 <strong>Planning:</strong> Requirements analysis, system architecture, safety & hygiene concept</li>
-  			<li>🛠️ <strong>Implementation:</strong> Mechanical design, wiring, programming, HMI</li>
-  			<li>🧪 <strong>Testing:</strong> Recipe validation, throughput, failure scenarios, maintainability</li>
-  			<li>📊 <strong>Documentation:</strong> Ongoing blog entries, circuit diagrams, parts lists, CAD</li>
-		</ul>
+      <div class="card">
+        <h2>Project Description</h2>
+        <p>DrinkOS is a modular, sensor-based platform for the automated preparation of cocktails.</p>
+        <p>The goal is to develop a cocktail station based on modern Industry 4.0 principles, enabling reliable, safe, and traceable operation.</p>
+        <p>The core of the project is a new user interface on a Siemens touch panel, which allows users to select predefined recipes or create and save custom cocktails. Once a recipe is selected, a Siemens PLC controls the fully automated process: A cup is moved to the dispensing stations via a linear actuator, and the ingredients are dispensed. Integrated LED lighting visualizes the process, while the HMI continuously displays the current step in a transparent and user-friendly way.</p>
+        <ul class="list">
+          <li>💡 <strong>Planning:</strong> Requirements analysis, system architecture, safety & hygiene concept</li>
+          <li>🛠️ <strong>Implementation:</strong> Mechanical design, wiring, programming, HMI</li>
+          <li>🧪 <strong>Testing:</strong> Recipe validation, throughput, failure scenarios, maintainability</li>
+          <li>📊 <strong>Documentation:</strong> Ongoing blog entries, circuit diagrams, parts lists, CAD</li>
+        </ul>
         <p class="muted small">Link to <a href="https://bbs1-mainz.jimdofree.com/projektmanagement/internetpr%C3%A4sentation/" target="_blank" rel="noopener">BBS1 Mainz – Online Presentation</a> and the project pages is planned.</p>
-	</div>
+      </div>
     </div>
   </section>
 
@@ -187,288 +203,355 @@
       <h2>Blog / Arbeitstagebuch</h2>
       <p class="muted">Jeder Projektteilnehmer führt und aktualisiert ein öffentliches Arbeitstagebuch: </p>
       <div class="grid grid-3">
+        <!-- ... (deine Blog-Karten bleiben unverändert) ... -->
         <article class="card" aria-labelledby="b1">
           <div class="badge">KW 36</div>
-		  <div class="badge">Dario</div>
+          <div class="badge">Dario</div>
           <h3 id="b1">Erstellung des Pflichtenheftes</h3>
-          <p>In der ersten Woche ist meine Hauptaufgabe zu gucken was wir machen wollen, wie sinnvoll das ist, ohne das mian später in Zeitprobleme kommt.
-		  Dabei ist meine Hauptaufgabe Ideen zu sammeln wie das Programm aussehen kann</p>
+          <p>In der ersten Woche ist meine Hauptaufgabe zu gucken was wir machen wollen, wie sinnvoll das ist, ohne das man später in Zeitprobleme kommt. Dabei ist meine Hauptaufgabe Ideen zu sammeln wie das Programm aussehen kann.</p>
         </article>
-        <article class="card" aria-labelledby="b2">
-          <div class="badge">KW 36</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b2">Planung Antrieb</h3>
-          <p>Möglichkeiten alternativer Antriebstechniken überprüft. Lösungsansatz: Schrittmotor über Schrittmotortreiber wird vond er SPS angesteuert.</p>
-        </article>
-        <article class="card" aria-labelledby="b3">
-          <div class="badge">KW 37</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b3">Pflichenheft und Softwaretest</h3>
-          <p>Funktionale Anfroderungen wurden verschrifftlicht. Dazu wurden Ziele weiter ausformuliert, dazu gehören: LED-Steuerung, Visualisierung, Antriebstechnik und Rezeptverwaltung. Dazu habe ich die Verbindungen zu der SPS und dem HMI hergestellt. Da mein Laptop über keine Ethernetschittstelle verfügt, habe ich den Adapter getestet. Dazu wurden Logos erstellt.  </p>
-        </article>
-		<article class="card" aria-labelledby="b4">
-          <div class="badge">KW 37</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b4">Zeitplan und Website</h3>
-          <p>Ich habe Heute zuerst mit Excel einen groben Zeitplan erstellt, dieser soll in der nächsten Zeit immer wieder aktualisiert werden. Außerdem habe ich die Website online gestellt.</p>
-        </article>
-		<article class="card" aria-labelledby="b5">
-          <div class="badge">KW 38</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b5">Pflichtenheft erweitert</h3>
-          <p>Der Fokus heute war die Formulierung der Technischen Anforderungen. Zusätzlich wurde der Zeitplan erweitert und fast ageschlossen. Am Schluss wurden die Rahmenbedingungen des Pflichtenheftes noch erweitert und formuliert.</p>
-        </article>
-		<article class="card" aria-labelledby="b6">
-          <div class="badge">KW 38</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b6">Website</h3>
-          <p>Ich habe mich Heute um die gestaltung der Website im HTML-code gekümmert.</p>
-        </article>
-		<article class="card" aria-labelledby="b7">
-          <div class="badge">KW 39</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b7">Pflichtenheft erweitert</h3>
-          <p>Durch eine Geschäftsreise war ich nicht in der Schule, nebenbei habe ich aber weiter das Pflichtenheft beschrieben.</p>
-        </article>
-		<article class="card" aria-labelledby="b8">
-          <div class="badge">KW 39</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b8">Motorsteuerung</h3>
-          <p>Erst gab es einen Vortrag durch SEW über Antriebe. Danach habe ich unsere Motorsteuerung Testweise an den PC angeschlossen und ein Firmwareupdate geladen.</p>
-        </article>
-		<article class="card" aria-labelledby="b9">
-          <div class="badge">KW 40</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b9">Planen und Programmierung des Programms</h3>
-          <p>Allgemeine Funktionen wie Betriebsarten oder Störungshandling wurden programmiert und es wurde festgelegt, wie die Funktionen sinnvoll zu bedienen sind. 
-		  Zusätzlich wurde Angefangen einen FB für den Antrieb zu programmieren. Über die Woche wurde die Visualisierung angefangen und erste Bilder erstellt und aufgeschrieben wie die Bedienung der Anlage erfolgt</p>
-        </article>
-		<article class="card" aria-labelledby="b10">
-          <div class="badge">KW 40</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b10">Pflichtenheft und Motorsteuerung</h3>
-          <p>Wir haben zusammen das Pflichtenheft fertiggestellt und geprüft, sowie das Logo und den Link zur Website an die Projektleiter weitergeleitet. Außerdem habe ich den Testaufbau für den Motor fertig gestellt und den Motor in Betrieb genommen.</p>
-        </article>
-		<article class="card" aria-labelledby="b11">
-          <div class="badge">KW 41</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b11">Testen von Funktionen</h3>
-          <p>Ein Milestone ist, das die Ansteuerung des Antriebs über das HMI funktionert hat. Es hat die Referenzfahrt und eine absolut Positionierung funktionert. 
-		  Dadurch sind wir einen großen Schritt weitergekommen und der Antrieb kann vollends programmiert werden. Auch andere Funktionen wie Betriebsarten und erste Visualisierungen konnten getestet werden. </p>
-        </article>
-		<article class="card" aria-labelledby="b12">
-          <div class="badge">KW 41</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b12">Motorsteuerung über SPS</h3>
-          <p>Dario hat mir seinen Visualisierungsvorschlag präsenteirt und wir haben darüber diskutiert. Außerdem habe ich weitere Tests am Motor durchgeführt. Danach haben wir den Motor an die SPSangeschlossen und konnten weitere Tests in Verbindung SPS und motor machen.</p>
-        </article>
-		<!--<article class="card" aria-labelledby="b13">
-          <div class="badge">KW 42</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b13">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b14">
-          <div class="badge">KW 42</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b14">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b15">
-          <div class="badge">KW 43</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b15">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b16">
-          <div class="badge">KW 43</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b16">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b17">
-          <div class="badge">KW 44</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b17">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b18">
-          <div class="badge">KW 44</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b18">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b19">
-          <div class="badge">KW 45</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b19">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b20">
-          <div class="badge">KW 45</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b20">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b21">
-          <div class="badge">KW 46</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b21">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b22">
-          <div class="badge">KW 46</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b22">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b23">
-          <div class="badge">KW 47</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b23">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b24">
-          <div class="badge">KW 47</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b24">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b25">
-          <div class="badge">KW 48</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b25">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b26">
-          <div class="badge">KW 48</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b26">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b27">
-          <div class="badge">KW 49</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b27">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b28">
-          <div class="badge">KW 49</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b28">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b29">
-          <div class="badge">KW 50</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b29">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b30">
-          <div class="badge">KW 50</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b30">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b31">
-          <div class="badge">KW 51</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b31">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b32">
-          <div class="badge">KW 51</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b32">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b33">
-          <div class="badge">KW 52</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b33">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b34">
-          <div class="badge">KW 52</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b34">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b35">
-          <div class="badge">KW 01</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b35">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b36">
-          <div class="badge">KW 01</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b36">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b37">
-          <div class="badge">KW 02</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b37">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b38">
-          <div class="badge">KW 02</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b38">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b39">
-          <div class="badge">KW 03</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b39">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b40">
-          <div class="badge">KW 03</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b40">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b41">
-          <div class="badge">KW 04</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b41">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b42">
-          <div class="badge">KW 04</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b42">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b43">
-          <div class="badge">KW 05</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b43">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b44">
-          <div class="badge">KW 05</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b44">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b45">
-          <div class="badge">KW 06</div>
-		  <div class="badge">Dario</div>
-          <h3 id="b45">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article>
-		<article class="card" aria-labelledby="b46">
-          <div class="badge">KW 06</div>
-		  <div class="badge">Noah</div>
-          <h3 id="b46">Kein Eintrag</h3>
-          <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
-        </article> -->
-      </div>
+
+      <article class="card" aria-labelledby="b2">
+        <div class="badge">KW 36</div>
+        <div class="badge">Noah</div>
+        <h3 id="b2">Planung Antrieb</h3>
+        <p>
+          Möglichkeiten alternativer Antriebstechniken überprüft. Lösungsansatz: Schrittmotor über Schrittmotortreiber wird von der SPS angesteuert.
+        </p>
+      </article>
+
+      <article class="card" aria-labelledby="b3">
+        <div class="badge">KW 37</div>
+        <div class="badge">Dario</div>
+        <h3 id="b3">Pflichtenheft und Softwaretest</h3>
+        <p>
+          Funktionale Anforderungen wurden verschriftlicht. Dazu wurden Ziele weiter ausformuliert, dazu gehören: LED-Steuerung, Visualisierung, Antriebstechnik und Rezeptverwaltung. Außerdem habe ich die Verbindungen zur SPS und zum HMI hergestellt. Da mein Laptop über keine Ethernet-Schnittstelle verfügt, habe ich den Adapter getestet. Zusätzlich wurden Logos erstellt.
+        </p>
+      </article>
+
+      <article class="card" aria-labelledby="b4">
+        <div class="badge">KW 37</div>
+        <div class="badge">Noah</div>
+        <h3 id="b4">Zeitplan und Website</h3>
+        <p>
+          Ich habe heute zuerst mit Excel einen groben Zeitplan erstellt; dieser soll in der nächsten Zeit immer wieder aktualisiert werden. Außerdem habe ich die Website online gestellt.
+        </p>
+      </article>
+
+      <article class="card" aria-labelledby="b5">
+        <div class="badge">KW 38</div>
+        <div class="badge">Dario</div>
+        <h3 id="b5">Pflichtenheft erweitert</h3>
+        <p>
+          Der Fokus heute war die Formulierung der technischen Anforderungen. Zusätzlich wurde der Zeitplan erweitert und fast abgeschlossen. Am Schluss wurden die Rahmenbedingungen des Pflichtenheftes noch erweitert und formuliert.
+        </p>
+      </article>
+
+      <article class="card" aria-labelledby="b6">
+        <div class="badge">KW 38</div>
+        <div class="badge">Noah</div>
+        <h3 id="b6">Website</h3>
+        <p>
+          Ich habe mich heute um die Gestaltung der Website im HTML-Code gekümmert.
+        </p>
+      </article>
+
+      <article class="card" aria-labelledby="b7">
+        <div class="badge">KW 39</div>
+        <div class="badge">Dario</div>
+        <h3 id="b7">Pflichtenheft erweitert</h3>
+        <p>
+          Durch eine Geschäftsreise war ich nicht in der Schule, nebenbei habe ich aber weiter das Pflichtenheft beschrieben.
+        </p>
+      </article>
+
+      <article class="card" aria-labelledby="b8">
+        <div class="badge">KW 39</div>
+        <div class="badge">Noah</div>
+        <h3 id="b8">Motorsteuerung</h3>
+        <p>
+          Erst gab es einen Vortrag durch SEW über Antriebe. Danach habe ich unsere Motorsteuerung testweise an den PC angeschlossen und ein Firmware-Update geladen.
+        </p>
+      </article>
+
+      <article class="card" aria-labelledby="b9">
+        <div class="badge">KW 40</div>
+        <div class="badge">Dario</div>
+        <h3 id="b9">Planen und Programmierung des Programms</h3>
+        <p>
+          Allgemeine Funktionen wie Betriebsarten oder Störungshandling wurden programmiert und es wurde festgelegt, wie die Funktionen sinnvoll zu bedienen sind. Zusätzlich wurde angefangen, einen FB für den Antrieb zu programmieren. Über die Woche wurde die Visualisierung gestartet und erste Bilder erstellt sowie beschrieben, wie die Bedienung der Anlage erfolgt.
+        </p>
+      </article>
+
+      <article class="card" aria-labelledby="b10">
+        <div class="badge">KW 40</div>
+        <div class="badge">Noah</div>
+        <h3 id="b10">Pflichtenheft und Motorsteuerung</h3>
+        <p>
+          Wir haben zusammen das Pflichtenheft fertiggestellt und geprüft sowie das Logo und den Link zur Website an die Projektleiter weitergeleitet. Außerdem habe ich den Testaufbau für den Motor fertiggestellt und den Motor in Betrieb genommen.
+        </p>
+      </article>
+
+      <article class="card" aria-labelledby="b11">
+        <div class="badge">KW 41</div>
+        <div class="badge">Dario</div>
+        <h3 id="b11">Testen von Funktionen</h3>
+        <p>
+          Ein Meilenstein ist, dass die Ansteuerung des Antriebs über das HMI funktioniert hat. Es haben die Referenzfahrt und eine absolute Positionierung funktioniert. Dadurch sind wir einen großen Schritt weitergekommen und der Antrieb kann vollends programmiert werden. Auch andere Funktionen wie Betriebsarten und erste Visualisierungen konnten getestet werden.
+        </p>
+      </article>
+
+      <article class="card" aria-labelledby="b12">
+        <div class="badge">KW 41</div>
+        <div class="badge">Noah</div>
+        <h3 id="b12">Motorsteuerung über SPS</h3>
+        <p>
+          Dario hat mir seinen Visualisierungsvorschlag präsentiert und wir haben darüber diskutiert. Außerdem habe ich weitere Tests am Motor durchgeführt. Danach haben wir den Motor an die SPS angeschlossen und konnten weitere Tests in Verbindung SPS und Motor machen.
+        </p>
+      </article>
+
+      <!--
+      <article class="card" aria-labelledby="b13">
+        <div class="badge">KW 42</div>
+        <div class="badge">Dario</div>
+        <h3 id="b13">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b14">
+        <div class="badge">KW 42</div>
+        <div class="badge">Noah</div>
+        <h3 id="b14">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b15">
+        <div class="badge">KW 43</div>
+        <div class="badge">Dario</div>
+        <h3 id="b15">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b16">
+        <div class="badge">KW 43</div>
+        <div class="badge">Noah</div>
+        <h3 id="b16">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b17">
+        <div class="badge">KW 44</div>
+        <div class="badge">Dario</div>
+        <h3 id="b17">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b18">
+        <div class="badge">KW 44</div>
+        <div class="badge">Noah</div>
+        <h3 id="b18">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b19">
+        <div class="badge">KW 45</div>
+        <div class="badge">Dario</div>
+        <h3 id="b19">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b20">
+        <div class="badge">KW 45</div>
+        <div class="badge">Noah</div>
+        <h3 id="b20">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b21">
+        <div class="badge">KW 46</div>
+        <div class="badge">Dario</div>
+        <h3 id="b21">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b22">
+        <div class="badge">KW 46</div>
+        <div class="badge">Noah</div>
+        <h3 id="b22">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b23">
+        <div class="badge">KW 47</div>
+        <div class="badge">Dario</div>
+        <h3 id="b23">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b24">
+        <div class="badge">KW 47</div>
+        <div class="badge">Noah</div>
+        <h3 id="b24">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b25">
+        <div class="badge">KW 48</div>
+        <div class="badge">Dario</div>
+        <h3 id="b25">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b26">
+        <div class="badge">KW 48</div>
+        <div class="badge">Noah</div>
+        <h3 id="b26">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b27">
+        <div class="badge">KW 49</div>
+        <div class="badge">Dario</div>
+        <h3 id="b27">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b28">
+        <div class="badge">KW 49</div>
+        <div class="badge">Noah</div>
+        <h3 id="b28">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b29">
+        <div class="badge">KW 50</div>
+        <div class="badge">Dario</div>
+        <h3 id="b29">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b30">
+        <div class="badge">KW 50</div>
+        <div class="badge">Noah</div>
+        <h3 id="b30">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b31">
+        <div class="badge">KW 51</div>
+        <div class="badge">Dario</div>
+        <h3 id="b31">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b32">
+        <div class="badge">KW 51</div>
+        <div class="badge">Noah</div>
+        <h3 id="b32">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b33">
+        <div class="badge">KW 52</div>
+        <div class="badge">Dario</div>
+        <h3 id="b33">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b34">
+        <div class="badge">KW 52</div>
+        <div class="badge">Noah</div>
+        <h3 id="b34">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b35">
+        <div class="badge">KW 01</div>
+        <div class="badge">Dario</div>
+        <h3 id="b35">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b36">
+        <div class="badge">KW 01</div>
+        <div class="badge">Noah</div>
+        <h3 id="b36">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b37">
+        <div class="badge">KW 02</div>
+        <div class="badge">Dario</div>
+        <h3 id="b37">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b38">
+        <div class="badge">KW 02</div>
+        <div class="badge">Noah</div>
+        <h3 id="b38">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b39">
+        <div class="badge">KW 03</div>
+        <div class="badge">Dario</div>
+        <h3 id="b39">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b40">
+        <div class="badge">KW 03</div>
+        <div class="badge">Noah</div>
+        <h3 id="b40">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b41">
+        <div class="badge">KW 04</div>
+        <div class="badge">Dario</div>
+        <h3 id="b41">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b42">
+        <div class="badge">KW 04</div>
+        <div class="badge">Noah</div>
+        <h3 id="b42">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b43">
+        <div class="badge">KW 05</div>
+        <div class="badge">Dario</div>
+        <h3 id="b43">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b44">
+        <div class="badge">KW 05</div>
+        <div class="badge">Noah</div>
+        <h3 id="b44">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b45">
+        <div class="badge">KW 06</div>
+        <div class="badge">Dario</div>
+        <h3 id="b45">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+
+      <article class="card" aria-labelledby="b46">
+        <div class="badge">KW 06</div>
+        <div class="badge">Noah</div>
+        <h3 id="b46">Kein Eintrag</h3>
+        <p>Leckage-Sensorik integriert, Not-Aus getestet, Reinigungsmodus dokumentiert.</p>
+      </article>
+      -->
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Team -->
   <section id="team">
@@ -481,20 +564,20 @@
           <li><strong>Programmierung SPS:</strong> Dario Begerau</li>
           <li><strong>Visualisierung HMI: </strong> Dario Begerau</li>
           <li><strong>LED-Steuerung: </strong> Noah Jordan</li>
-		  <li><strong>Antriebstechnik: </strong> Noah Jordan</li>
-		  <li><strong>Internetseite </strong> Noah Jordan</li>
+          <li><strong>Antriebstechnik: </strong> Noah Jordan</li>
+          <li><strong>Internetseite </strong> Noah Jordan</li>
         </ul>
       </div>
-		<div class="card">
-      <h1>Noah Jordan</h1> 
-      <img src="Porträt Noah.jpg" alt="Profilbild von Noah Jordan" style="width:100%; height:auto; border-radius:8px; margin:10px 0;">
-      <p>Noah Jordan hat bei Dr.Heinrich Schneider Messtechnik GmbH in Bad Kreuznach den Beruf des Industrie-Mechatronikers erlernt. Aktuell arbeitet er dort als Anwendungstechniker in der Messtechnik. Er bearbeitet dieses Projekt im Zuge der Abschlussprüfung zum staatlich geprüften Techniker Fachrichtung Prozessautomatisierung.</p>
-    </div>
-		<div class="card">
-      <h1>Dario Begerau</h1> 
-      <img src="Porträt Dario.jpg" alt="Profilbild von Dario Begerau" style="width:100%; height:auto; border-radius:8px; margin:10px 0;">
-      <p>Dario Begerau hat bei Heinrich Huhn in Drolshagen den Beruf des Elektronikers für Betriebstechnik erlernt. Aktuell arbeitet er bei der Eckelmann AG als technischer Vertriebler. Er bearbeitet dieses Projekt im Zuge der Abschlussprüfung zum staatlich geprüften Techniker Fachrichtung Prozessautomatisierung.</p>
-    </div>
+      <div class="card">
+        <h1>Noah Jordan</h1> 
+        <img src="Porträt Noah.jpg" alt="Profilbild von Noah Jordan" style="width:100%; height:auto; border-radius:8px; margin:10px 0;">
+        <p>Noah Jordan hat bei Dr.Heinrich Schneider Messtechnik GmbH in Bad Kreuznach den Beruf des Industrie-Mechatronikers erlernt. Aktuell arbeitet er dort als Anwendungstechniker in der Messtechnik. Er bearbeitet dieses Projekt im Zuge der Abschlussprüfung zum staatlich geprüften Techniker Fachrichtung Prozessautomatisierung.</p>
+      </div>
+      <div class="card">
+        <h1>Dario Begerau</h1> 
+        <img src="Porträt Dario.jpg" alt="Profilbild von Dario Begerau" style="width:100%; height:auto; border-radius:8px; margin:10px 0;">
+        <p>Dario Begerau hat bei Heinrich Huhn in Drolshagen den Beruf des Elektronikers für Betriebstechnik erlernt. Aktuell arbeitet er bei der Eckelmann AG als technischer Vertriebler. Er bearbeitet dieses Projekt im Zuge der Abschlussprüfung zum staatlich geprüften Techniker Fachrichtung Prozessautomatisierung.</p>
+      </div>
       <div class="card">
         <h2>Kontakt / Betreuung</h2>
         <p>Fachschule für Automatisierungstechnik – BBS&nbsp;1 Mainz</p>
@@ -511,6 +594,28 @@
           <li><a href="#meilensteine">Zeitplan</a></li>
           <li><a href="https://bbs1-mainz.jimdofree.com/projektmanagement/internetpr%C3%A4sentation/" target="_blank" rel="noopener">Vorgaben Internetpräsentation (BBS1)</a></li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galerie (NEU) -->
+  <section id="galerie" class="gallery">
+    <div class="container">
+      <h2>Galerie</h2>
+      <p class="muted">Hier zeigen wir Eindrücke aus Planung, Aufbau und Tests. Zum Vergrößern klicken/tippen.</p>
+      <div class="grid-auto" id="galleryGrid">
+        <!-- BILD – Vorlage -->
+        <a href="Anlage_frontal.jpeg" class="gallery-item" data-type="image" data-caption="Erster Testaufbau – Schaltschrank">
+          <img src="media/aufbau_01_thumb.jpg" alt="Testaufbau Schaltschrank" loading="lazy">
+        </a>
+
+        <!-- VIDEO (MP4) – Vorlage -->
+        <a href="Steuerung des Antriebs.mp4" class="gallery-item" data-type="video" data-poster="media/linearachse_poster.jpg" data-caption="Linearantrieb Referenzfahrt">
+          <img src="media/linearachse_poster.jpg" alt="Linearantrieb Referenzfahrt" loading="lazy">
+          <span class="badge-video">▶ Video</span>
+        </a>
+
+        <!-- Weitere Items: duplizieren und Pfade anpassen -->
       </div>
     </div>
   </section>
@@ -565,14 +670,111 @@
     </div>
   </footer>
 
+  <!-- Lightbox-Overlay -->
+  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Medienanzeige">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lbClose" aria-label="Schließen">✕</button>
+      <button class="lightbox-prev" id="lbPrev" aria-label="Vorheriges">‹</button>
+      <div class="lightbox-content" id="lbContent"></div>
+      <button class="lightbox-next" id="lbNext" aria-label="Nächstes">›</button>
+    </div>
+  </div>
+
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
+    function toggleMenu() {
+      const menu = document.getElementById('menuLinks');
+      menu.classList.toggle('show');
+    }
   </script>
-	<script>
-  function toggleMenu() {
-    const menu = document.getElementById('menuLinks');
-    menu.classList.toggle('show');
-  }
-</script>
+
+  <!-- Galerie / Lightbox Logik -->
+  <script>
+  (function(){
+    const grid = document.getElementById('galleryGrid');
+    if(!grid) return;
+
+    const lb = document.getElementById('lightbox');
+    const content = document.getElementById('lbContent');
+    const btnClose = document.getElementById('lbClose');
+    const btnPrev = document.getElementById('lbPrev');
+    const btnNext = document.getElementById('lbNext');
+
+    const items = Array.from(grid.querySelectorAll('.gallery-item'));
+    let idx = -1;
+
+    function openAt(i){
+      if(!items.length) return;
+      idx = ((i % items.length) + items.length) % items.length;
+      const a = items[idx];
+      const type = a.dataset.type;
+      const href = a.getAttribute('href');
+      const caption = a.dataset.caption || '';
+
+      content.innerHTML = '';
+
+      if(type === 'image'){
+        const img = document.createElement('img');
+        img.src = href;
+        img.alt = caption || 'Bild';
+        content.appendChild(img);
+      } else if(type === 'video'){
+        const vid = document.createElement('video');
+        vid.src = href;
+        vid.controls = true;
+        vid.playsInline = true;
+        vid.preload = 'metadata';
+        if(a.dataset.poster) vid.poster = a.dataset.poster;
+        content.appendChild(vid);
+        vid.muted = true; vid.play().catch(()=>{});
+      } else if(type === 'youtube'){
+        const iframe = document.createElement('iframe');
+        const url = new URL(href, window.location.href);
+        const id = url.searchParams.get('v') || href.split('/').pop();
+        iframe.src = 'https://www.youtube.com/embed/' + id + '?rel=0&autoplay=1';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        iframe.title = caption || 'YouTube Video';
+        iframe.style.width = '100%'; iframe.style.height = '70vh';
+        content.appendChild(iframe);
+      }
+
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLB(){
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      content.innerHTML = '';
+      idx = -1;
+    }
+
+    function prev(){ if(items.length) openAt(idx - 1); }
+    function next(){ if(items.length) openAt(idx + 1); }
+
+    grid.addEventListener('click', (e)=>{
+      const a = e.target.closest('.gallery-item');
+      if(!a) return;
+      e.preventDefault();
+      const i = items.indexOf(a);
+      openAt(i);
+    });
+
+    btnClose.addEventListener('click', closeLB);
+    btnPrev.addEventListener('click', prev);
+    btnNext.addEventListener('click', next);
+
+    lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLB(); });
+
+    document.addEventListener('keydown', (e)=>{
+      if(!lb.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLB();
+      if(e.key === 'ArrowLeft') prev();
+      if(e.key === 'ArrowRight') next();
+    });
+  })();
+  </script>
 </body>
 </html>
+
