@@ -35,15 +35,18 @@
     .menu-links a:last-child{border-bottom:none}
     .menu-links.show{display:flex}
 
-    /* ===== HERO: Hintergrundbild + Textbox + rundes, freischwebendes Logo ===== */
+    /* HERO: Bild vollständig anzeigen + blaue Seiten füllen */
     .hero{
-      position:relative;
-      color:#0b1220;
-      background:url('Anlage_frontal.jpeg') center center / cover no-repeat;
+      position: relative;
+      color: #0b1220;
+      /* 1) Bild ohne Zuschnitt (contain), mittig, kein Repeat */
+      background: url('Anlage_frontal.jpeg') center center / contain no-repeat,
+                  var(--blue); /* 2) freie Fläche in Markenblau */
     }
+    /* Optionales, sehr leichtes Overlay für Lesbarkeit (auch über dem Blau) */
     .hero::before{
       content:""; position:absolute; inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.35) 100%);
+      background: rgba(0,0,0,.18); /* gern feiner einstellen oder entfernen */
     }
     .hero .wrap{
       position:relative; /* über dem Overlay */
