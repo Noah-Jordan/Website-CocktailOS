@@ -14,7 +14,7 @@
       --text:#0f172a;
       --muted:#334155;
       --surface:#ffffff;
-    }
+    
     *{box-sizing:border-box}
     html,body{margin:0}
     body{font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Liberation Sans", sans-serif; color:#0b1220; background:#f8fafc}
@@ -30,10 +30,36 @@
     .menu a{color:white; text-decoration:none; font-weight:600; opacity:.95}
     .menu a:hover{opacity:1; text-decoration:underline}
     .menu-button{font-size:1.5rem; background:none; border:none; cursor:pointer; padding:10px; color:white}
-    .menu-links{display:none; flex-direction:column; background-color:#123780; padding:10px; border-radius:5px; position:absolute; top:100%; right:1rem; width:200px; box-shadow:0 2px 8px rgba(0,0,0,0.1); z-index:1000}
-    .menu-links a{padding:8px; text-decoration:none; color:white; border-bottom:1px solid rgba(255,255,255,0.2)}
-    .menu-links a:last-child{border-bottom:none}
-    .menu-links.show{display:flex}
+     /* Off-canvas Menü rechts */
+    .menu-links{
+      position:fixed;
+      top:60px;                  /* entspricht deiner Headerhöhe */
+      right:-260px;              /* startet außerhalb des Viewports */
+      width:260px;
+      display:flex;
+      flex-direction:column;
+      background-color:#123780;
+      padding:12px;
+      border-radius:12px 0 0 12px;
+      box-shadow:-10px 14px 28px rgba(0,0,0,.18);
+      z-index:1000;
+      transition:right .25s ease;
+    }
+    .menu-links a{
+      padding:10px;
+      text-decoration:none;
+      color:white;
+      border-bottom:1px solid rgba(255,255,255,0.18)
+    }
+    .menu-links a:last-child{ border-bottom:none }
+    
+    /* ausfahren */
+    .menu-links.show{ right:0 }
+    
+    /* Wenn Menü offen: Logo etwas nach links schieben */
+    body.nav-open .hero-mark{
+      transform:translateX(-280px); /* ≈ Menübreite + Luft */
+    }
 
     /* ===== HERO: Blau + mehr Breite im Hero ===== */
     .hero{
@@ -167,7 +193,11 @@
     // Jahr (falls du später wieder einen Footer nutzt)
     // document.getElementById('y')?.textContent = new Date().getFullYear();
 
-    function toggleMenu(){ document.getElementById('menuLinks').classList.toggle('show'); }
+    function toggleMenu(){
+      const ml = document.getElementById('menuLinks');
+      ml.classList.toggle('show');
+      document.body.classList.toggle('nav-open', ml.classList.contains('show'));
+    }
 
     // Logo beim Scrollen ausblenden, sobald #projekt erreicht ist
     (function(){
@@ -601,7 +631,7 @@
       <div class="card">
         <h1>Dario Begerau</h1> 
         <img src="Porträt Dario.jpg" alt="Profilbild von Dario Begerau" style="width:100%; height:auto; border-radius:8px; margin:10px 0;">
-        <p>Dario Begerau hat bei Heinrich Huhn in Drolshagen den Beruf des Elektronikers für Betriebstechnik erlernt. Aktuell arbeitet er bei der Eckelmann AG als technischer Vertriebler. Er bearbeitet dieses Projekt im Zuge der Abschlussprüfung zum staatlich geprüften Techniker Fachrichtung Prozessautomatisierung.</p>
+        <p>Dario Begerau hat bei Heinrich Huhn in Drolshagen den Beruf des Elektronikers für Betriebstechnik erlernt. Aktuell arbeitet er bei der Eckelmann AG im technischen Vertrieb. Er bearbeitet dieses Projekt im Zuge der Abschlussprüfung zum staatlich geprüften Techniker Fachrichtung Prozessautomatisierung.</p>
       </div>
       <div class="card">
         <h2>Kontakt / Betreuung</h2>
@@ -955,9 +985,10 @@
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
-    function toggleMenu() {
-      const menu = document.getElementById('menuLinks');
-      menu.classList.toggle('show');
+   function toggleMenu(){
+      const ml = document.getElementById('menuLinks');
+      ml.classList.toggle('show');
+      document.body.classList.toggle('nav-open', ml.classList.contains('show'));
     }
   </script>
 
