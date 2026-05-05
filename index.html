@@ -14,7 +14,8 @@
       --text:#0f172a;
       --muted:#334155;
       --surface:#ffffff;
-    
+    }
+
     *{box-sizing:border-box}
     html,body{margin:0}
     body{font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Liberation Sans", sans-serif; color:#0b1220; background:#f8fafc}
@@ -30,11 +31,11 @@
     .menu a{color:white; text-decoration:none; font-weight:600; opacity:.95}
     .menu a:hover{opacity:1; text-decoration:underline}
     .menu-button{font-size:1.5rem; background:none; border:none; cursor:pointer; padding:10px; color:white}
-     /* Off-canvas Menü rechts */
+
     .menu-links{
       position:fixed;
-      top:60px;                  /* entspricht deiner Headerhöhe */
-      right:-260px;              /* startet außerhalb des Viewports */
+      top:60px;
+      right:-260px;
       width:260px;
       display:flex;
       flex-direction:column;
@@ -52,30 +53,24 @@
       border-bottom:1px solid rgba(255,255,255,0.18)
     }
     .menu-links a:last-child{ border-bottom:none }
-    
-    /* ausfahren */
     .menu-links.show{ right:0 }
-    
-    /* Wenn Menü offen: Logo etwas nach links schieben */
     body.nav-open .hero-mark{
-      transform:translateX(-280px); /* ≈ Menübreite + Luft */
+      transform:translateX(-280px);
     }
 
-    /* ===== HERO: Blau + mehr Breite im Hero ===== */
     .hero{
       position: relative;
       color: #0b1220;
       background: radial-gradient(1000px 500px at 70% -100px, #2a4faa 0%, transparent 70%), var(--blue);
     }
-    .hero::before{ /* leichtes Overlay für Lesbarkeit */
+    .hero::before{
       content:""; position:absolute; inset:0; background: rgba(0,0,0,.15);
     }
     .hero .wrap{
-      position:relative; /* über dem Overlay */
+      position:relative;
       display:grid; grid-template-columns:1fr; gap:2rem;
       padding:3rem 0; min-height:60vh; align-items:center;
     }
-    /* Mehr Platz NUR im Hero */
     .hero .container{ max-width: 1300px; }
 
     .hero-card{
@@ -85,28 +80,25 @@
       padding:1.2rem 1.4rem;
       box-shadow:0 10px 30px rgba(0,0,0,.12);
       backdrop-filter:blur(4px);
-      max-width:900px; /* etwas breiter zum Schreiben */
+      max-width:900px;
     }
     .hero-card h1{ font-size:clamp(1.8rem,4vw,3rem); margin:.2rem 0 .6rem }
-    .hero-card p{ color:#e5e7eb; } /* wird durch Overlay dunkler – hier auf sehr hell setzen */
     .hero-card p, .hero-card span.muted{ color:#eef2ff; }
-    .hero-card{ color:#0b1220; } /* Überschriften dunkel lassen */
+    .hero-card{ color:#0b1220; }
 
-    /* Buttons */
     .cta{display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap}
     .btn{display:inline-block; padding:.75rem 1rem; border-radius:999px; text-decoration:none; font-weight:700}
     .btn-primary{background:var(--yellow); color:#1f2937}
     .btn-outline{border:1.5px solid rgba(255,255,255,.6); color:white; background:transparent}
 
-    /* Rundes, freischwebendes Logo – FIXED bis #projekt */
     .hero-mark{
-      position:fixed; top:84px; right:20px;   /* 84px ≈ Header (60px) + Luft */
+      position:fixed; top:84px; right:20px;
       width:160px; height:160px;
       border-radius:50%;
       object-fit:contain; background:#fff;
       padding:10px; border:1px solid #e5e7eb;
       box-shadow:0 10px 30px rgba(0,0,0,.12);
-      z-index:60; /* über Header-Menü (50) */
+      z-index:60;
       transition:opacity .2s ease, transform .2s ease;
     }
     .hero-mark.is-hidden{ opacity:0; transform:scale(.95); pointer-events:none; }
@@ -120,39 +112,83 @@
 
     .card{background:var(--surface); border:1px solid #e5e7eb; border-radius:18px; padding:1rem}
     .badge{display:inline-block; padding:.25rem .6rem; border-radius:999px; font-size:.75rem; background:#eef2ff; color:#3730a3}
-    .muted{color:#cbd5e1} /* heller im Hero-Kontext */
+    .muted{color:#cbd5e1}
 
     .timeline{position:relative; margin-left:.5rem}
     .timeline::before{content:""; position:absolute; left:.6rem; top:.2rem; bottom:.2rem; width:2px; background:#dbeafe}
     .tl-item{position:relative; padding-left:1.8rem; margin:.8rem 0}
     .tl-item::before{content:""; position:absolute; left:0; top:.2rem; width:.9rem; height:.9rem; border-radius:999px; background:var(--yellow); border:2px solid #1d4ed8}
 
-    /* Galerie/Lightbox Styles bleiben unverändert, falls ihr die nutzt */
-    /* ===== gezielte Schwarz-Overrides ===== */
-    /* Hero-Einleitung */
     #start .hero-card p { color:#000 !important; }
-    
-    /* Hinweiszeilen unter Projekt (de/en) */
     #projekt .muted.small { color:#000 !important; }
-    
-    /* Blog-Einleitung */
     #blog .muted { color:#000 !important; }
-    
-    /* Kontakt-Hinweis im Team-Block */
     #team .muted { color:#000 !important; }
-    
-    /* Galerie-Einleitung */
     #galerie .muted { color:#000 !important; }
-      
-    /* CTA-Button "Zum Blog" – Text schwarz */
     #start .cta .btn-outline{
       color:#000 !important;
-      border-color: rgba(0,0,0,.35); /* optional: dunkler Rand statt weiß */
+      border-color: rgba(0,0,0,.35);
     }
+
+    /* --- Galerie --- */
+    .gallery { padding: 3rem 0; }
+    .gallery .grid-auto {
+      display:grid; gap:14px;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    }
+    .gallery-card{
+      display:flex; flex-direction:column; gap:6px;
+    }
+    .gallery-item {
+      position:relative; overflow:hidden; border-radius:14px;
+      border:1px solid #e5e7eb; background:#fff;
+      aspect-ratio:16/10; display:block;
+    }
+    .gallery-item img, .gallery-item video {
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+    .gallery-item:hover {
+      box-shadow:0 6px 18px rgba(0,0,0,.08);
+      transform:translateY(-1px); transition:all .2s ease;
+    }
+    .gallery-item .badge-video {
+      position:absolute; left:8px; bottom:8px;
+      padding:.25rem .5rem; background:rgba(10,42,102,.9);
+      color:#fff; border-radius:999px; font-size:.75rem;
+    }
+    .gallery-caption{
+      font-size:.9rem; line-height:1.35;
+      color:#475569;
+      padding:0 2px;
+    }
+
+    /* --- Lightbox --- */
+    .lightbox {
+      position:fixed; inset:0; background:rgba(0,0,0,.8);
+      display:none; align-items:center; justify-content:center; z-index:1000;
+    }
+    .lightbox.open { display:flex; }
+    .lightbox-inner {
+      width:min(1200px,92vw); max-height:88vh; background:#000;
+      border-radius:14px; position:relative; overflow:hidden;
+    }
+    .lightbox-content { display:flex; align-items:center; justify-content:center; }
+    .lightbox-content img, .lightbox-content video, .lightbox-content iframe {
+      max-width:100%; max-height:88vh; display:block;
+    }
+    .lightbox-close, .lightbox-prev, .lightbox-next {
+      position:absolute; top:10px;
+      background:rgba(255,255,255,.12); color:#fff;
+      border:none; padding:.6rem .8rem; border-radius:10px; cursor:pointer;
+      backdrop-filter: blur(6px);
+    }
+    .lightbox-close{ right:10px; }
+    .lightbox-prev{ left:10px; top:50%; transform:translateY(-50%); }
+    .lightbox-next{ right:10px; top:50%; transform:translateY(-50%); }
   </style>
 </head>
 <body>
-  <!-- Kopfzeile / Navigation -->
+
+  <!-- Header -->
   <header>
     <div class="container nav">
       <div class="brand" aria-label="DrinkOS">
@@ -177,12 +213,10 @@
     </div>
   </header>
 
-  <!-- Hero mit rundem, freischwebendem Logo -->
+  <!-- Hero -->
   <section class="hero" id="start">
-    <!-- RUNDES, FIXED LOGO (bleibt bis Projekt sichtbar) -->
     <img class="hero-mark" src="drinkos_logo_noslogan Rund.png" alt="DrinkOS Logo">
     <div class="container wrap">
-      <!-- Text-Box -->
       <div class="hero-card">
         <span class="muted">Projektarbeit Fachschule Automatisierungstechnik</span>
         <h1>DrinkOS – Smarte Cocktail-Steuerung</h1>
@@ -195,37 +229,6 @@
     </div>
   </section>
 
-  <script>
-    // Jahr (falls du später wieder einen Footer nutzt)
-    // document.getElementById('y')?.textContent = new Date().getFullYear();
-
-    function toggleMenu(){
-      const ml = document.getElementById('menuLinks');
-      ml.classList.toggle('show');
-      document.body.classList.toggle('nav-open', ml.classList.contains('show'));
-    }
-
-    // Logo beim Scrollen ausblenden, sobald #projekt erreicht ist
-    (function(){
-      const logo = document.querySelector('.hero-mark');
-      const project = document.getElementById('projekt');
-
-      function onScroll(){
-        if(!logo || !project) return;
-        const threshold = project.getBoundingClientRect().top;
-        if(threshold <= 80) { // kurz vor Beginn der Projektsektion ausblenden
-          logo.classList.add('is-hidden');
-        } else {
-          logo.classList.remove('is-hidden');
-        }
-      }
-      window.addEventListener('scroll', onScroll, {passive:true});
-      window.addEventListener('resize', onScroll);
-      onScroll();
-    })();
-  </script>
-</body>
-</html>
   <!-- Projektbeschreibung -->
   <section id="projekt">
     <div class="container grid grid-2">
@@ -258,364 +261,63 @@
     </div>
   </section>
 
-  <!-- Blog / Arbeitstagebuch (öffentlich) -->
+  <!-- Blog -->
   <section id="blog">
     <div class="container">
       <h2>Blog / Arbeitstagebuch</h2>
       <p class="muted">Jeder Projektteilnehmer führt und aktualisiert ein öffentliches Arbeitstagebuch: </p>
       <div class="grid grid-3">
-        <!-- ... (deine Blog-Karten bleiben unverändert) ... -->
-        <article class="card" aria-labelledby="b1">
-          <div class="badge">KW 36</div>
-          <div class="badge">Dario</div>
-          <h3 id="b1">Erstellung des Pflichtenheftes</h3>
-          <p>In der ersten Woche ist meine Hauptaufgabe zu gucken was wir machen wollen, wie sinnvoll das ist, ohne das man später in Zeitprobleme kommt. Dabei ist meine Hauptaufgabe Ideen zu sammeln wie das Programm aussehen kann.</p>
-        </article>
 
-      <article class="card" aria-labelledby="b2">
-        <div class="badge">KW 36</div>
-        <div class="badge">Noah</div>
-        <h3 id="b2">Planung Antrieb</h3>
-        <p>
-          Möglichkeiten alternativer Antriebstechniken überprüft. Lösungsansatz: Schrittmotor über Schrittmotortreiber wird von der SPS angesteuert.
-        </p>
-      </article>
+        <article class="card" aria-labelledby="b1"><div class="badge">KW 36</div> <div class="badge">Dario</div><h3 id="b1">Erstellung des Pflichtenheftes</h3><p>In der ersten Woche ist meine Hauptaufgabe zu gucken was wir machen wollen, wie sinnvoll das ist, ohne das man später in Zeitprobleme kommt. Dabei ist meine Hauptaufgabe Ideen zu sammeln wie das Programm aussehen kann.</p></article>
+        <article class="card" aria-labelledby="b2"><div class="badge">KW 36</div> <div class="badge">Noah</div><h3 id="b2">Planung Antrieb</h3><p>Möglichkeiten alternativer Antriebstechniken überprüft. Lösungsansatz: Schrittmotor über Schrittmotortreiber wird von der SPS angesteuert.</p></article>
+        <article class="card" aria-labelledby="b3"><div class="badge">KW 37</div> <div class="badge">Dario</div><h3 id="b3">Pflichtenheft und Softwaretest</h3><p>Funktionale Anforderungen wurden verschriftlicht. Dazu wurden Ziele weiter ausformuliert, dazu gehören: LED-Steuerung, Visualisierung, Antriebstechnik und Rezeptverwaltung. Außerdem habe ich die Verbindungen zur SPS und zum HMI hergestellt. Da mein Laptop über keine Ethernet-Schnittstelle verfügt, habe ich den Adapter getestet. Zusätzlich wurden Logos erstellt.</p></article>
+        <article class="card" aria-labelledby="b4"><div class="badge">KW 37</div> <div class="badge">Noah</div><h3 id="b4">Zeitplan und Website</h3><p>Ich habe heute zuerst mit Excel einen groben Zeitplan erstellt; dieser soll in der nächsten Zeit immer wieder aktualisiert werden. Außerdem habe ich die Website online gestellt.</p></article>
+        <article class="card" aria-labelledby="b5"><div class="badge">KW 38</div> <div class="badge">Dario</div><h3 id="b5">Pflichtenheft erweitert</h3><p>Der Fokus heute war die Formulierung der technischen Anforderungen. Zusätzlich wurde der Zeitplan erweitert und fast abgeschlossen. Am Schluss wurden die Rahmenbedingungen des Pflichtenheftes noch erweitert und formuliert.</p></article>
+        <article class="card" aria-labelledby="b6"><div class="badge">KW 38</div> <div class="badge">Noah</div><h3 id="b6">Website</h3><p>Ich habe mich heute um die Gestaltung der Website im HTML-Code gekümmert.</p></article>
+        <article class="card" aria-labelledby="b7"><div class="badge">KW 39</div> <div class="badge">Dario</div><h3 id="b7">Pflichtenheft erweitert</h3><p>Durch eine Geschäftsreise war ich nicht in der Schule, nebenbei habe ich aber weiter das Pflichtenheft beschrieben.</p></article>
+        <article class="card" aria-labelledby="b8"><div class="badge">KW 39</div> <div class="badge">Noah</div><h3 id="b8">Motorsteuerung</h3><p>Erst gab es einen Vortrag durch SEW über Antriebe. Danach habe ich unsere Motorsteuerung testweise an den PC angeschlossen und ein Firmware-Update geladen.</p></article>
+        <article class="card" aria-labelledby="b9"><div class="badge">KW 40</div> <div class="badge">Dario</div><h3 id="b9">Planen und Programmierung des Programms</h3><p>Allgemeine Funktionen wie Betriebsarten oder Störungshandling wurden programmiert und es wurde festgelegt, wie die Funktionen sinnvoll zu bedienen sind. Zusätzlich wurde angefangen, einen FB für den Antrieb zu programmieren. Über die Woche wurde die Visualisierung gestartet und erste Bilder erstellt sowie beschrieben, wie die Bedienung der Anlage erfolgt.</p></article>
+        <article class="card" aria-labelledby="b10"><div class="badge">KW 40</div> <div class="badge">Noah</div><h3 id="b10">Pflichtenheft und Motorsteuerung</h3><p>Wir haben zusammen das Pflichtenheft fertiggestellt und geprüft sowie das Logo und den Link zur Website an die Projektleiter weitergeleitet. Außerdem habe ich den Testaufbau für den Motor fertiggestellt und den Motor in Betrieb genommen.</p></article>
+        <article class="card" aria-labelledby="b11"><div class="badge">KW 41</div> <div class="badge">Dario</div><h3 id="b11">Testen von Funktionen</h3><p>Ein Meilenstein ist, dass die Ansteuerung des Antriebs über das HMI funktioniert hat. Es haben die Referenzfahrt und eine absolute Positionierung funktioniert. Dadurch sind wir einen großen Schritt weitergekommen und der Antrieb kann vollends programmiert werden. Auch andere Funktionen wie Betriebsarten und erste Visualisierungen konnten getestet werden.</p></article>
+        <article class="card" aria-labelledby="b12"><div class="badge">KW 41</div> <div class="badge">Noah</div><h3 id="b12">Motorsteuerung über SPS</h3><p>Dario hat mir seinen Visualisierungsvorschlag präsentiert und wir haben darüber diskutiert. Außerdem habe ich weitere Tests am Motor durchgeführt. Danach haben wir den Motor an die SPS angeschlossen und konnten weitere Tests in Verbindung SPS und Motor machen.</p></article>
+        <article class="card" aria-labelledby="b13"><div class="badge">KW 42</div> <div class="badge">Dario</div><h3 id="b13">Vorbereitung des Arduinos und Einrichten Modus</h3><p>Die Verbindung zwischen Arduino und PLC wurde vorbereitet. Dazu wurde der Ablauf des Einsetzens der Flaschen angepasst. Man wird nun Schritt für Schritt mit dem HMI durchgeleitet.</p></article>
+        <article class="card" aria-labelledby="b14"><div class="badge">KW 42</div> <div class="badge">Noah</div><h3 id="b14">Website</h3><p>In dieser Woche habe ich mich noch etwas um die Website gekümmert, ich hatte durch die Arbeit leider nicht viel Zeit.</p></article>
+        <article class="card" aria-labelledby="b15"><div class="badge">KW 43</div> <div class="badge">Dario</div><h3 id="b15">Testen der Arduino-PLC Verbindung</h3><p>Ich habe die Verbindung zwischen Arduino und PLC getestet. Hierbei habe ich die Library Snap7 genommen. Die Verbindung funktioniert und es kann gesendet und geschrieben werden. Vorteil der Snap7 Verbindung ist, dass PLC-seitig nur ein nicht optimierter DB und Put/Get aktiviert werden muss. Der Rest ist Arduino-seitig. Auch Effekte wie das Pulsieren eines LED-Strips funktionieren und wurden getestet.</p></article>
+        <article class="card" aria-labelledby="b16"><div class="badge">KW 43</div> <div class="badge">Noah</div><h3 id="b16">Schulferien</h3><p>Ich war in den Schulferien für die Firma im Außendienst unterwegs und hatte daher keine Zeit.</p></article>
+        <article class="card" aria-labelledby="b17"><div class="badge">KW 44</div> <div class="badge">Dario</div><h3 id="b17">Erweiterung des Arduino-Programms und Aufbau der Rezeptverwaltungsstruktur</h3><p>Das Arduino-Programm wurde erweitert und Funktionen wurden ergänzt. Wenn die Anlage angeht und das erste Lifebit geschrieben wird, werden alle LEDs einen Grünlauf für 10 Sek. starten. Dazu habe ich mir Gedanken gemacht wie die Rezeptverwaltung aufzubauen ist. Ob die HMI-Rezepte sinnvoller sind, oder alle Rezepte als Code aufzubauen. Dazu liegt der Fokus auf die Zwischenpräsentation.</p></article>
+        <article class="card" aria-labelledby="b18"><div class="badge">KW 44</div> <div class="badge">Noah</div><h3 id="b18">Einbau CNC-Antrieb</h3><p>Ich habe diese Woche in Zusammenarbeit mit Dario die Anlage "entkernt". Wir haben alles herausgebaut was wir in Zukunft nicht mehr benötigen, dazu gehörte Elektronik und Mechanik. Danach habe ich den CNC-Antrieb eingebaut und motorseitig verkabelt.</p></article>
+        <article class="card" aria-labelledby="b19"><div class="badge">KW 45</div> <div class="badge">Dario</div><h3 id="b19">Zwischenpräsentation</h3><p>Wir haben in dieser Woche unsere Zwischenpräsentation gehalten. Wir haben versucht den IST-Stand vorzustellen und unsere Ziele zu präsentieren. Dazu wurde die HMI-Visualisierung weitergebaut. Momentan bin ich dabei den Automatik-Modus zu programmieren.</p></article>
+        <article class="card" aria-labelledby="b20"><div class="badge">KW 45</div> <div class="badge">Noah</div><h3 id="b20">Zwischenpräsentation</h3><p>Wir haben in dieser Woche unsere Zwischenpräsentation gehalten. Wir haben versucht den IST-Stand vorzustellen und unsere Ziele zu präsentieren. Außerdem habe ich angefangen den Antrieb einzubauen. Des weiteren habe ich die Wartungsklappe erneuert: Die Taster wurden entfernt und eine neue Plexiglasscheibe eingesetzt.</p></article>
+        <article class="card" aria-labelledby="b21"><div class="badge">KW 46</div> <div class="badge">Dario</div><h3 id="b21">Schaltschrank Verdrahtung</h3><p>Am Montag wurde der Schaltschrank neu verdrahtet. Ich habe versucht die Komponenten zu verkabeln, bis auf den Antrieb ist alles verkabelt. Weiterer Fokus ist das Programmieren des HMI. Ein neues Feature ist das Betreiber-Pop-up, in dem man Cocktails abwählen, Zählstände ablesen und errechnete Füllstände sehen kann.</p></article>
+        <article class="card" aria-labelledby="b22"><div class="badge">KW 46</div> <div class="badge">Noah</div><h3 id="b22">Motor und LED</h3><p>In dieser Woche habe ich den Antrieb fertig eingebaut und verkabelt. Außerdem habe ich ein LED-Band eingeklebt. Ich habe den Antrieb über das Programm Nanopro eingestellt und die Positionen des Führungswagens zu den Positionen der Ausgießer angepasst.</p></article>
+        <article class="card" aria-labelledby="b23"><div class="badge">KW 47</div> <div class="badge">Dario</div><h3 id="b23">Weitere Verdrahtung und HMI-Updates</h3><p>Ich habe versucht den Antrieb anzusteuern. Wir bekamen aber keine Eingänge vom Antrieb. Wir benötigen Bits wie Bereit, Fahrend und Fehler. Das Problem liegt am Antrieb, wahrscheinlich an der Verkabelung der Ausgänge. Dazu habe ich einige Änderungen am HMI getestet, ein Teil ist der Freestylemode bei dem ich mir eine Grundstruktur der Visualisierung ausgedacht habe.</p></article>
+        <article class="card" aria-labelledby="b24"><div class="badge">KW 47</div> <div class="badge">Noah</div><h3 id="b24">Krank</h3><p>In dieser Woche war ich leider krank, ich habe Dario von zu Hause aus unterstützt.</p></article>
+        <article class="card" aria-labelledby="b25"><div class="badge">KW 48</div> <div class="badge">Dario</div><h3 id="b25">Rezepte und Antrieb Ansteuerung</h3><p>Wir haben die einzelnen Positionen der Dispenser anfahren können und haben die Ansteuerung über das HMI getestet. Dazu habe ich Rezept-Updates getestet für die Bedienbarkeit. Leider ist ein weiteres Netzteil für LED kaputt angeliefert worden, daher konnten wir das nicht weiter testen.</p></article>
+        <article class="card" aria-labelledby="b26"><div class="badge">KW 48</div> <div class="badge">Noah</div><h3 id="b26">Optimierung Antrieb</h3><p>Wir wurden vor folgendes Problem gestellt: Wir konnten kein Ausgangssignal von der Motorsteuerung bekommen. Das lag daran, dass der Ausgang Null-schaltend ist. Durch eine Pull-Up-Schaltung der drei Ausgänge wurden die Ausgänge bei Schaltung auf 24V hochgezogen. Außerdem habe ich die Eingangsbelegung angepasst, sodass wir den Motor über die SPS steuern können.</p></article>
+        <article class="card" aria-labelledby="b27"><div class="badge">KW 49</div> <div class="badge">Dario</div><h3 id="b27">Hubantrieb & Visu</h3><p>Am Montag habe ich verschiedene Features der Visu getestet und den Linearantrieb und andere Programmeinheiten aufgeräumt. Dazu habe ich am Donnerstag den Hubantrieb verkabelt und in Betrieb genommen mit Visualisierung.</p></article>
+        <article class="card" aria-labelledby="b28"><div class="badge">KW 49</div> <div class="badge">Noah</div><h3 id="b28">Einbau Hubantrieb</h3><p>Wir haben den Halter des Bechers optimiert, Problem war, dass der Becher nur ziemlich knapp unter dem Ausgießer saß, das haben wir etwas erweitert. Außerdem habe ich den Hubantrieb eingebaut und verkabelt. Das zuvor verklebte LED-Band habe ich ebenfalls verkabelt und wir haben erste Tests durchgeführt.</p></article>
+        <article class="card" aria-labelledby="b29"><div class="badge">KW 50</div> <div class="badge">Dario</div><h3 id="b29">Programmierung und Testen des Automatikbetriebs</h3><p>Programmierung des Automatikbetriebs. Das heißt, die bestehenden Funktionen wie Linearantrieb oder Hubantrieb miteinander zu verbinden. Hier hat das noch nicht 100% geklappt. Des weiteren habe ich die Visualisierung weiter gemacht. Die Visualisierung ist zu 90% fertig.</p></article>
+        <article class="card" aria-labelledby="b30"><div class="badge">KW 50</div> <div class="badge">Noah</div><h3 id="b30">Inbetriebnahme LED</h3><p>Diese Woche habe ich die restlichen LED-Bänder verklebt und verkabelt. Außerdem habe ich die Platine für die Verteilung der Datensignale der LEDs installiert und angeschlossen. Der zuvor montierte Hubantrieb musste ebenfalls nochmal ausgerichtet werden, sodass er problemfrei aus- und einfährt.</p></article>
+        <article class="card" aria-labelledby="b31"><div class="badge">KW 51</div> <div class="badge">Dario</div><h3 id="b31">Programmierung Automatik-Betrieb</h3><p>Ich habe weiter am Automatik-Betrieb programmiert und getestet.</p></article>
+        <article class="card" aria-labelledby="b32"><div class="badge">KW 51</div> <div class="badge">Noah</div><h3 id="b32">Hubantrieb Optimierung</h3><p>Ich habe Tests der Ausgießer mit Flüssigkeiten gemacht. Dabei habe ich die Hubeinheit mechanisch eingestellt und optimiert. Außerdem ist aufgefallen, dass die Ausgießer nicht 100% funktionieren, einige müssen ausgetauscht werden. Außerdem habe ich einen Not-Aus-Schalter eingebaut und verdrahtet.</p></article>
+        <article class="card" aria-labelledby="b33"><div class="badge">KW 52</div> <div class="badge">Dario</div><h3 id="b33">Ferien</h3><p>Leider konnten wir kurzfristig in den Ferien nicht mehr an das Projekt und konnten daher keine weiteren Tests durchführen, weiter geht's dann in KW02. Wir konnten die Zeit gut nutzen um die Dokumentation zu vervollständigen.</p></article>
+        <article class="card" aria-labelledby="b34"><div class="badge">KW 52</div> <div class="badge">Noah</div><h3 id="b34">Ferien</h3><p>Leider konnten wir kurzfristig in den Ferien nicht mehr an das Projekt und konnten daher keine weiteren Tests durchführen, weiter geht's dann in KW02. Wir konnten die Zeit gut nutzen um die Dokumentation zu vervollständigen.</p></article>
+        <article class="card" aria-labelledby="b35"><div class="badge">KW 01</div> <div class="badge">Dario</div><h3 id="b35">Ferien</h3><p>Ich habe in den Ferien an der Dokumentation gearbeitet.</p></article>
+        <article class="card" aria-labelledby="b36"><div class="badge">KW 01</div> <div class="badge">Noah</div><h3 id="b36">Ferien</h3><p>In den Ferien habe ich an der Dokumentation weitergearbeitet und war montags in der Schule um die Ausgießer zu testen.</p></article>
+        <article class="card" aria-labelledby="b37"><div class="badge">KW 02</div> <div class="badge">Dario</div><h3 id="b37">Test Automatik-Programm</h3><p>Ich habe den Modus zum selbst Mixen an der Anlage getestet und er funktioniert. Die Anlage verfährt nun auch automatisch zu den Ausgießern und wieder in Grundposition.</p></article>
+        <article class="card" aria-labelledby="b38"><div class="badge">KW 02</div> <div class="badge">Noah</div><h3 id="b38">Einbau Flaschen und neue Ausgießer</h3><p>Ich habe die Flaschen mit den neuen Ausgießern eingebaut und getestet. Mit dem Automatik-Programm war dies gut möglich.</p></article>
+        <article class="card" aria-labelledby="b39"><div class="badge">KW 03</div> <div class="badge">Dario</div><h3 id="b39">Abgabe der Projektdokumentation</h3><p>Abgabe der Dokumentation. Dazu habe ich die Automatik-Schleifen getestet und mir Gedanken gemacht wie der Verbrauch am besten dargestellt werden kann.</p></article>
+        <article class="card" aria-labelledby="b40"><div class="badge">KW 03</div> <div class="badge">Noah</div><h3 id="b40">Abgabe Projektdokumentation</h3><p>Heute haben wir die Projektdokumentation abgegeben. Außerdem haben wir weitere Tests der Automatikbetriebe Auto und Freestyle durchgeführt.</p></article>
+        <article class="card" aria-labelledby="b41"><div class="badge">KW 04</div> <div class="badge">Dario</div><h3 id="b41">Fachgespräch und kleinere Bugs</h3><p>Wir hatten früh das Fachgespräch. Des weiteren war der Fokus daran, kleinere Bugs zu fixen. Dazu zählen Verbrauch, Sensor am Becherhalter oder das Pulsieren der LEDs.</p></article>
+        <article class="card" aria-labelledby="b42"><div class="badge">KW 04</div> <div class="badge">Noah</div><h3 id="b42">Fachgespräch</h3><p>Heute hatten wir das Fachgespräch. Außerdem habe ich die elektronische Inbetriebnahme durchgeführt und das Messprotokoll erstellt.</p></article>
+        <article class="card" aria-labelledby="b43"><div class="badge">KW 05</div> <div class="badge">Dario</div><h3 id="b43">Not-Aus & Betreiber-Infos</h3><p>Ich musste den Not-Aus noch korrekt einbinden. Danach muss eine Referenzfahrt angefordert werden. Dazu habe ich die Funktionen rund um das Betreiber-Pop-up-Bild ausprobiert. Dazu zählen der Cocktailzähler, der Verbrauch des Dispensers beim Event und der Verbrauch des Dispensers pro 1 Liter.</p></article>
+        <article class="card" aria-labelledby="b44"><div class="badge">KW 05</div> <div class="badge">Noah</div><h3 id="b44">Anpassungen</h3><p>Heute habe ich letzte Anpassungen durchgeführt. Ich habe die Positionen des Antriebs angepasst, da diese nicht 100% auf der korrekten Position waren.</p></article>
+        <article class="card" aria-labelledby="b45"><div class="badge">KW 06</div> <div class="badge">Dario</div><h3 id="b45">Vorbereitung der Präsentation</h3><p>Ich habe einzelne Funktionen überprüft. 1 Button beim Linearantrieb wurde nicht richtig angezeigt. Dazu haben wir die Präsentation ausprobiert ob wir zeitlich klarkommen und die PowerPoint angepasst und gekürzt.</p></article>
+        <article class="card" aria-labelledby="b46"><div class="badge">KW 06</div> <div class="badge">Noah</div><h3 id="b46">Vorbereitung Präsentation</h3><p>Wir haben die fertige Anlage in den Präsentationsraum gestellt und die Flaschen, Ausgießer und Becher gespült.</p></article>
 
-      <article class="card" aria-labelledby="b3">
-        <div class="badge">KW 37</div>
-        <div class="badge">Dario</div>
-        <h3 id="b3">Pflichtenheft und Softwaretest</h3>
-        <p>
-          Funktionale Anforderungen wurden verschriftlicht. Dazu wurden Ziele weiter ausformuliert, dazu gehören: LED-Steuerung, Visualisierung, Antriebstechnik und Rezeptverwaltung. Außerdem habe ich die Verbindungen zur SPS und zum HMI hergestellt. Da mein Laptop über keine Ethernet-Schnittstelle verfügt, habe ich den Adapter getestet. Zusätzlich wurden Logos erstellt.
-        </p>
-      </article>
-
-      <article class="card" aria-labelledby="b4">
-        <div class="badge">KW 37</div>
-        <div class="badge">Noah</div>
-        <h3 id="b4">Zeitplan und Website</h3>
-        <p>
-          Ich habe heute zuerst mit Excel einen groben Zeitplan erstellt; dieser soll in der nächsten Zeit immer wieder aktualisiert werden. Außerdem habe ich die Website online gestellt.
-        </p>
-      </article>
-
-      <article class="card" aria-labelledby="b5">
-        <div class="badge">KW 38</div>
-        <div class="badge">Dario</div>
-        <h3 id="b5">Pflichtenheft erweitert</h3>
-        <p>
-          Der Fokus heute war die Formulierung der technischen Anforderungen. Zusätzlich wurde der Zeitplan erweitert und fast abgeschlossen. Am Schluss wurden die Rahmenbedingungen des Pflichtenheftes noch erweitert und formuliert.
-        </p>
-      </article>
-
-      <article class="card" aria-labelledby="b6">
-        <div class="badge">KW 38</div>
-        <div class="badge">Noah</div>
-        <h3 id="b6">Website</h3>
-        <p>
-          Ich habe mich heute um die Gestaltung der Website im HTML-Code gekümmert.
-        </p>
-      </article>
-
-      <article class="card" aria-labelledby="b7">
-        <div class="badge">KW 39</div>
-        <div class="badge">Dario</div>
-        <h3 id="b7">Pflichtenheft erweitert</h3>
-        <p>
-          Durch eine Geschäftsreise war ich nicht in der Schule, nebenbei habe ich aber weiter das Pflichtenheft beschrieben.
-        </p>
-      </article>
-
-      <article class="card" aria-labelledby="b8">
-        <div class="badge">KW 39</div>
-        <div class="badge">Noah</div>
-        <h3 id="b8">Motorsteuerung</h3>
-        <p>
-          Erst gab es einen Vortrag durch SEW über Antriebe. Danach habe ich unsere Motorsteuerung testweise an den PC angeschlossen und ein Firmware-Update geladen.
-        </p>
-      </article>
-
-      <article class="card" aria-labelledby="b9">
-        <div class="badge">KW 40</div>
-        <div class="badge">Dario</div>
-        <h3 id="b9">Planen und Programmierung des Programms</h3>
-        <p>
-          Allgemeine Funktionen wie Betriebsarten oder Störungshandling wurden programmiert und es wurde festgelegt, wie die Funktionen sinnvoll zu bedienen sind. Zusätzlich wurde angefangen, einen FB für den Antrieb zu programmieren. Über die Woche wurde die Visualisierung gestartet und erste Bilder erstellt sowie beschrieben, wie die Bedienung der Anlage erfolgt.
-        </p>
-      </article>
-
-      <article class="card" aria-labelledby="b10">
-        <div class="badge">KW 40</div>
-        <div class="badge">Noah</div>
-        <h3 id="b10">Pflichtenheft und Motorsteuerung</h3>
-        <p>
-          Wir haben zusammen das Pflichtenheft fertiggestellt und geprüft sowie das Logo und den Link zur Website an die Projektleiter weitergeleitet. Außerdem habe ich den Testaufbau für den Motor fertiggestellt und den Motor in Betrieb genommen.
-        </p>
-      </article>
-
-      <article class="card" aria-labelledby="b11">
-        <div class="badge">KW 41</div>
-        <div class="badge">Dario</div>
-        <h3 id="b11">Testen von Funktionen</h3>
-        <p>
-          Ein Meilenstein ist, dass die Ansteuerung des Antriebs über das HMI funktioniert hat. Es haben die Referenzfahrt und eine absolute Positionierung funktioniert. Dadurch sind wir einen großen Schritt weitergekommen und der Antrieb kann vollends programmiert werden. Auch andere Funktionen wie Betriebsarten und erste Visualisierungen konnten getestet werden.
-        </p>
-      </article>
-
-      <article class="card" aria-labelledby="b12">
-        <div class="badge">KW 41</div>
-        <div class="badge">Noah</div>
-        <h3 id="b12">Motorsteuerung über SPS</h3>
-        <p>
-          Dario hat mir seinen Visualisierungsvorschlag präsentiert und wir haben darüber diskutiert. Außerdem habe ich weitere Tests am Motor durchgeführt. Danach haben wir den Motor an die SPS angeschlossen und konnten weitere Tests in Verbindung SPS und Motor machen.
-        </p>
-      </article>
-
-      <article class="card" aria-labelledby="b13">
-        <div class="badge">KW 42</div>
-        <div class="badge">Dario</div>
-        <h3 id="b13">Vorbereitung des Arduinos und Einrichten Modus</h3>
-        <p>Die Verbidnung zwischen Arduino und PLC wurde vorbereitet. Dazu wurde das Ablauf des einsetzen der Flaschen angepasst. Man wirdn nun Schritt für Schritt mit dem HMI durch geleitet.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b14">
-        <div class="badge">KW 42</div>
-        <div class="badge">Noah</div>
-        <h3 id="b14">Website</h3>
-        <p>In dieser Woche habe ich mich noch etwas um die Website gekümmert, ich hatte durch die Arbeit leider nicht viel zeit.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b15">
-        <div class="badge">KW 43</div>
-        <div class="badge">Dario</div>
-        <h3 id="b15">Testen der Arduino-PLC Verbindung</h3>
-        <p>Ich habe die Verbindung zwischen Arduino und PLC getestet. Hierbei habe ich die Liabry Snap7 genommen. Die Verbidnung funktioniert und es kann gesendet und geschrieben werden. Vorteil der Snap7 Verbidnung ist, dass es PLC seitig nur ein nicht optimierter DB und Put/Get aktiviert weden muss. Der Rest ist Arduino seitig. Auch Effekte wie zum Beispiel, dass pulsieren eines LED-Strip. Funktioniert und wurde getestet.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b16">
-        <div class="badge">KW 43</div>
-        <div class="badge">Noah</div>
-        <h3 id="b16">Schulferien</h3>
-        <p>Ich war in den Schulferien für die Firma im Außendienst unerwegs und hatte daher keine Zeit.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b17">
-        <div class="badge">KW 44</div>
-        <div class="badge">Dario</div>
-        <h3 id="b17">Erweiterung des Arduinos Programm und Aufbau derRezeptverwaltungs Struktur</h3>
-        <p>Das Arduino Programm wurde erweitert und Funktionen wurden Erweitert. Wenn die Anlage angeht und das erste Lifebit geschrieben wird, werden alle LED ein Grünenlauf für 10sek. starten. Dazu hab ich mir Gedanken geamcht wie die Rezeptverwaltung aufzubauen ist. Ob die HMI Rezepte sinnvoller sind, oder alle Rezepte als Code aufzubauen. Dazu liegt der Fokus auf die Zwischenpräsenation.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b18">
-        <div class="badge">KW 44</div>
-        <div class="badge">Noah</div>
-        <h3 id="b18">Einbau CNC-Antrieb</h3>
-        <p>Ich habe diese Woche in zusammenarbeit mit Dario die Anlage "entkernt". Wir haben alles herausgebaut was wir in Zukunft nicht mehr benötigen, dazu gehörte Elektronik und Mechanik. Danach habe ich den CNC-Antrieb eingebaut und Motorsseitig verkabelt.</p>
-      </article>
-
-      
-      <article class="card" aria-labelledby="b19">
-        <div class="badge">KW 45</div>
-        <div class="badge">Dario</div>
-        <h3 id="b19">Zwischen Präsentation</h3>
-        <p>Wir haben in dieser Woche unsere Zwischenpräsentation gehalten. Wir haben versucht den IST-Stand vorzustellen und unsere Ziele zu präsentieren. Dazu wurde die HMI Visualisierung weitergebaut. Momentan bin ich dabei den Automatik modus zu programmieren</p>
-      </article>
-
-      <article class="card" aria-labelledby="b20">
-        <div class="badge">KW 45</div>
-        <div class="badge">Noah</div>
-        <h3 id="b20">Zwischenpräsentation</h3>
-        <p>Wir haben in dieser Woche unsere Zwischenpräsentation gehalten. Wir haben versucht den IST-Stand vorzustellen und unsere Ziele zu präsentieren.Außerdem habe ich angefangen den Antrieb einzubauen.Des weiteren habe ich die Wartungsklappe erneuert: Die Taster wurden entfernt und eine neue Plexiglasscheibe eingesetzt.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b21">
-        <div class="badge">KW 46</div>
-        <div class="badge">Dario</div>
-        <h3 id="b21">Schaltschrank Verdrahtung</h3>
-        <p>Am Montag wurde der Schaltschrank neu verdrahtet. Ich habe versucht die Komponenten zu verkabeln bis auf dem Antrieb ist alles verkabelt. Weiterer Fokus ist das programmieren das HMI. Ein neues Feature ist das Betreiber Pop-up in dem Man Cocktails abwählen, Zällstände ablesen kann und errechnete Füllstände sehen kann</p>
-      </article>
-
-      <article class="card" aria-labelledby="b22">
-        <div class="badge">KW 46</div>
-        <div class="badge">Noah</div>
-        <h3 id="b22">Motor und LED</h3>
-        <p>In dieser Woche habe ich den Antrieb fertig eingebaut und verkabelt. Außerdem habe ich ein LED-Band eingekebt. Ich habe den Antrieb über das Programm Nanopro eingestellt und die Positionen des Führungswagen zu den Positionen der Ausgießer angepasst.</p>
-      </article>
-
-       
-      <article class="card" aria-labelledby="b23">
-        <div class="badge">KW 47</div>
-        <div class="badge">Dario</div>
-        <h3 id="b23">Weitere verdrahtung und HMI Updates</h3>
-        <p>Ich habe versucht den Antrieb anzusteuern über den Antrieb. Wir bekamen aber keine Eingänge vom Antrieb. Wir benötigen Bits wie Bereit, Fahrend und Fehler. Das Problem ist am Antrieb. Wahrscheinlich liegt es an der Verkabelung der Ausgänge. Dazu habe einige veränderung am HMI getestet, ein Teil ist der Freestylemode bei dem ich mir eine Grundstruktur der Visualisierung ausgedacht.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b24">
-        <div class="badge">KW 47</div>
-        <div class="badge">Noah</div>
-        <h3 id="b24">Krank</h3>
-        <p>In dieser Woche war ich leider krank, ich habe Dario von zu Hause aus unterstützt.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b25">
-        <div class="badge">KW 48</div>
-        <div class="badge">Dario</div>
-        <h3 id="b25">Rezepte und Antrieb Ansteuerung</h3>
-        <p>Wir haben die einzelnen Positionen der Dispenser anfahren können und haben die Ansteuerung über das HMI getestet. Dazu habe ich Rezept updates getestet für die Bedienbarkeit. Leider ist ein weiteres Netzteil für LED kaputt angelifert worden, daher konnten wir das nicht weiter testen.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b26">
-        <div class="badge">KW 48</div>
-        <div class="badge">Noah</div>
-        <h3 id="b26">Optimierung Antrieb</h3>
-        <p>Wir wurden vor folgendes Problem gestellt: Wir konnten kein Ausgangssignal von der Motorsteuerung bekommen. Das lag daran, dass der Ausgang Null-schaltend ist. Durch eine Pull-Up Schaltung der drei Ausgänge wurden die Ausgänge bei Schaltung auf 24V hochgezogen. Außerdem habe ich die Eingangsbelegung angepasst,sodass wir den Motor über die SPS Steuern können.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b27">
-        <div class="badge">KW 49</div>
-        <div class="badge">Dario</div>
-        <h3 id="b27">Hubantrieb & Visu</h3>
-        <p>Am Montag habe ich verschiedene features der visu getestet und den Linearantrieb und andere Programmeinheiten wurden aufgeräumt. Dazu habe ich am Donnerstag den Hubantrieb verkabelt und in Betrieb genommen mit Visualiesierung. </p>
-      </article>
-
-      <article class="card" aria-labelledby="b28">
-        <div class="badge">KW 49</div>
-        <div class="badge">Noah</div>
-        <h3 id="b28">Einbau Hubantrieb</h3>
-        <p>Wir haben den Halter des Bechers optimiert, Problem war, dass der Becher nur ziemlich knapp unter dem Ausgießer saß, das haben wir etwas erweitert. Außerdem habe ich den Hubantrieb eingebaut und verkabelt. Das zuvor verklebte LED-Band habe ich ebenfalls verkabelt und wir haben erste Tests durchgeführt.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b29">
-        <div class="badge">KW 50</div>
-        <div class="badge">Dario</div>
-        <h3 id="b29">Programmierung und testen des Automatik Betriebs</h3>
-        <p>Programmierung des Automatik betriebs. Das heißt, dass die bestehenden funktionen wie linear Antrieb oderHubantrieb miteinander zu verbinden. Hier hat das noch nicht 100% geklappt. Des weiteren habe ich die Visualisierung weiter gemacht. Die Visualisierung, ist zu 90% fertig. </p>
-      </article>
-
-      <article class="card" aria-labelledby="b30">
-        <div class="badge">KW 50</div>
-        <div class="badge">Noah</div>
-        <h3 id="b30">Inbetriebnahme LED</h3>
-        <p>Diese Woche habe ich die Restlichen LED-Bänder verklebt und verkabelt. Außerdem habe ich die Platine für die Verteilung der Datensignale der LEDs installiert und angeschlossen. Der zuvor montierte Hubantrieb musste ebenfalls nochmal ausgerichtet werden, sodass er Problemfrei aus und einfährt..</p>
-      </article>
- 
-      <article class="card" aria-labelledby="b31">
-        <div class="badge">KW 51</div>
-        <div class="badge">Dario</div>
-        <h3 id="b31">Programmierung Automatik-Betrieb</h3>
-        <p>Ich habe weiter am Automatik-Betrieb programmiert und getestet.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b32">
-        <div class="badge">KW 51</div>
-        <div class="badge">Noah</div>
-        <h3 id="b32">Hubantrieb Optimierung</h3>
-        <p>Ich habe Tests der Ausgießer mit Flüssigkeiten gemacht. Dabei habe ich die Hubeinheit Mechanisch eingestellt und optimiert. Außerdem ist aufgefallen, dass die Ausgießer nicht 100% funktionieren, einige müssen ausgetauscht werden. Außerdem habe ich einen Not-Aus Schalter eingebaut und verdrahtet.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b33">
-        <div class="badge">KW 52</div>
-        <div class="badge">Dario</div>
-        <h3 id="b33">Ferien </h3>
-        <p>Leider konnten wir kurzfristig in den Ferien nicht mehr an das Projekt unnd konnten daher keine weitere Tests durchführen, weiter gehts dann in KW02. Wir konnten die Zeit dann gut nutzen um die Dokumentation zu vervollständigen.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b34">
-        <div class="badge">KW 52</div>
-        <div class="badge">Noah</div>
-        <h3 id="b34">Ferien</h3>
-        <p>Leider konnten wir kurzfristig in den Ferien nicht mehr an das Projekt unnd konnten daher keine weitere Tests durchführen, weiter gehts dann in KW02. Wir konnten die Zeit dann gut nutzen um die Dokumentation zu vervollständigen.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b35">
-        <div class="badge">KW 01</div>
-        <div class="badge">Dario</div>
-        <h3 id="b35">Ferien</h3>
-        <p>Ich habe in den Ferien an der Dokumentation gearbeitet.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b36">
-        <div class="badge">KW 01</div>
-        <div class="badge">Noah</div>
-        <h3 id="b36">Ferien</h3>
-        <p>In den Ferien habe ich an der Dokumentation weitergearbeitet und war Montags in der Schule um die Ausgießer zu testen.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b37">
-        <div class="badge">KW 02</div>
-        <div class="badge">Dario</div>
-        <h3 id="b37">Test Automatik-Programm</h3>
-        <p>Ich habe den Modus zum selbst Mixen an der Anlage getestet und er funktioniert. Die Anlage verfährt nun auch Automatisch zu den Ausgießern und wieder in Grundposition.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b38">
-        <div class="badge">KW 02</div>
-        <div class="badge">Noah</div>
-        <h3 id="b38">Einbau Flaschen und neue Ausgießer</h3>
-        <p>Ich habe die Flaschen mit den neuen Ausgießern eingebaut und getestet. Mit dem Automatik-Programm war dies gut möglich.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b39">
-        <div class="badge">KW 03</div>
-        <div class="badge">Dario</div>
-        <h3 id="b39">Abgabe der Projektdoukumentation</h3>
-        <p>Abgabe der Dokumentation. Dazu habe ich die Automatik Schleifen getestet und mir Gedanken gemacht wie der Verbrauch am besten dargestellt werden kann.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b40">
-        <div class="badge">KW 03</div>
-        <div class="badge">Noah</div>
-        <h3 id="b40">Abgabe Projektdokumentation</h3>
-        <p>Heute haben wir die Projektdokumentation abgegeben. Außerdem haben wir weitere Tests der Automatikbetriebe Auto und Freestyle durchgeführt.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b41">
-        <div class="badge">KW 04</div>
-        <div class="badge">Dario</div>
-        <h3 id="b41">Fachgespräch und kleinere Bugs</h3>
-        <p>Wir hatten früh das Fachgespräch. Des weiteren war der Fokus daran kleinere Bugs zu fixen. Dazu zählen Verbrauch, Sensor am Becherhalter oder das pulsieren der LED's</p>
-      </article>
-
-      <article class="card" aria-labelledby="b42">
-        <div class="badge">KW 04</div>
-        <div class="badge">Noah</div>
-        <h3 id="b42">Fachgespräch</h3>
-        <p>Heute hatten wir das Fachgespräch. Außerdem habe ich die Elektronische Inbertiebnahme durchgeführt und das Messprotokoll erstellt.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b43">
-        <div class="badge">KW 05</div>
-        <div class="badge">Dario</div>
-        <h3 id="b43">Not-Aus & Betrieber Info's</h3>
-        <p>Ich musste den Not-Aus noch korrekt einbinden. Danach muss eine Referenzfahrt angefordert werden. Dazu habe ich die Funktionen rund um das Betreiber Pop-up Bild ausprobiert. Dazu zählen der Cocktailzähler, der Verbrauch des Dispensers beim Event und der Verbrauch des Dispensers pro 1 Liter.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b44">
-        <div class="badge">KW 05</div>
-        <div class="badge">Noah</div>
-        <h3 id="b44">Anpassungen</h3>
-        <p>Heute habe ich letzte Anpassungen durchgeführt. Ich habe die Positionen des Antriebs angepasst, da diese nicht 100% auf der korrekten Position waren.</p>
-      </article>
-
-      <article class="card" aria-labelledby="b45">
-        <div class="badge">KW 06</div>
-        <div class="badge">Dario</div>
-        <h3 id="b45">Vorbereitung der Präsentation</h3>
-        <p>Ich habe einzelne Funktionen überprüft. 1 Button beim Linear Antrieb wurde nicht richtig angezeigt. Dazu haben wir die Präsentation ausprobier tob wir zeitlich klarkommen und die Power Point angepasst und gekürzt</p>
-      </article>
-
-      <article class="card" aria-labelledby="b46">
-        <div class="badge">KW 06</div>
-        <div class="badge">Noah</div>
-        <h3 id="b46">Vorbereitung Präsentation</h3>
-        <p>Wir haben die Fertige Anlage in den Präsenationsraum gestellt und die Flaschen, Ausgießer und Becher gespült.</p>
-      </article>
-
-        <!--
-      -->
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- Team -->
   <section id="team">
@@ -624,28 +326,28 @@
         <h2>Team & Arbeitsteilung</h2>
         <p>Die Inhalte der Seiten werden von allen Teammitgliedern nach festgelegter Arbeitsteilung erstellt und gepflegt.</p>
         <ul class="list">
-          <li><strong>Projektleitung:</strong> Dario Begerau/Noah Jordan</li>
+          <li><strong>Projektleitung:</strong> Dario Begerau / Noah Jordan</li>
           <li><strong>Programmierung SPS:</strong> Dario Begerau</li>
-          <li><strong>Visualisierung HMI: </strong> Dario Begerau</li>
-          <li><strong>LED-Steuerung: </strong> Noah Jordan</li>
-          <li><strong>Antriebstechnik: </strong> Noah Jordan</li>
-          <li><strong>Internetseite </strong> Noah Jordan</li>
+          <li><strong>Visualisierung HMI:</strong> Dario Begerau</li>
+          <li><strong>LED-Steuerung:</strong> Noah Jordan</li>
+          <li><strong>Antriebstechnik:</strong> Noah Jordan</li>
+          <li><strong>Internetseite:</strong> Noah Jordan</li>
         </ul>
       </div>
       <div class="card">
-        <h1>Noah Jordan</h1> 
+        <h1>Noah Jordan</h1>
         <img src="Porträt Noah.jpg" alt="Profilbild von Noah Jordan" style="width:100%; height:auto; border-radius:8px; margin:10px 0;">
-        <p>Noah Jordan hat bei Dr.Heinrich Schneider Messtechnik GmbH in Bad Kreuznach den Beruf des Industrie-Mechatronikers erlernt. Aktuell arbeitet er dort als Anwendungstechniker in der Messtechnik. Er bearbeitet dieses Projekt im Zuge der Abschlussprüfung zum staatlich geprüften Techniker Fachrichtung Prozessautomatisierung.</p>
+        <p>Noah Jordan hat bei Dr. Heinrich Schneider Messtechnik GmbH in Bad Kreuznach den Beruf des Industrie-Mechatronikers erlernt. Aktuell arbeitet er dort als Anwendungstechniker in der Messtechnik. Er bearbeitet dieses Projekt im Zuge der Abschlussprüfung zum staatlich geprüften Techniker Fachrichtung Prozessautomatisierung.</p>
       </div>
       <div class="card">
-        <h1>Dario Begerau</h1> 
+        <h1>Dario Begerau</h1>
         <img src="Porträt Dario.jpg" alt="Profilbild von Dario Begerau" style="width:100%; height:auto; border-radius:8px; margin:10px 0;">
         <p>Dario Begerau hat bei Heinrich Huhn in Drolshagen den Beruf des Elektronikers für Betriebstechnik erlernt. Aktuell arbeitet er bei der Eckelmann AG im technischen Vertrieb. Er bearbeitet dieses Projekt im Zuge der Abschlussprüfung zum staatlich geprüften Techniker Fachrichtung Prozessautomatisierung.</p>
       </div>
       <div class="card">
         <h2>Kontakt / Betreuung</h2>
         <p>Fachschule für Automatisierungstechnik – BBS&nbsp;1 Mainz</p>
-        <p class="small muted">Bitte beachten: Bitte geben sie Projekt und Name an, damit die Zuständige Stelle es zuweisen kann.</p>
+        <p class="small muted">Bitte beachten: Bitte geben Sie Projekt und Name an, damit die zuständige Stelle es zuweisen kann.</p>
         <ul class="list">
           <li>E-Mail: <a href="mailto:sekretariat@bbs1-mainz.de">sekretariat@bbs1-mainz.de</a></li>
           <li>Ort: Mainz</li>
@@ -662,372 +364,149 @@
     </div>
   </section>
 
-<!-- Galerie -->
-<section id="galerie" class="gallery">
-  <div class="container">
-    <h2>Galerie</h2>
-    <p class="muted">Hier zeigen wir Eindrücke aus Planung, Aufbau und Tests. Zum Vergrößern klicken/tippen.</p>
+  <!-- Galerie -->
+  <section id="galerie" class="gallery">
+    <div class="container">
+      <h2>Galerie</h2>
+      <p class="muted">Hier zeigen wir Eindrücke aus Planung, Aufbau und Tests. Zum Vergrößern klicken/tippen.</p>
 
-    <div class="grid-auto" id="galleryGrid">
+      <div class="grid-auto" id="galleryGrid">
 
-      <!-- ══════════ BILDER ══════════ -->
+        <!-- ══════════ BILDER ══════════ -->
 
-      <figure class="gallery-card">
-        <a href="Ansicht Frontal Vorstellung.jpg"
-           class="gallery-item"
-           data-type="image"
-           data-caption="DrinkOS Gesamtansicht – Schaltschrank links geöffnet, 6 Dispenser-Flaschen oben, Linearantrieb mit Becherhalter im Vordergrund, HMI zeigt Rezeptauswahl">
-          <img src="Ansicht Frontal Vorstellung.jpg" alt="DrinkOS – Gesamtansicht der fertigen Anlage" loading="lazy">
-        </a>
-        <figcaption class="gallery-caption">Fertige Anlage – Schaltschrank, 6 Dispenser, Linearantrieb und Siemens HMI</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Ansicht Frontal Vorstellung.jpg" class="gallery-item" data-type="image"
+             data-caption="DrinkOS Gesamtansicht – Schaltschrank links geöffnet, 6 Dispenser-Flaschen oben, Linearantrieb mit Becherhalter im Vordergrund, HMI zeigt Rezeptauswahl">
+            <img src="Ansicht Frontal Vorstellung.jpg" alt="DrinkOS – Gesamtansicht der fertigen Anlage" loading="lazy">
+          </a>
+          <figcaption class="gallery-caption">Fertige Anlage – Schaltschrank, 6 Dispenser, Linearantrieb und Siemens HMI</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="Schaltschrank_mit_LED.jpg"
-           class="gallery-item"
-           data-type="image"
-           data-caption="Schaltschrank mit türkiser LED-Beleuchtung – S7-1200, SITOP PSU100S und Arduino LED-Board voll verdrahtet">
-          <img src="Schaltschrank_mit_LED.jpg" alt="Schaltschrank mit LED-Beleuchtung" loading="lazy">
-        </a>
-        <figcaption class="gallery-caption">Schaltschrank mit LED – S7-1200, SITOP, Arduino-Board fertig verdrahtet</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Schaltschrank mit LED.jpg" class="gallery-item" data-type="image"
+             data-caption="Schaltschrank mit türkiser LED-Beleuchtung – S7-1200, SITOP PSU100S und Arduino LED-Board voll verdrahtet">
+            <img src="Schaltschrank mit LED.jpg" alt="Schaltschrank mit LED-Beleuchtung" loading="lazy">
+          </a>
+          <figcaption class="gallery-caption">Schaltschrank mit LED – S7-1200, SITOP, Arduino-Board fertig verdrahtet</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="Ansicht Grundbild.jpg"
-           class="gallery-item"
-           data-type="image"
-           data-caption="HMI Grundbild im Automatikbetrieb – 6 Dispenser-Slots mit Füllstandsanzeige, Betriebsartenwahl BA-Hand / BA-Auto / RT-Mode">
-          <img src="Ansicht Grundbild.jpg" alt="Siemens SIMATIC HMI – Grundbild Automatikbetrieb" loading="lazy">
-        </a>
-        <figcaption class="gallery-caption">HMI Grundbild – BA-AUTO aktiv, 6 Slots mit Füllstandsanzeige</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Ansicht Grundbild.jpg" class="gallery-item" data-type="image"
+             data-caption="HMI Grundbild im Automatikbetrieb – 6 Dispenser-Slots mit Füllstandsanzeige, Betriebsartenwahl BA-Hand / BA-Auto / RT-Mode">
+            <img src="Ansicht Grundbild.jpg" alt="Siemens SIMATIC HMI – Grundbild Automatikbetrieb" loading="lazy">
+          </a>
+          <figcaption class="gallery-caption">HMI Grundbild – BA-AUTO aktiv, 6 Slots mit Füllstandsanzeige</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="Ansicht Cocktail auswahl.jpg"
-           class="gallery-item"
-           data-type="image"
-           data-caption="HMI Rezeptauswahl – Cherry Spark, Citrus Fizz, Tropic Breeze, Tonic Twist u.v.m. Freestyle- und Betreibermodus ebenfalls erreichbar">
-          <img src="Ansicht Cocktail auswahl.jpg" alt="Siemens SIMATIC HMI – Cocktailauswahl" loading="lazy">
-        </a>
-        <figcaption class="gallery-caption">HMI Cocktailauswahl – 8 Grundrezepte, Mixen-Button und Freestylemode</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Ansicht Cocktail auswahl.jpg" class="gallery-item" data-type="image"
+             data-caption="HMI Rezeptauswahl – Cherry Spark, Citrus Fizz, Tropic Breeze, Tonic Twist u.v.m. Freestyle- und Betreibermodus ebenfalls erreichbar">
+            <img src="Ansicht Cocktail auswahl.jpg" alt="Siemens SIMATIC HMI – Cocktailauswahl" loading="lazy">
+          </a>
+          <figcaption class="gallery-caption">HMI Cocktailauswahl – 8 Grundrezepte, Mixen-Button und Freestylemode</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="Anlage_frontal.jpeg"
-           class="gallery-item"
-           data-type="image"
-           data-caption="Anlage frontal – Schaltschrank">
-          <img src="Anlage_frontal.jpeg" alt="Anlage frontal – Schaltschrank" loading="lazy">
-        </a>
-        <figcaption class="gallery-caption">Anlage frontal – Schaltschrank</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Anlage_frontal.jpeg" class="gallery-item" data-type="image"
+             data-caption="Anlage frontal – Schaltschrank">
+            <img src="Anlage_frontal.jpeg" alt="Anlage frontal – Schaltschrank" loading="lazy">
+          </a>
+          <figcaption class="gallery-caption">Anlage frontal – Schaltschrank</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="Schaltschrank_frei.jpeg"
-           class="gallery-item"
-           data-type="image"
-           data-caption="Schaltschrank – frei geräumt">
-          <img src="Schaltschrank_frei.jpeg" alt="Schaltschrank – frei geräumt" loading="lazy">
-        </a>
-        <figcaption class="gallery-caption">Schaltschrank – frei geräumt</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Schaltschrank_frei.jpeg" class="gallery-item" data-type="image"
+             data-caption="Schaltschrank – frei geräumt">
+            <img src="Schaltschrank_frei.jpeg" alt="Schaltschrank – frei geräumt" loading="lazy">
+          </a>
+          <figcaption class="gallery-caption">Schaltschrank – frei geräumt</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="Achse_eingebaut.jpeg"
-           class="gallery-item"
-           data-type="image"
-           data-caption="Neuer Linear Antrieb">
-          <img src="Achse_eingebaut.jpeg" alt="Neuer Linearantrieb ohne Sensoren" loading="lazy">
-        </a>
-        <figcaption class="gallery-caption">Neuer Linear Antrieb ohne Sensoren</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Achse_eingebaut.jpeg" class="gallery-item" data-type="image"
+             data-caption="Neuer Linear Antrieb">
+            <img src="Achse_eingebaut.jpeg" alt="Neuer Linearantrieb ohne Sensoren" loading="lazy">
+          </a>
+          <figcaption class="gallery-caption">Neuer Linear Antrieb ohne Sensoren</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="HMI_Antrieb_Idee.png"
-           class="gallery-item"
-           data-type="image"
-           data-caption="HMI – Linearantrieb (Bedienbild)">
-          <img src="HMI_Antrieb_Idee.png" alt="HMI – Linearantrieb (Bedienbild)" loading="lazy">
-        </a>
-        <figcaption class="gallery-caption">HMI Pop-up Bild, Linear Antrieb Test Funktion</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="HMI_Antrieb_Idee.png" class="gallery-item" data-type="image"
+             data-caption="HMI – Linearantrieb (Bedienbild)">
+            <img src="HMI_Antrieb_Idee.png" alt="HMI – Linearantrieb (Bedienbild)" loading="lazy">
+          </a>
+          <figcaption class="gallery-caption">HMI Pop-up Bild, Linear Antrieb Test Funktion</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="HMI_LED_Idee.png"
-           class="gallery-item"
-           data-type="image"
-           data-caption="HMI – LED/Arduino (Testbild)">
-          <img src="HMI_LED_Idee.png" alt="HMI – LED/Arduino (Testbild)" loading="lazy">
-        </a>
-        <figcaption class="gallery-caption">HMI Pop-up Bild, LED Test Funktion</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="HMI_LED_Idee.png" class="gallery-item" data-type="image"
+             data-caption="HMI – LED/Arduino (Testbild)">
+            <img src="HMI_LED_Idee.png" alt="HMI – LED/Arduino (Testbild)" loading="lazy">
+          </a>
+          <figcaption class="gallery-caption">HMI Pop-up Bild, LED Test Funktion</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="Visu_Idee.jpeg"
-           class="gallery-item"
-           data-type="image"
-           data-caption="HMI – Hauptbildschirm (Idee)">
-          <img src="Visu_Idee.jpeg" alt="HMI – Hauptbildschirm (Idee)" loading="lazy">
-        </a>
-        <figcaption class="gallery-caption">HMI – Hauptbildschirm (Idee)</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Visu_Idee.jpeg" class="gallery-item" data-type="image"
+             data-caption="HMI – Hauptbildschirm (Idee)">
+            <img src="Visu_Idee.jpeg" alt="HMI – Hauptbildschirm (Idee)" loading="lazy">
+          </a>
+          <figcaption class="gallery-caption">HMI – Hauptbildschirm (Idee)</figcaption>
+        </figure>
 
-      <!-- ══════════ VIDEOS ══════════ -->
+        <!-- ══════════ VIDEOS ══════════ -->
 
-      <figure class="gallery-card">
-        <a href="Automatikbetrieb Vorstellung.mp4"
-           class="gallery-item"
-           data-type="video"
-           data-caption="Automatikbetrieb – Vorstellung: Der Becherhalter verfährt vollautomatisch zu den einzelnen Dispensern und kehrt anschließend in die Grundposition zurück">
-          <span class="badge-video">▶ Video</span>
-        </a>
-        <figcaption class="gallery-caption">Automatikbetrieb – Linearantrieb fährt Dispenser an und kehrt zurück</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Automatikbetrieb Vorstellung.mp4" class="gallery-item" data-type="video"
+             data-caption="Automatikbetrieb – Vorstellung: Der Becherhalter verfährt vollautomatisch zu den einzelnen Dispensern und kehrt anschließend in die Grundposition zurück">
+            <span class="badge-video">▶ Video</span>
+          </a>
+          <figcaption class="gallery-caption">Automatikbetrieb – Linearantrieb fährt Dispenser an und kehrt zurück</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="Automatikbetrieb LED.mp4"
-           class="gallery-item"
-           data-type="video"
-           data-caption="Automatikbetrieb mit LED-Visualisierung – Die türkise LED-Beleuchtung begleitet den Mischprozess und zeigt den Betriebszustand der Anlage">
-          <span class="badge-video">▶ Video</span>
-        </a>
-        <figcaption class="gallery-caption">Automatikbetrieb mit LED – Visualisierung des Betriebszustands</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Automatikbetrieb LED.mp4" class="gallery-item" data-type="video"
+             data-caption="Automatikbetrieb mit LED-Visualisierung – Die türkise LED-Beleuchtung begleitet den Mischprozess und zeigt den Betriebszustand der Anlage">
+            <span class="badge-video">▶ Video</span>
+          </a>
+          <figcaption class="gallery-caption">Automatikbetrieb mit LED – Visualisierung des Betriebszustands</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="Automatikbetriebtest.mp4"
-           class="gallery-item"
-           data-type="video"
-           data-caption="Automatikbetrieb – Test (Anfahren der einzelnen Dispenser)">
-          <span class="badge-video">▶ Video</span>
-        </a>
-        <figcaption class="gallery-caption">Automatikbetrieb – Test (Anfahren der einzelnen Dispenser)</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Automatikbetriebtest.mp4" class="gallery-item" data-type="video"
+             data-caption="Automatikbetrieb – Test (Anfahren der einzelnen Dispenser)">
+            <span class="badge-video">▶ Video</span>
+          </a>
+          <figcaption class="gallery-caption">Automatikbetrieb – Test (Anfahren der einzelnen Dispenser)</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="LED Zustände.mp4"
-           class="gallery-item"
-           data-type="video"
-           data-caption="LED Zustände der Anlage (HAND/AUTO/AUS)">
-          <span class="badge-video">▶ Video</span>
-        </a>
-        <figcaption class="gallery-caption">LED Zustände der Anlage (HAND/AUTO/AUS)</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="LED Zustände.mp4" class="gallery-item" data-type="video"
+             data-caption="LED Zustände der Anlage (HAND/AUTO/AUS)">
+            <span class="badge-video">▶ Video</span>
+          </a>
+          <figcaption class="gallery-caption">LED Zustände der Anlage (HAND/AUTO/AUS)</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="Steuerung des Antriebs.mp4"
-           class="gallery-item"
-           data-type="video"
-           data-caption="Steuerung des Antriebs – Referenzfahrt">
-          <span class="badge-video">▶ Video</span>
-        </a>
-        <figcaption class="gallery-caption">Steuerung des Antriebs – Referenzfahrt</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Steuerung des Antriebs.mp4" class="gallery-item" data-type="video"
+             data-caption="Steuerung des Antriebs – Referenzfahrt">
+            <span class="badge-video">▶ Video</span>
+          </a>
+          <figcaption class="gallery-caption">Steuerung des Antriebs – Referenzfahrt</figcaption>
+        </figure>
 
-      <figure class="gallery-card">
-        <a href="Antrieb verbaut.mp4"
-           class="gallery-item"
-           data-type="video"
-           data-caption="Antrieb und Motor an der Anlage verbaut">
-          <span class="badge-video">▶ Video</span>
-        </a>
-        <figcaption class="gallery-caption">Antrieb und Motor an der Anlage verbaut</figcaption>
-      </figure>
+        <figure class="gallery-card">
+          <a href="Antrieb verbaut.mp4" class="gallery-item" data-type="video"
+             data-caption="Antrieb und Motor an der Anlage verbaut">
+            <span class="badge-video">▶ Video</span>
+          </a>
+          <figcaption class="gallery-caption">Antrieb und Motor an der Anlage verbaut</figcaption>
+        </figure>
 
+      </div>
     </div>
-  </div>
-</section>
-}
-.gallery-card{
-  display:flex; flex-direction:column; gap:6px;
-}
-.gallery-item {
-  position:relative; overflow:hidden; border-radius:14px;
-  border:1px solid #e5e7eb; background:#fff;
-  aspect-ratio:16/10; display:block;
-}
-.gallery-item img, .gallery-item video {
-  width:100%; height:100%; object-fit:cover; display:block;
-}
-.gallery-item:hover {
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-  transform:translateY(-1px); transition:all .2s ease;
-}
-.gallery-item .badge-video {
-  position:absolute; left:8px; bottom:8px;
-  padding:.25rem .5rem; background:rgba(10,42,102,.9);
-  color:#fff; border-radius:999px; font-size:.75rem;
-}
-
-/* Beschriftung unterm Bild/Video */
-.gallery-caption{
-  font-size:.9rem; line-height:1.35;
-  color:#475569; /* muted */
-  padding:0 2px;
-}
-
-/* --- Lightbox --- */
-.lightbox {
-  position:fixed; inset:0; background:rgba(0,0,0,.8);
-  display:none; align-items:center; justify-content:center; z-index:1000;
-}
-.lightbox.open { display:flex; }
-.lightbox-inner {
-  width:min(1200px,92vw); max-height:88vh; background:#000;
-  border-radius:14px; position:relative; overflow:hidden;
-}
-.lightbox-content { display:flex; align-items:center; justify-content:center; }
-.lightbox-content img, .lightbox-content video, .lightbox-content iframe {
-  max-width:100%; max-height:88vh; display:block;
-}
-.lightbox-close, .lightbox-prev, .lightbox-next {
-  position:absolute; top:10px;
-  background:rgba(255,255,255,.12); color:#fff;
-  border:none; padding:.6rem .8rem; border-radius:10px; cursor:pointer;
-  backdrop-filter: blur(6px);
-}
-.lightbox-close{ right:10px; }
-.lightbox-prev{ left:10px; top:50%; transform:translateY(-50%); }
-.lightbox-next{ right:10px; top:50%; transform:translateY(-50%); }
-</style>
-
-<script>
-/* Galerie-Logik: Vorschaubilder + Lightbox + Captions */
-(function(){
-  const grid = document.getElementById('galleryGrid');
-  const lb = document.getElementById('lightbox');
-  const content = document.getElementById('lbContent');
-  const btnClose = document.getElementById('lbClose');
-  const btnPrev = document.getElementById('lbPrev');
-  const btnNext = document.getElementById('lbNext');
-
-  // Sammle die klickbaren <a.gallery-item> in Reihenfolge
-  const items = Array.from(grid.querySelectorAll('.gallery-item'));
-
-  // 1) Thumbnails automatisch erzeugen (für Videos/YouTube), Captions synchronisieren
-  items.forEach((a)=>{
-    const type = a.dataset.type;
-    const href = a.getAttribute('href');
-
-    // Sicherstellen, dass figcaption Text aus data-caption hat (falls leer)
-    const card = a.closest('.gallery-card');
-    const capEl = card?.querySelector('.gallery-caption');
-    if(capEl && !capEl.textContent.trim() && a.dataset.caption){
-      capEl.textContent = a.dataset.caption;
-    }
-
-    // Falls kein <img> in der Vorschau vorhanden ist → generieren
-    if(!a.querySelector('img')){
-      const img = document.createElement('img');
-      img.alt = a.dataset.caption || 'Vorschau';
-      img.loading = 'lazy';
-      a.prepend(img);
-
-      if(type === 'youtube'){
-        try{
-          const id = new URL(href).searchParams.get('v') || href.split('/').pop();
-          img.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-        }catch{
-          img.src = '';
-        }
-      } else if(type === 'video'){
-        // Zufälliges Vorschaubild aus MP4 erzeugen
-        const video = document.createElement('video');
-        video.src = href;
-        video.preload = 'metadata';
-        video.muted = true;
-        video.playsInline = true;
-        video.addEventListener('loadeddata',()=>{
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          canvas.width = video.videoWidth || 1280;
-          canvas.height = video.videoHeight || 720;
-          const target = Math.random() * 3; // 0–3 s
-          // bei sehr kurzen Clips auf 0s bleiben
-          video.currentTime = Math.min(target, (video.duration || 0));
-          video.addEventListener('seeked',()=>{
-            try{
-              ctx.drawImage(video,0,0,canvas.width,canvas.height);
-              img.src = canvas.toDataURL('image/jpeg',0.7);
-            }catch(e){
-              // Wenn drawImage wegen CORS fehlschlägt, nichts tun (oder Fallback)
-            }
-          },{once:true});
-        });
-      } else {
-        // Normales Bild → direkt verlinktes Bild als Vorschau
-        img.src = href;
-      }
-    }
-  });
-
-  // 2) Lightbox öffnen
-  let idx = -1;
-  function openAt(i){
-    if(!items.length) return;
-    idx = ((i % items.length) + items.length) % items.length;
-
-    const a = items[idx];
-    const type = a.dataset.type;
-    const href = a.getAttribute('href');
-    const caption = a.dataset.caption || '';
-
-    content.innerHTML = '';
-
-    if(type === 'image'){
-      const img = document.createElement('img');
-      img.src = href; img.alt = caption;
-      content.appendChild(img);
-    } else if(type === 'video'){
-      const vid = document.createElement('video');
-      vid.src = href; vid.controls = true; vid.playsInline = true;
-      content.appendChild(vid);
-      vid.play().catch(()=>{});
-    } else if(type === 'youtube'){
-      const id = new URL(href).searchParams.get('v') || href.split('/').pop();
-      const iframe = document.createElement('iframe');
-      iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
-      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      iframe.allowFullscreen = true;
-      iframe.style.width = '100%';
-      iframe.style.height = '70vh';
-      content.appendChild(iframe);
-    }
-
-    lb.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLB(){
-    lb.classList.remove('open');
-    document.body.style.overflow = '';
-    content.innerHTML = '';
-    idx = -1;
-  }
-  function prev(){ if(items.length) openAt(idx - 1); }
-  function next(){ if(items.length) openAt(idx + 1); }
-
-  // Klick-Handling auf die Galerie
-  grid.addEventListener('click', (e)=>{
-    const a = e.target.closest('.gallery-item');
-    if(!a) return;
-    e.preventDefault();
-    openAt(items.indexOf(a));
-  });
-
-  // Controls + Keyboard
-  document.getElementById('lbClose').addEventListener('click', closeLB);
-  document.getElementById('lbPrev').addEventListener('click', prev);
-  document.getElementById('lbNext').addEventListener('click', next);
-  lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLB(); });
-  document.addEventListener('keydown', (e)=>{
-    if(!lb.classList.contains('open')) return;
-    if(e.key === 'Escape') closeLB();
-    if(e.key === 'ArrowLeft') prev();
-    if(e.key === 'ArrowRight') next();
-  });
-})();
-</script>
+  </section>
 
   <!-- Meilensteine -->
   <section id="meilensteine">
@@ -1035,13 +514,13 @@
       <h2>Meilensteine & Fortschritt & Ausblick</h2>
       <div class="card timeline">
         <div class="tl-item"><strong>25.08.2025 Kickoff: </strong>Das Projekt ist gestartet. Wir dürfen nun offiziell an der Anlage arbeiten.</div>
-        <div class="tl-item"><strong>30.09.2025 Abgabe Pflichtenheft: </strong>Das Pflichtenheft wurde fertig definiert und abgegeben. Gleichzeitig wurden Kernthemen wie: Antrieb, Visualisierung und LED-Steuerung ausgelegt und geplant</div>
-        <div class="tl-item"><strong>06.10.2025 Testen des Antriebs: </strong>Die Positionierung funktioniert und wir können wie im Video oben zu sehen über das HMI positionieren</div>
-        <div class="tl-item"><strong>20.10.2025 Testen der Arduino Verbindung: </strong>Am Montag nach den Ferien wird weiter getestet. Das Programm für den Arduino steht und der Antrieb wird verbaut.</div>
-        <div class="tl-item"><strong>03.11.2025 Zwischenpräsentation: </strong>Dort wird die Zwischenpräsentation gehalten. Probleme als auch erfolge werden gezeigt.</div>
-        <div class="tl-item"><strong>01.12.2025 Coming soon: Testen des Automatikbetriebs  </strong>Den 01.10 haben wir uns Ziel gesetzt um dort alle Funktionen zu testen. Im Dezember ist das Ziel fine tuning und Dokumentation zu machen</div>
-        <div class="tl-item"><strong>12.01.2026 Coming soon: Fachgespräch </strong>Ein weiterer Teil der Bewertung unseres Projektes ist das Fachgesrpäch. Hier werden wir im Detail mit unseren Betreuern über die Anlage reden</div>
-        <div class="tl-item"><strong>07.02.2026 Coming soon: Abschluss Präsentation </strong>An diesem Datum werden wir unser Projekt live und in Farbe vorstellen. Gleichzeitig übergeben wir danach das Projekt an die BBS1</div>
+        <div class="tl-item"><strong>30.09.2025 Abgabe Pflichtenheft: </strong>Das Pflichtenheft wurde fertig definiert und abgegeben. Gleichzeitig wurden Kernthemen wie: Antrieb, Visualisierung und LED-Steuerung ausgelegt und geplant.</div>
+        <div class="tl-item"><strong>06.10.2025 Testen des Antriebs: </strong>Die Positionierung funktioniert und wir können wie im Video oben zu sehen über das HMI positionieren.</div>
+        <div class="tl-item"><strong>20.10.2025 Testen der Arduino-Verbindung: </strong>Am Montag nach den Ferien wird weiter getestet. Das Programm für den Arduino steht und der Antrieb wird verbaut.</div>
+        <div class="tl-item"><strong>03.11.2025 Zwischenpräsentation: </strong>Dort wird die Zwischenpräsentation gehalten. Probleme als auch Erfolge werden gezeigt.</div>
+        <div class="tl-item"><strong>01.12.2025 Testen des Automatikbetriebs: </strong>Den 01.12 haben wir uns als Ziel gesetzt um dort alle Funktionen zu testen. Im Dezember ist das Ziel Fine-Tuning und Dokumentation zu machen.</div>
+        <div class="tl-item"><strong>12.01.2026 Fachgespräch: </strong>Ein weiterer Teil der Bewertung unseres Projektes ist das Fachgespräch. Hier werden wir im Detail mit unseren Betreuern über die Anlage reden.</div>
+        <div class="tl-item"><strong>07.02.2026 Abschlusspräsentation: </strong>An diesem Datum werden wir unser Projekt live und in Farbe vorstellen. Gleichzeitig übergeben wir danach das Projekt an die BBS1.</div>
       </div>
     </div>
   </section>
@@ -1067,7 +546,7 @@
           <button class="btn" style="background:var(--blue); color:white; border:none">Senden</button>
         </form>
       </div>
-      <div class="card impressum">
+      <div class="card">
         <h2>Impressum & Datenschutz (Kurz)</h2>
         <p>Verantwortlich für den Inhalt: Projektteam DrinkOS (Schulprojekt). Keine Gewähr für Vollständigkeit. Alle Marken sind Eigentum der jeweiligen Inhaber.</p>
         <p>Bitte beachten: Keine abwertenden Inhalte, sensible personenbezogene Daten nur nach Maßgabe des Datenschutzes. Urheberrechte werden respektiert. (vgl. Vorgaben BBS1)</p>
@@ -1083,7 +562,7 @@
     </div>
   </footer>
 
-  <!-- Lightbox-Overlay -->
+  <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Medienanzeige">
     <div class="lightbox-inner">
       <button class="lightbox-close" id="lbClose" aria-label="Schließen">✕</button>
@@ -1095,100 +574,117 @@
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
-   function toggleMenu(){
+
+    function toggleMenu(){
       const ml = document.getElementById('menuLinks');
       ml.classList.toggle('show');
       document.body.classList.toggle('nav-open', ml.classList.contains('show'));
     }
-  </script>
 
-  <!-- Galerie / Lightbox Logik -->
-  <script>
-  (function(){
-    const grid = document.getElementById('galleryGrid');
-    if(!grid) return;
+    // Logo beim Scrollen ausblenden
+    (function(){
+      const logo = document.querySelector('.hero-mark');
+      const project = document.getElementById('projekt');
+      function onScroll(){
+        if(!logo || !project) return;
+        logo.classList.toggle('is-hidden', project.getBoundingClientRect().top <= 80);
+      }
+      window.addEventListener('scroll', onScroll, {passive:true});
+      window.addEventListener('resize', onScroll);
+      onScroll();
+    })();
 
-    const lb = document.getElementById('lightbox');
-    const content = document.getElementById('lbContent');
-    const btnClose = document.getElementById('lbClose');
-    const btnPrev = document.getElementById('lbPrev');
-    const btnNext = document.getElementById('lbNext');
+    // Galerie + Lightbox
+    (function(){
+      const grid = document.getElementById('galleryGrid');
+      if(!grid) return;
 
-    const items = Array.from(grid.querySelectorAll('.gallery-item'));
-    let idx = -1;
+      const lb = document.getElementById('lightbox');
+      const content = document.getElementById('lbContent');
+      const items = Array.from(grid.querySelectorAll('.gallery-item'));
+      let idx = -1;
 
-    function openAt(i){
-      if(!items.length) return;
-      idx = ((i % items.length) + items.length) % items.length;
-      const a = items[idx];
-      const type = a.dataset.type;
-      const href = a.getAttribute('href');
-      const caption = a.dataset.caption || '';
+      // Video-Thumbnails automatisch generieren
+      items.forEach((a) => {
+        const type = a.dataset.type;
+        const href = a.getAttribute('href');
+        if(!a.querySelector('img') && type === 'video'){
+          const img = document.createElement('img');
+          img.alt = a.dataset.caption || 'Vorschau';
+          img.loading = 'lazy';
+          img.style.width = '100%';
+          img.style.height = '100%';
+          img.style.objectFit = 'cover';
+          a.prepend(img);
+          const video = document.createElement('video');
+          video.src = href;
+          video.preload = 'metadata';
+          video.muted = true;
+          video.playsInline = true;
+          video.addEventListener('loadeddata', () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth || 1280;
+            canvas.height = video.videoHeight || 720;
+            video.currentTime = Math.min(Math.random() * 3, video.duration || 0);
+            video.addEventListener('seeked', () => {
+              try {
+                canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                img.src = canvas.toDataURL('image/jpeg', 0.7);
+              } catch(e) {}
+            }, {once:true});
+          });
+          video.load();
+        }
+      });
 
-      content.innerHTML = '';
-
-      if(type === 'image'){
-        const img = document.createElement('img');
-        img.src = href;
-        img.alt = caption || 'Bild';
-        content.appendChild(img);
-      } else if(type === 'video'){
-        const vid = document.createElement('video');
-        vid.src = href;
-        vid.controls = true;
-        vid.playsInline = true;
-        vid.preload = 'metadata';
-        if(a.dataset.poster) vid.poster = a.dataset.poster;
-        content.appendChild(vid);
-        vid.muted = true; vid.play().catch(()=>{});
-      } else if(type === 'youtube'){
-        const iframe = document.createElement('iframe');
-        const url = new URL(href, window.location.href);
-        const id = url.searchParams.get('v') || href.split('/').pop();
-        iframe.src = 'https://www.youtube.com/embed/' + id + '?rel=0&autoplay=1';
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        iframe.allowFullscreen = true;
-        iframe.title = caption || 'YouTube Video';
-        iframe.style.width = '100%'; iframe.style.height = '70vh';
-        content.appendChild(iframe);
+      function openAt(i){
+        if(!items.length) return;
+        idx = ((i % items.length) + items.length) % items.length;
+        const a = items[idx];
+        const type = a.dataset.type;
+        const href = a.getAttribute('href');
+        const caption = a.dataset.caption || '';
+        content.innerHTML = '';
+        if(type === 'image'){
+          const img = document.createElement('img');
+          img.src = href; img.alt = caption;
+          content.appendChild(img);
+        } else if(type === 'video'){
+          const vid = document.createElement('video');
+          vid.src = href; vid.controls = true; vid.playsInline = true; vid.muted = true;
+          content.appendChild(vid);
+          vid.play().catch(()=>{});
+        }
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
       }
 
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
+      function closeLB(){
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+        content.innerHTML = '';
+        idx = -1;
+      }
 
-    function closeLB(){
-      lb.classList.remove('open');
-      document.body.style.overflow = '';
-      content.innerHTML = '';
-      idx = -1;
-    }
+      grid.addEventListener('click', (e) => {
+        const a = e.target.closest('.gallery-item');
+        if(!a) return;
+        e.preventDefault();
+        openAt(items.indexOf(a));
+      });
 
-    function prev(){ if(items.length) openAt(idx - 1); }
-    function next(){ if(items.length) openAt(idx + 1); }
-
-    grid.addEventListener('click', (e)=>{
-      const a = e.target.closest('.gallery-item');
-      if(!a) return;
-      e.preventDefault();
-      const i = items.indexOf(a);
-      openAt(i);
-    });
-
-    btnClose.addEventListener('click', closeLB);
-    btnPrev.addEventListener('click', prev);
-    btnNext.addEventListener('click', next);
-
-    lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLB(); });
-
-    document.addEventListener('keydown', (e)=>{
-      if(!lb.classList.contains('open')) return;
-      if(e.key === 'Escape') closeLB();
-      if(e.key === 'ArrowLeft') prev();
-      if(e.key === 'ArrowRight') next();
-    });
-  })();
+      document.getElementById('lbClose').addEventListener('click', closeLB);
+      document.getElementById('lbPrev').addEventListener('click', () => openAt(idx - 1));
+      document.getElementById('lbNext').addEventListener('click', () => openAt(idx + 1));
+      lb.addEventListener('click', (e) => { if(e.target === lb) closeLB(); });
+      document.addEventListener('keydown', (e) => {
+        if(!lb.classList.contains('open')) return;
+        if(e.key === 'Escape') closeLB();
+        if(e.key === 'ArrowLeft') openAt(idx - 1);
+        if(e.key === 'ArrowRight') openAt(idx + 1);
+      });
+    })();
   </script>
+
 </body>
 </html>
-
