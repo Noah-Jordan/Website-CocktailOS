@@ -33,54 +33,30 @@
     .menu-button{font-size:1.5rem; background:none; border:none; cursor:pointer; padding:10px; color:white}
 
     .menu-links{
-      position:fixed;
-      top:60px;
-      right:-260px;
-      width:260px;
-      display:flex;
-      flex-direction:column;
-      background-color:#123780;
-      padding:12px;
-      border-radius:12px 0 0 12px;
-      box-shadow:-10px 14px 28px rgba(0,0,0,.18);
-      z-index:1000;
-      transition:right .25s ease;
+      position:fixed; top:60px; right:-260px; width:260px;
+      display:flex; flex-direction:column; background-color:#123780;
+      padding:12px; border-radius:12px 0 0 12px;
+      box-shadow:-10px 14px 28px rgba(0,0,0,.18); z-index:1000; transition:right .25s ease;
     }
-    .menu-links a{
-      padding:10px;
-      text-decoration:none;
-      color:white;
-      border-bottom:1px solid rgba(255,255,255,0.18)
-    }
+    .menu-links a{ padding:10px; text-decoration:none; color:white; border-bottom:1px solid rgba(255,255,255,0.18) }
     .menu-links a:last-child{ border-bottom:none }
     .menu-links.show{ right:0 }
-    body.nav-open .hero-mark{
-      transform:translateX(-280px);
-    }
+    body.nav-open .hero-mark{ transform:translateX(-280px); }
 
     .hero{
-      position: relative;
-      color: #0b1220;
+      position: relative; color: #0b1220;
       background: radial-gradient(1000px 500px at 70% -100px, #2a4faa 0%, transparent 70%), var(--blue);
     }
-    .hero::before{
-      content:""; position:absolute; inset:0; background: rgba(0,0,0,.15);
-    }
+    .hero::before{ content:""; position:absolute; inset:0; background: rgba(0,0,0,.15); }
     .hero .wrap{
-      position:relative;
-      display:grid; grid-template-columns:1fr; gap:2rem;
+      position:relative; display:grid; grid-template-columns:1fr; gap:2rem;
       padding:3rem 0; min-height:60vh; align-items:center;
     }
     .hero .container{ max-width: 1300px; }
-
     .hero-card{
-      background:rgba(255,255,255,0.92);
-      border:1px solid #e5e7eb;
-      border-radius:18px;
-      padding:1.2rem 1.4rem;
-      box-shadow:0 10px 30px rgba(0,0,0,.12);
-      backdrop-filter:blur(4px);
-      max-width:900px;
+      background:rgba(255,255,255,0.92); border:1px solid #e5e7eb; border-radius:18px;
+      padding:1.2rem 1.4rem; box-shadow:0 10px 30px rgba(0,0,0,.12);
+      backdrop-filter:blur(4px); max-width:900px;
     }
     .hero-card h1{ font-size:clamp(1.8rem,4vw,3rem); margin:.2rem 0 .6rem }
     .hero-card p, .hero-card span.muted{ color:#eef2ff; }
@@ -92,14 +68,10 @@
     .btn-outline{border:1.5px solid rgba(255,255,255,.6); color:white; background:transparent}
 
     .hero-mark{
-      position:fixed; top:84px; right:20px;
-      width:160px; height:160px;
-      border-radius:50%;
-      object-fit:contain; background:#fff;
-      padding:10px; border:1px solid #e5e7eb;
-      box-shadow:0 10px 30px rgba(0,0,0,.12);
-      z-index:60;
-      transition:opacity .2s ease, transform .2s ease;
+      position:fixed; top:84px; right:20px; width:160px; height:160px;
+      border-radius:50%; object-fit:contain; background:#fff;
+      padding:10px; border:1px solid #e5e7eb; box-shadow:0 10px 30px rgba(0,0,0,.12);
+      z-index:60; transition:opacity .2s ease, transform .2s ease;
     }
     .hero-mark.is-hidden{ opacity:0; transform:scale(.95); pointer-events:none; }
 
@@ -114,76 +86,93 @@
     .badge{display:inline-block; padding:.25rem .6rem; border-radius:999px; font-size:.75rem; background:#eef2ff; color:#3730a3}
     .muted{color:#cbd5e1}
 
+    /* Timeline */
     .timeline{position:relative; margin-left:.5rem}
     .timeline::before{content:""; position:absolute; left:.6rem; top:.2rem; bottom:.2rem; width:2px; background:#dbeafe}
     .tl-item{position:relative; padding-left:1.8rem; margin:.8rem 0}
     .tl-item::before{content:""; position:absolute; left:0; top:.2rem; width:.9rem; height:.9rem; border-radius:999px; background:var(--yellow); border:2px solid #1d4ed8}
+    .tl-item.done::before{
+      content:"✓"; background:#16a34a; border-color:#15803d; color:white;
+      font-size:.6rem; font-weight:900; display:flex; align-items:center; justify-content:center;
+    }
+    .tl-item.open::before{ background:#94a3b8; border-color:#64748b; }
 
+    /* Color overrides */
     #start .hero-card p { color:#000 !important; }
     #projekt .muted.small { color:#000 !important; }
     #blog .muted { color:#000 !important; }
     #team .muted { color:#000 !important; }
     #galerie .muted { color:#000 !important; }
-    #start .cta .btn-outline{
-      color:#000 !important;
-      border-color: rgba(0,0,0,.35);
-    }
+    #start .cta .btn-outline{ color:#000 !important; border-color: rgba(0,0,0,.35); }
 
-    /* --- Galerie --- */
-    .gallery { padding: 3rem 0; }
-    .gallery .grid-auto {
+    /* Stats Banner */
+    .stats-banner{ background:linear-gradient(90deg,#0a2a66 0%,#123780 100%); color:white; padding:1.2rem 0; }
+    .stats-inner{ display:flex; gap:2rem; flex-wrap:wrap; justify-content:center; }
+    .stat{ display:flex; flex-direction:column; align-items:center; gap:.15rem; }
+    .stat-num{ font-size:1.6rem; font-weight:800; color:var(--yellow); line-height:1; }
+    .stat-label{ font-size:.8rem; opacity:.85; text-transform:uppercase; letter-spacing:.05em; }
+
+    /* Blog Filter */
+    .blog-filter{ display:flex; gap:.5rem; margin-bottom:1rem; flex-wrap:wrap; }
+    .filter-btn{
+      padding:.4rem 1rem; border-radius:999px; border:1.5px solid var(--blue);
+      background:white; color:var(--blue); font-weight:600; cursor:pointer; transition:background .15s, color .15s;
+    }
+    .filter-btn.active, .filter-btn:hover{ background:var(--blue); color:white; }
+
+    /* Galerie */
+    .gallery{ padding:3rem 0; }
+    .gallery-section-title{ margin:1.5rem 0 .75rem; color:#0a2a66; font-size:1.1rem; font-weight:700; }
+    .gallery .grid-auto{
       display:grid; gap:14px;
       grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
     }
-    .gallery-card{
-      display:flex; flex-direction:column; gap:6px;
-    }
-    .gallery-item {
+    .gallery-card{ display:flex; flex-direction:column; gap:6px; }
+    .gallery-item{
       position:relative; overflow:hidden; border-radius:14px;
-      border:1px solid #e5e7eb; background:#fff;
-      aspect-ratio:16/10; display:block;
+      border:1px solid #e5e7eb; background:#fff; aspect-ratio:16/10; display:block;
     }
-    .gallery-item img, .gallery-item video {
-      width:100%; height:100%; object-fit:cover; display:block;
-    }
-    .gallery-item:hover {
-      box-shadow:0 6px 18px rgba(0,0,0,.08);
-      transform:translateY(-1px); transition:all .2s ease;
-    }
-    .gallery-item .badge-video {
-      position:absolute; left:8px; bottom:8px;
-      padding:.25rem .5rem; background:rgba(10,42,102,.9);
-      color:#fff; border-radius:999px; font-size:.75rem;
-    }
-    .gallery-caption{
-      font-size:.9rem; line-height:1.35;
-      color:#475569;
-      padding:0 2px;
-    }
+    .gallery-item img, .gallery-item video{ width:100%; height:100%; object-fit:cover; display:block; }
+    .gallery-item:hover{ box-shadow:0 6px 18px rgba(0,0,0,.08); transform:translateY(-1px); transition:all .2s ease; }
 
-    /* --- Lightbox --- */
-    .lightbox {
-      position:fixed; inset:0; background:rgba(0,0,0,.8);
-      display:none; align-items:center; justify-content:center; z-index:1000;
+    /* Play Button Overlay */
+    .badge-video{
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      background:rgba(10,42,102,.15); transition:background .2s;
     }
-    .lightbox.open { display:flex; }
-    .lightbox-inner {
-      width:min(1200px,92vw); max-height:88vh; background:#000;
-      border-radius:14px; position:relative; overflow:hidden;
+    .badge-video::after{
+      content:"";
+      width:52px; height:52px; border-radius:50%;
+      background: rgba(10,42,102,.85) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") no-repeat 55% center / 28px;
+      box-shadow:0 4px 16px rgba(0,0,0,.3); transition:transform .2s, box-shadow .2s;
     }
-    .lightbox-content { display:flex; align-items:center; justify-content:center; }
-    .lightbox-content img, .lightbox-content video, .lightbox-content iframe {
-      max-width:100%; max-height:88vh; display:block;
-    }
-    .lightbox-close, .lightbox-prev, .lightbox-next {
-      position:absolute; top:10px;
-      background:rgba(255,255,255,.12); color:#fff;
-      border:none; padding:.6rem .8rem; border-radius:10px; cursor:pointer;
-      backdrop-filter: blur(6px);
+    .gallery-item:hover .badge-video{ background:rgba(10,42,102,.25); }
+    .gallery-item:hover .badge-video::after{ transform:scale(1.1); box-shadow:0 6px 20px rgba(0,0,0,.4); }
+
+    .gallery-caption{ font-size:.9rem; line-height:1.35; color:#475569; padding:0 2px; }
+
+    /* Lightbox */
+    .lightbox{ position:fixed; inset:0; background:rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index:1000; }
+    .lightbox.open{ display:flex; }
+    .lightbox-inner{ width:min(1200px,92vw); max-height:88vh; background:#000; border-radius:14px; position:relative; overflow:hidden; }
+    .lightbox-content{ display:flex; align-items:center; justify-content:center; }
+    .lightbox-content img, .lightbox-content video, .lightbox-content iframe{ max-width:100%; max-height:88vh; display:block; }
+    .lightbox-close, .lightbox-prev, .lightbox-next{
+      position:absolute; top:10px; background:rgba(255,255,255,.12); color:#fff;
+      border:none; padding:.6rem .8rem; border-radius:10px; cursor:pointer; backdrop-filter:blur(6px);
     }
     .lightbox-close{ right:10px; }
     .lightbox-prev{ left:10px; top:50%; transform:translateY(-50%); }
     .lightbox-next{ right:10px; top:50%; transform:translateY(-50%); }
+
+    /* Nach-oben Button */
+    #toTop{
+      position:fixed; bottom:2rem; right:2rem; width:44px; height:44px;
+      border-radius:50%; background:var(--blue); color:white; border:none;
+      font-size:1.2rem; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,.2);
+      opacity:0; transform:translateY(10px); transition:opacity .25s, transform .25s; z-index:200;
+    }
+    #toTop.visible{ opacity:1; transform:translateY(0); }
   </style>
 </head>
 <body>
@@ -229,6 +218,17 @@
     </div>
   </section>
 
+  <!-- Stats Banner -->
+  <div class="stats-banner">
+    <div class="container stats-inner">
+      <div class="stat"><span class="stat-num">46</span><span class="stat-label">Blog-Einträge</span></div>
+      <div class="stat"><span class="stat-num">6</span><span class="stat-label">Dispenser</span></div>
+      <div class="stat"><span class="stat-num">108</span><span class="stat-label">Git Commits</span></div>
+      <div class="stat"><span class="stat-num">1,2</span><span class="stat-label">Abschlussnote</span></div>
+      <div class="stat"><span class="stat-num">S7-1200</span><span class="stat-label">Siemens SPS</span></div>
+    </div>
+  </div>
+
   <!-- Projektbeschreibung -->
   <section id="projekt">
     <div class="container grid grid-2">
@@ -265,9 +265,13 @@
   <section id="blog">
     <div class="container">
       <h2>Blog / Arbeitstagebuch</h2>
-      <p class="muted">Jeder Projektteilnehmer führt und aktualisiert ein öffentliches Arbeitstagebuch: </p>
+      <p class="muted">Jeder Projektteilnehmer führt und aktualisiert ein öffentliches Arbeitstagebuch:</p>
+      <div class="blog-filter">
+        <button class="filter-btn active" data-filter="all">Alle</button>
+        <button class="filter-btn" data-filter="Dario">Dario</button>
+        <button class="filter-btn" data-filter="Noah">Noah</button>
+      </div>
       <div class="grid grid-3">
-
         <article class="card" aria-labelledby="b1"><div class="badge">KW 36</div> <div class="badge">Dario</div><h3 id="b1">Erstellung des Pflichtenheftes</h3><p>In der ersten Woche ist meine Hauptaufgabe zu gucken was wir machen wollen, wie sinnvoll das ist, ohne das man später in Zeitprobleme kommt. Dabei ist meine Hauptaufgabe Ideen zu sammeln wie das Programm aussehen kann.</p></article>
         <article class="card" aria-labelledby="b2"><div class="badge">KW 36</div> <div class="badge">Noah</div><h3 id="b2">Planung Antrieb</h3><p>Möglichkeiten alternativer Antriebstechniken überprüft. Lösungsansatz: Schrittmotor über Schrittmotortreiber wird von der SPS angesteuert.</p></article>
         <article class="card" aria-labelledby="b3"><div class="badge">KW 37</div> <div class="badge">Dario</div><h3 id="b3">Pflichtenheft und Softwaretest</h3><p>Funktionale Anforderungen wurden verschriftlicht. Dazu wurden Ziele weiter ausformuliert, dazu gehören: LED-Steuerung, Visualisierung, Antriebstechnik und Rezeptverwaltung. Außerdem habe ich die Verbindungen zur SPS und zum HMI hergestellt. Da mein Laptop über keine Ethernet-Schnittstelle verfügt, habe ich den Adapter getestet. Zusätzlich wurden Logos erstellt.</p></article>
@@ -314,7 +318,6 @@
         <article class="card" aria-labelledby="b44"><div class="badge">KW 05</div> <div class="badge">Noah</div><h3 id="b44">Anpassungen</h3><p>Heute habe ich letzte Anpassungen durchgeführt. Ich habe die Positionen des Antriebs angepasst, da diese nicht 100% auf der korrekten Position waren.</p></article>
         <article class="card" aria-labelledby="b45"><div class="badge">KW 06</div> <div class="badge">Dario</div><h3 id="b45">Vorbereitung der Präsentation</h3><p>Ich habe einzelne Funktionen überprüft. 1 Button beim Linearantrieb wurde nicht richtig angezeigt. Dazu haben wir die Präsentation ausprobiert ob wir zeitlich klarkommen und die PowerPoint angepasst und gekürzt.</p></article>
         <article class="card" aria-labelledby="b46"><div class="badge">KW 06</div> <div class="badge">Noah</div><h3 id="b46">Vorbereitung Präsentation</h3><p>Wir haben die fertige Anlage in den Präsentationsraum gestellt und die Flaschen, Ausgießer und Becher gespült.</p></article>
-
       </div>
     </div>
   </section>
@@ -370,9 +373,8 @@
       <h2>Galerie</h2>
       <p class="muted">Hier zeigen wir Eindrücke aus Planung, Aufbau und Tests. Zum Vergrößern klicken/tippen.</p>
 
+      <p class="gallery-section-title">📷 Bilder</p>
       <div class="grid-auto" id="galleryGrid">
-
-        <!-- ══════════ BILDER ══════════ -->
 
         <figure class="gallery-card">
           <a href="Ansicht Frontal Vorstellung.jpg" class="gallery-item" data-type="image"
@@ -454,12 +456,15 @@
           <figcaption class="gallery-caption">HMI – Hauptbildschirm (Idee)</figcaption>
         </figure>
 
-        <!-- ══════════ VIDEOS ══════════ -->
+      </div>
+
+      <p class="gallery-section-title">🎬 Videos</p>
+      <div class="grid-auto" id="galleryGridVideos">
 
         <figure class="gallery-card">
           <a href="Automatikbetrieb Vorstellung.mp4" class="gallery-item" data-type="video"
              data-caption="Automatikbetrieb – Vorstellung: Der Becherhalter verfährt vollautomatisch zu den einzelnen Dispensern und kehrt anschließend in die Grundposition zurück">
-            <span class="badge-video">▶ Video</span>
+            <span class="badge-video"></span>
           </a>
           <figcaption class="gallery-caption">Automatikbetrieb – Linearantrieb fährt Dispenser an und kehrt zurück</figcaption>
         </figure>
@@ -467,7 +472,7 @@
         <figure class="gallery-card">
           <a href="Automatikbetrieb LED.mp4" class="gallery-item" data-type="video"
              data-caption="Automatikbetrieb mit LED-Visualisierung – Die türkise LED-Beleuchtung begleitet den Mischprozess und zeigt den Betriebszustand der Anlage">
-            <span class="badge-video">▶ Video</span>
+            <span class="badge-video"></span>
           </a>
           <figcaption class="gallery-caption">Automatikbetrieb mit LED – Visualisierung des Betriebszustands</figcaption>
         </figure>
@@ -475,7 +480,7 @@
         <figure class="gallery-card">
           <a href="Automatikbetriebtest.mp4" class="gallery-item" data-type="video"
              data-caption="Automatikbetrieb – Test (Anfahren der einzelnen Dispenser)">
-            <span class="badge-video">▶ Video</span>
+            <span class="badge-video"></span>
           </a>
           <figcaption class="gallery-caption">Automatikbetrieb – Test (Anfahren der einzelnen Dispenser)</figcaption>
         </figure>
@@ -483,7 +488,7 @@
         <figure class="gallery-card">
           <a href="LED Zustände.mp4" class="gallery-item" data-type="video"
              data-caption="LED Zustände der Anlage (HAND/AUTO/AUS)">
-            <span class="badge-video">▶ Video</span>
+            <span class="badge-video"></span>
           </a>
           <figcaption class="gallery-caption">LED Zustände der Anlage (HAND/AUTO/AUS)</figcaption>
         </figure>
@@ -491,7 +496,7 @@
         <figure class="gallery-card">
           <a href="Steuerung des Antriebs.mp4" class="gallery-item" data-type="video"
              data-caption="Steuerung des Antriebs – Referenzfahrt">
-            <span class="badge-video">▶ Video</span>
+            <span class="badge-video"></span>
           </a>
           <figcaption class="gallery-caption">Steuerung des Antriebs – Referenzfahrt</figcaption>
         </figure>
@@ -499,7 +504,7 @@
         <figure class="gallery-card">
           <a href="Antrieb verbaut.mp4" class="gallery-item" data-type="video"
              data-caption="Antrieb und Motor an der Anlage verbaut">
-            <span class="badge-video">▶ Video</span>
+            <span class="badge-video"></span>
           </a>
           <figcaption class="gallery-caption">Antrieb und Motor an der Anlage verbaut</figcaption>
         </figure>
@@ -513,14 +518,14 @@
     <div class="container">
       <h2>Meilensteine & Fortschritt & Ausblick</h2>
       <div class="card timeline">
-        <div class="tl-item"><strong>25.08.2025 Kickoff: </strong>Das Projekt ist gestartet. Wir dürfen nun offiziell an der Anlage arbeiten.</div>
-        <div class="tl-item"><strong>30.09.2025 Abgabe Pflichtenheft: </strong>Das Pflichtenheft wurde fertig definiert und abgegeben. Gleichzeitig wurden Kernthemen wie: Antrieb, Visualisierung und LED-Steuerung ausgelegt und geplant.</div>
-        <div class="tl-item"><strong>06.10.2025 Testen des Antriebs: </strong>Die Positionierung funktioniert und wir können wie im Video oben zu sehen über das HMI positionieren.</div>
-        <div class="tl-item"><strong>20.10.2025 Testen der Arduino-Verbindung: </strong>Am Montag nach den Ferien wird weiter getestet. Das Programm für den Arduino steht und der Antrieb wird verbaut.</div>
-        <div class="tl-item"><strong>03.11.2025 Zwischenpräsentation: </strong>Dort wird die Zwischenpräsentation gehalten. Probleme als auch Erfolge werden gezeigt.</div>
-        <div class="tl-item"><strong>01.12.2025 Testen des Automatikbetriebs: </strong>Den 01.12 haben wir uns als Ziel gesetzt um dort alle Funktionen zu testen. Im Dezember ist das Ziel Fine-Tuning und Dokumentation zu machen.</div>
-        <div class="tl-item"><strong>12.01.2026 Fachgespräch: </strong>Ein weiterer Teil der Bewertung unseres Projektes ist das Fachgespräch. Hier werden wir im Detail mit unseren Betreuern über die Anlage reden.</div>
-        <div class="tl-item"><strong>07.02.2026 Abschlusspräsentation: </strong>An diesem Datum werden wir unser Projekt live und in Farbe vorstellen. Gleichzeitig übergeben wir danach das Projekt an die BBS1.</div>
+        <div class="tl-item done"><strong>25.08.2025 Kickoff:</strong> Das Projekt ist gestartet. Wir dürfen nun offiziell an der Anlage arbeiten.</div>
+        <div class="tl-item done"><strong>30.09.2025 Abgabe Pflichtenheft:</strong> Das Pflichtenheft wurde fertig definiert und abgegeben. Gleichzeitig wurden Kernthemen wie: Antrieb, Visualisierung und LED-Steuerung ausgelegt und geplant.</div>
+        <div class="tl-item done"><strong>06.10.2025 Testen des Antriebs:</strong> Die Positionierung funktioniert und wir können wie im Video oben zu sehen über das HMI positionieren.</div>
+        <div class="tl-item done"><strong>20.10.2025 Testen der Arduino-Verbindung:</strong> Am Montag nach den Ferien wird weiter getestet. Das Programm für den Arduino steht und der Antrieb wird verbaut.</div>
+        <div class="tl-item done"><strong>03.11.2025 Zwischenpräsentation:</strong> Dort wird die Zwischenpräsentation gehalten. Probleme als auch Erfolge werden gezeigt.</div>
+        <div class="tl-item done"><strong>01.12.2025 Testen des Automatikbetriebs:</strong> Den 01.12 haben wir uns als Ziel gesetzt um dort alle Funktionen zu testen. Im Dezember ist das Ziel Fine-Tuning und Dokumentation zu machen.</div>
+        <div class="tl-item done"><strong>12.01.2026 Fachgespräch:</strong> Ein weiterer Teil der Bewertung unseres Projektes ist das Fachgespräch. Hier werden wir im Detail mit unseren Betreuern über die Anlage reden.</div>
+        <div class="tl-item done"><strong>07.02.2026 Abschlusspräsentation:</strong> An diesem Datum werden wir unser Projekt live und in Farbe vorstellen. Gleichzeitig übergeben wir danach das Projekt an die BBS1.</div>
       </div>
     </div>
   </section>
@@ -572,6 +577,9 @@
     </div>
   </div>
 
+  <!-- Nach-oben Button -->
+  <button id="toTop" aria-label="Nach oben" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
 
@@ -594,27 +602,52 @@
       onScroll();
     })();
 
+    // Nach-oben Button
+    (function(){
+      const btn = document.getElementById('toTop');
+      window.addEventListener('scroll', () => {
+        btn.classList.toggle('visible', window.scrollY > 300);
+      }, {passive:true});
+    })();
+
+    // Blog Filter
+    (function(){
+      const btns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('#blog .card[aria-labelledby]');
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filter = btn.dataset.filter;
+          cards.forEach(card => {
+            if(filter === 'all'){
+              card.style.display = '';
+            } else {
+              const badges = card.querySelectorAll('.badge');
+              const match = Array.from(badges).some(b => b.textContent.trim() === filter);
+              card.style.display = match ? '' : 'none';
+            }
+          });
+        });
+      });
+    })();
+
     // Galerie + Lightbox
     (function(){
-      const grid = document.getElementById('galleryGrid');
-      if(!grid) return;
-
+      const allItems = Array.from(document.querySelectorAll('.gallery-item'));
       const lb = document.getElementById('lightbox');
       const content = document.getElementById('lbContent');
-      const items = Array.from(grid.querySelectorAll('.gallery-item'));
       let idx = -1;
 
       // Video-Thumbnails automatisch generieren
-      items.forEach((a) => {
+      allItems.forEach((a) => {
         const type = a.dataset.type;
         const href = a.getAttribute('href');
-        if(!a.querySelector('img') && type === 'video'){
+        if(type === 'video'){
           const img = document.createElement('img');
           img.alt = a.dataset.caption || 'Vorschau';
           img.loading = 'lazy';
-          img.style.width = '100%';
-          img.style.height = '100%';
-          img.style.objectFit = 'cover';
+          img.style.cssText = 'width:100%;height:100%;object-fit:cover;position:absolute;inset:0;';
           a.prepend(img);
           const video = document.createElement('video');
           video.src = href;
@@ -638,9 +671,9 @@
       });
 
       function openAt(i){
-        if(!items.length) return;
-        idx = ((i % items.length) + items.length) % items.length;
-        const a = items[idx];
+        if(!allItems.length) return;
+        idx = ((i % allItems.length) + allItems.length) % allItems.length;
+        const a = allItems[idx];
         const type = a.dataset.type;
         const href = a.getAttribute('href');
         const caption = a.dataset.caption || '';
@@ -651,7 +684,7 @@
           content.appendChild(img);
         } else if(type === 'video'){
           const vid = document.createElement('video');
-          vid.src = href; vid.controls = true; vid.playsInline = true; vid.muted = true;
+          vid.src = href; vid.controls = true; vid.playsInline = true; vid.muted = false;
           content.appendChild(vid);
           vid.play().catch(()=>{});
         }
@@ -666,11 +699,13 @@
         idx = -1;
       }
 
-      grid.addEventListener('click', (e) => {
-        const a = e.target.closest('.gallery-item');
-        if(!a) return;
-        e.preventDefault();
-        openAt(items.indexOf(a));
+      document.querySelectorAll('.grid-auto').forEach(grid => {
+        grid.addEventListener('click', (e) => {
+          const a = e.target.closest('.gallery-item');
+          if(!a) return;
+          e.preventDefault();
+          openAt(allItems.indexOf(a));
+        });
       });
 
       document.getElementById('lbClose').addEventListener('click', closeLB);
