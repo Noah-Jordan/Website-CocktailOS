@@ -135,8 +135,7 @@
       background:rgba(10,42,102,.15); transition:background .2s;
     }
     .badge-video::after{
-      content:"";
-      width:52px; height:52px; border-radius:50%;
+      content:""; width:52px; height:52px; border-radius:50%;
       background: rgba(10,42,102,.85) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") no-repeat 55% center / 28px;
       box-shadow:0 4px 16px rgba(0,0,0,.3); transition:transform .2s, box-shadow .2s;
     }
@@ -148,7 +147,7 @@
     .lightbox.open{ display:flex; }
     .lightbox-inner{ width:min(1200px,92vw); max-height:88vh; background:#000; border-radius:14px; position:relative; overflow:hidden; }
     .lightbox-content{ display:flex; align-items:center; justify-content:center; }
-    .lightbox-content img, .lightbox-content video, .lightbox-content iframe{ max-width:100%; max-height:88vh; display:block; }
+    .lightbox-content img, .lightbox-content video{ max-width:100%; max-height:88vh; display:block; }
     .lightbox-close, .lightbox-prev, .lightbox-next{
       position:absolute; top:10px; background:rgba(255,255,255,.12); color:#fff;
       border:none; padding:.6rem .8rem; border-radius:10px; cursor:pointer; backdrop-filter:blur(6px);
@@ -165,11 +164,7 @@
     }
     #toTop.visible{ opacity:1; transform:translateY(0); }
 
-    /* Simulation */
-    .sim-wrap{
-      background:#fff; border:1px solid #e5e7eb; border-radius:18px;
-      padding:1.5rem; overflow-x:auto;
-    }
+    .sim-wrap{ background:#fff; border:1px solid #e5e7eb; border-radius:18px; padding:1.5rem; overflow-x:auto; }
     .sim-wrap svg{ min-width:560px; }
     .sim-controls{ display:flex; align-items:center; gap:10px; margin:10px 0 6px; flex-wrap:wrap; }
     .sim-controls button{
@@ -179,16 +174,9 @@
     }
     .sim-controls button:hover:not(:disabled){ background:var(--blue); color:white; }
     .sim-controls button:disabled{ opacity:.4; cursor:not-allowed; }
-    .sim-controls select{
-      font-size:13px; padding:5px 10px; border-radius:999px;
-      border:1.5px solid #e5e7eb; background:white; color:#0b1220;
-    }
+    .sim-controls select{ font-size:13px; padding:5px 10px; border-radius:999px; border:1.5px solid #e5e7eb; background:white; color:#0b1220; }
     .sim-badges{ display:flex; gap:8px; flex-wrap:wrap; margin:4px 0 0; }
-    .sim-badge{
-      font-size:11px; padding:3px 10px; border-radius:999px;
-      background:#f1f5f9; color:#64748b; font-weight:600;
-      transition:background .2s, color .2s;
-    }
+    .sim-badge{ font-size:11px; padding:3px 10px; border-radius:999px; background:#f1f5f9; color:#64748b; font-weight:600; transition:background .2s, color .2s; }
     .sim-badge.info{ background:#dbeafe; color:#1d4ed8; }
     .sim-badge.success{ background:#dcfce7; color:#15803d; }
     .sim-badge.warning{ background:#fef9c3; color:#92400e; }
@@ -277,16 +265,13 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
-       SIMULATION
-  ═══════════════════════════════════════ -->
+  <!-- SIMULATION -->
   <section id="simulation">
     <div class="container">
       <h2>Automatikbetrieb – Interaktive Simulation</h2>
       <p class="muted">Wähle ein Rezept und starte die Simulation um den vollautomatischen Ablauf der Anlage zu verstehen: Linearantrieb, Hubantrieb und LED-Visualisierung in Echtzeit.</p>
 
       <div class="sim-wrap">
-
         <svg id="sim-svg" width="100%" viewBox="0 0 680 340">
           <!-- Track -->
           <rect x="40" y="242" width="600" height="5" rx="2.5" fill="#e2e8f0"/>
@@ -294,7 +279,7 @@
           <rect x="40" y="237" width="600" height="2" rx="1" fill="#e2e8f0" opacity=".6"/>
           <rect x="40" y="252" width="600" height="2" rx="1" fill="#e2e8f0" opacity=".6"/>
 
-          <!-- Slot labels -->
+          <!-- Slot labels (Slot 1 links, Slot 6 rechts) -->
           <text id="sl1" x="90"  y="30" text-anchor="middle" font-size="11" fill="#64748b">Slot 1</text>
           <text id="sl2" x="190" y="30" text-anchor="middle" font-size="11" fill="#64748b">Slot 2</text>
           <text id="sl3" x="290" y="30" text-anchor="middle" font-size="11" fill="#64748b">Slot 3</text>
@@ -303,42 +288,12 @@
           <text id="sl6" x="590" y="30" text-anchor="middle" font-size="11" fill="#64748b">Slot 6</text>
 
           <!-- Bottles -->
-          <g id="bottle-1">
-            <rect x="73" y="42" width="34" height="78" rx="6" fill="#dbeafe" stroke="#e2e8f0" stroke-width=".5"/>
-            <rect x="80" y="37" width="20" height="11" rx="3" fill="#93c5fd"/>
-            <rect x="84" y="113" width="12" height="14" rx="2" fill="#60a5fa"/>
-            <text x="90" y="84" text-anchor="middle" font-size="9" fill="#1d4ed8">Kirsch</text>
-          </g>
-          <g id="bottle-2">
-            <rect x="173" y="42" width="34" height="78" rx="6" fill="#fef9c3" stroke="#e2e8f0" stroke-width=".5"/>
-            <rect x="180" y="37" width="20" height="11" rx="3" fill="#fde047"/>
-            <rect x="184" y="113" width="12" height="14" rx="2" fill="#facc15"/>
-            <text x="190" y="84" text-anchor="middle" font-size="9" fill="#92400e">Ginger</text>
-          </g>
-          <g id="bottle-3">
-            <rect x="273" y="42" width="34" height="78" rx="6" fill="#dcfce7" stroke="#e2e8f0" stroke-width=".5"/>
-            <rect x="280" y="37" width="20" height="11" rx="3" fill="#86efac"/>
-            <rect x="284" y="113" width="12" height="14" rx="2" fill="#4ade80"/>
-            <text x="290" y="84" text-anchor="middle" font-size="9" fill="#15803d">Zitrone</text>
-          </g>
-          <g id="bottle-4">
-            <rect x="373" y="42" width="34" height="78" rx="6" fill="#fef3c7" stroke="#e2e8f0" stroke-width=".5"/>
-            <rect x="380" y="37" width="20" height="11" rx="3" fill="#fcd34d"/>
-            <rect x="384" y="113" width="12" height="14" rx="2" fill="#f59e0b"/>
-            <text x="390" y="84" text-anchor="middle" font-size="9" fill="#92400e">Multivit</text>
-          </g>
-          <g id="bottle-5">
-            <rect x="473" y="42" width="34" height="78" rx="6" fill="#f0f9ff" stroke="#e2e8f0" stroke-width=".5"/>
-            <rect x="480" y="37" width="20" height="11" rx="3" fill="#bae6fd"/>
-            <rect x="484" y="113" width="12" height="14" rx="2" fill="#38bdf8"/>
-            <text x="490" y="84" text-anchor="middle" font-size="9" fill="#075985">Tonic</text>
-          </g>
-          <g id="bottle-6">
-            <rect x="573" y="42" width="34" height="78" rx="6" fill="#fce7f3" stroke="#e2e8f0" stroke-width=".5"/>
-            <rect x="580" y="37" width="20" height="11" rx="3" fill="#f9a8d4"/>
-            <rect x="584" y="113" width="12" height="14" rx="2" fill="#ec4899"/>
-            <text x="590" y="84" text-anchor="middle" font-size="9" fill="#9d174d">Grenadine</text>
-          </g>
+          <g><rect x="73"  y="42" width="34" height="78" rx="6" fill="#dbeafe" stroke="#e2e8f0" stroke-width=".5"/><rect x="80"  y="37" width="20" height="11" rx="3" fill="#93c5fd"/><rect x="84"  y="113" width="12" height="14" rx="2" fill="#60a5fa"/><text x="90"  y="84" text-anchor="middle" font-size="9" fill="#1d4ed8">Kirsch</text></g>
+          <g><rect x="173" y="42" width="34" height="78" rx="6" fill="#fef9c3" stroke="#e2e8f0" stroke-width=".5"/><rect x="180" y="37" width="20" height="11" rx="3" fill="#fde047"/><rect x="184" y="113" width="12" height="14" rx="2" fill="#facc15"/><text x="190" y="84" text-anchor="middle" font-size="9" fill="#92400e">Ginger</text></g>
+          <g><rect x="273" y="42" width="34" height="78" rx="6" fill="#dcfce7" stroke="#e2e8f0" stroke-width=".5"/><rect x="280" y="37" width="20" height="11" rx="3" fill="#86efac"/><rect x="284" y="113" width="12" height="14" rx="2" fill="#4ade80"/><text x="290" y="84" text-anchor="middle" font-size="9" fill="#15803d">Zitrone</text></g>
+          <g><rect x="373" y="42" width="34" height="78" rx="6" fill="#fef3c7" stroke="#e2e8f0" stroke-width=".5"/><rect x="380" y="37" width="20" height="11" rx="3" fill="#fcd34d"/><rect x="384" y="113" width="12" height="14" rx="2" fill="#f59e0b"/><text x="390" y="84" text-anchor="middle" font-size="9" fill="#92400e">Multivit</text></g>
+          <g><rect x="473" y="42" width="34" height="78" rx="6" fill="#f0f9ff" stroke="#e2e8f0" stroke-width=".5"/><rect x="480" y="37" width="20" height="11" rx="3" fill="#bae6fd"/><rect x="484" y="113" width="12" height="14" rx="2" fill="#38bdf8"/><text x="490" y="84" text-anchor="middle" font-size="9" fill="#075985">Tonic</text></g>
+          <g><rect x="573" y="42" width="34" height="78" rx="6" fill="#fce7f3" stroke="#e2e8f0" stroke-width=".5"/><rect x="580" y="37" width="20" height="11" rx="3" fill="#f9a8d4"/><rect x="584" y="113" width="12" height="14" rx="2" fill="#ec4899"/><text x="590" y="84" text-anchor="middle" font-size="9" fill="#9d174d">Grenadine</text></g>
 
           <!-- Dispenser dots -->
           <ellipse cx="90"  cy="130" rx="9" ry="4" fill="#94a3b8"/>
@@ -349,30 +304,34 @@
           <ellipse cx="590" cy="130" rx="9" ry="4" fill="#94a3b8"/>
 
           <!-- Drop -->
-          <ellipse id="sim-drop" cx="90" cy="148" rx="4" ry="6" fill="#60a5fa" opacity="0"/>
+          <ellipse id="sim-drop" cx="650" cy="148" rx="4" ry="6" fill="#60a5fa" opacity="0"/>
 
-          <!-- Moving group: cup + hub arm together -->
-          <g id="sim-moving" style="transform:translateX(0px);transition:transform 0.9s cubic-bezier(.4,0,.2,1)">
+          <!-- HOME marker ganz rechts -->
+          <text x="618" y="302" font-size="9" fill="#94a3b8">HOME</text>
+          <line x1="650" y1="258" x2="650" y2="270" stroke="#cbd5e1" stroke-width="1"/>
+
+          <!-- Moving group: startet bei HOME = ganz rechts (translateX = 650-90 = 560px) -->
+          <g id="sim-moving" style="transform:translateX(560px);transition:transform 0.9s cubic-bezier(.4,0,.2,1)">
+            <!-- Hub arm -->
             <g id="sim-hub-arm" style="transform:translateY(0px);transition:transform 0.4s ease-in-out">
               <rect x="77" y="162" width="26" height="32" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
               <rect x="83" y="167" width="14" height="3" rx="1" fill="#cbd5e1"/>
               <rect x="83" y="176" width="14" height="3" rx="1" fill="#cbd5e1"/>
               <rect x="83" y="185" width="14" height="3" rx="1" fill="#cbd5e1"/>
             </g>
+            <!-- Carriage -->
             <rect x="71" y="260" width="38" height="8" rx="3" fill="#f1f5f9" stroke="#94a3b8" stroke-width=".8"/>
+            <!-- Cup -->
             <path d="M77 258 L79 230 L101 230 L103 258Z" fill="white" stroke="#cbd5e1" stroke-width=".8"/>
+            <!-- Cup liquid -->
             <rect id="sim-cup-fill" x="79.5" y="256" width="21" height="0" fill="#60a5fa" opacity=".7"/>
             <text x="90" y="250" text-anchor="middle" font-size="10" fill="#94a3b8">1</text>
           </g>
 
-          <!-- HOME marker -->
-          <text x="47" y="302" font-size="9" fill="#94a3b8">HOME</text>
-          <line x1="40" y1="258" x2="40" y2="270" stroke="#cbd5e1" stroke-width="1"/>
-
           <!-- State box -->
           <rect x="40" y="292" width="600" height="38" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width=".5"/>
           <text id="sim-state-main" x="340" y="307" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Bereit – Rezept auswählen und Start drücken</text>
-          <text id="sim-state-sub"  x="340" y="322" text-anchor="middle" font-size="10" fill="#64748b">State: IDLE · Position: HOME</text>
+          <text id="sim-state-sub"  x="340" y="322" text-anchor="middle" font-size="10" fill="#64748b">State: IDLE · Position: HOME (rechts)</text>
         </svg>
 
         <div class="sim-controls">
@@ -393,11 +352,11 @@
           <span id="sim-hub" class="sim-badge">Hub: IDLE</span>
           <span id="sim-led" class="sim-badge success">LED: AUS</span>
         </div>
-
       </div>
     </div>
   </section>
 
+  <!-- BLOG -->
   <section id="blog">
     <div class="container">
       <h2>Blog / Arbeitstagebuch</h2>
@@ -458,6 +417,7 @@
     </div>
   </section>
 
+  <!-- TEAM -->
   <section id="team">
     <div class="container grid grid-3">
       <div class="card">
@@ -502,6 +462,7 @@
     </div>
   </section>
 
+  <!-- GALERIE -->
   <section id="galerie" class="gallery">
     <div class="container">
       <h2>Galerie</h2>
@@ -531,6 +492,7 @@
     </div>
   </section>
 
+  <!-- MEILENSTEINE -->
   <section id="meilensteine">
     <div class="container">
       <h2>Meilensteine & Fortschritt & Ausblick</h2>
@@ -547,6 +509,7 @@
     </div>
   </section>
 
+  <!-- KONTAKT -->
   <section id="kontakt">
     <div class="container grid grid-2">
       <div class="card">
@@ -678,30 +641,33 @@
       document.addEventListener('keydown', e => { if(!lb.classList.contains('open')) return; if(e.key==='Escape') closeLB(); if(e.key==='ArrowLeft') openAt(idx-1); if(e.key==='ArrowRight') openAt(idx+1); });
     })();
 
-    /* ═══════════════════════════════════════
-       SIMULATION
-    ═══════════════════════════════════════ */
-    const SIM_SLOT_X    = [90, 190, 290, 390, 490, 590];
-    const SIM_HOME_X    = 90;
-    const SIM_COLORS    = ['#60a5fa','#fde047','#4ade80','#fcd34d','#38bdf8','#ec4899'];
-    const SIM_NAMES     = ['Kirsch','Ginger','Zitrone','Multivit','Tonic','Grenadine'];
-    const SIM_RECIPES   = {
+    /* ═══════════ SIMULATION ═══════════ */
+    // HOME ist ganz rechts (x=650), Slots gehen von links (x=90) nach rechts (x=590)
+    // moving-group Ursprung liegt bei x=90 (Slot 1 Mitte)
+    // translateX = targetX - HOME_X → negativ = nach links fahren
+    const SIM_SLOT_X  = [90, 190, 290, 390, 490, 590];
+    const SIM_HOME_X  = 650;
+    const SIM_START_X = SIM_HOME_X - SIM_SLOT_X[0]; // 560px = Startoffset
+    const SIM_COLORS  = ['#60a5fa','#fde047','#4ade80','#fcd34d','#38bdf8','#ec4899'];
+    const SIM_NAMES   = ['Kirsch','Ginger','Zitrone','Multivit','Tonic','Grenadine'];
+    const SIM_RECIPES = {
       cherry:{ name:'Cherry Spark', slots:[1,3],   hubs:[2,1],   color:'#f43f5e' },
       citrus:{ name:'Citrus Fizz',  slots:[2,3,5], hubs:[1,2,1], color:'#eab308' },
       tropic:{ name:'Tropic Breeze',slots:[1,4,6], hubs:[1,1,2], color:'#10b981' },
       tonic: { name:'Tonic Twist',  slots:[2,5],   hubs:[2,2],   color:'#3b82f6' }
     };
 
-    let simRecipe   = SIM_RECIPES.cherry;
-    let simRunning  = false;
-    let simFill     = 0;
+    let simRecipe  = SIM_RECIPES.cherry;
+    let simRunning = false;
+    let simFill    = 0;
 
     function simSleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
     function simMove(targetX, ms){
+      const offset = targetX - SIM_HOME_X; // negativ = links vom HOME
       const mg = document.getElementById('sim-moving');
       mg.style.transition = `transform ${ms}ms cubic-bezier(.4,0,.2,1)`;
-      mg.style.transform  = `translateX(${targetX - SIM_HOME_X}px)`;
+      mg.style.transform  = `translateX(${offset}px)`;
     }
 
     function simHubArm(yOffset){
@@ -822,7 +788,7 @@
       document.getElementById('sim-cup-fill').setAttribute('height','0');
       const mg = document.getElementById('sim-moving');
       mg.style.transition = 'transform 0.5s ease';
-      mg.style.transform  = 'translateX(0px)';
+      mg.style.transform  = `translateX(${SIM_START_X}px)`;
       simHubArm(0);
       document.getElementById('sim-drop').setAttribute('opacity','0');
       simSetLED('#94a3b8','0.3');
@@ -830,7 +796,7 @@
       simSetBadge('sim-lin','Linear: HOME','');
       simSetBadge('sim-hub','Hub: IDLE','');
       simSetBadge('sim-led','LED: AUS','success');
-      simSetState('Bereit – Rezept auswählen und Start drücken','State: IDLE · Position: HOME');
+      simSetState('Bereit – Rezept auswählen und Start drücken','State: IDLE · Position: HOME (rechts)');
       document.getElementById('sim-btn-start').disabled = false;
       document.getElementById('sim-btn-reset').disabled = true;
       document.getElementById('sim-recipe').disabled    = false;
