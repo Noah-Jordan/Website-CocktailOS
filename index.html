@@ -118,27 +118,13 @@
 
     .gallery{ padding:3rem 0; }
     .gallery-section-title{ margin:1.5rem 0 .75rem; color:#0a2a66; font-size:1.1rem; font-weight:700; }
-    .gallery .grid-auto{
-      display:grid; gap:14px;
-      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-    }
+    .gallery .grid-auto{ display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
     .gallery-card{ display:flex; flex-direction:column; gap:6px; }
-    .gallery-item{
-      position:relative; overflow:hidden; border-radius:14px;
-      border:1px solid #e5e7eb; background:#fff; aspect-ratio:16/10; display:block;
-    }
+    .gallery-item{ position:relative; overflow:hidden; border-radius:14px; border:1px solid #e5e7eb; background:#fff; aspect-ratio:16/10; display:block; }
     .gallery-item img, .gallery-item video{ width:100%; height:100%; object-fit:cover; display:block; }
     .gallery-item:hover{ box-shadow:0 6px 18px rgba(0,0,0,.08); transform:translateY(-1px); transition:all .2s ease; }
-
-    .badge-video{
-      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-      background:rgba(10,42,102,.15); transition:background .2s;
-    }
-    .badge-video::after{
-      content:""; width:52px; height:52px; border-radius:50%;
-      background: rgba(10,42,102,.85) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") no-repeat 55% center / 28px;
-      box-shadow:0 4px 16px rgba(0,0,0,.3); transition:transform .2s, box-shadow .2s;
-    }
+    .badge-video{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(10,42,102,.15); transition:background .2s; }
+    .badge-video::after{ content:""; width:52px; height:52px; border-radius:50%; background: rgba(10,42,102,.85) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") no-repeat 55% center / 28px; box-shadow:0 4px 16px rgba(0,0,0,.3); transition:transform .2s, box-shadow .2s; }
     .gallery-item:hover .badge-video{ background:rgba(10,42,102,.25); }
     .gallery-item:hover .badge-video::after{ transform:scale(1.1); box-shadow:0 6px 20px rgba(0,0,0,.4); }
     .gallery-caption{ font-size:.9rem; line-height:1.35; color:#475569; padding:0 2px; }
@@ -148,30 +134,18 @@
     .lightbox-inner{ width:min(1200px,92vw); max-height:88vh; background:#000; border-radius:14px; position:relative; overflow:hidden; }
     .lightbox-content{ display:flex; align-items:center; justify-content:center; }
     .lightbox-content img, .lightbox-content video{ max-width:100%; max-height:88vh; display:block; }
-    .lightbox-close, .lightbox-prev, .lightbox-next{
-      position:absolute; top:10px; background:rgba(255,255,255,.12); color:#fff;
-      border:none; padding:.6rem .8rem; border-radius:10px; cursor:pointer; backdrop-filter:blur(6px);
-    }
+    .lightbox-close, .lightbox-prev, .lightbox-next{ position:absolute; top:10px; background:rgba(255,255,255,.12); color:#fff; border:none; padding:.6rem .8rem; border-radius:10px; cursor:pointer; backdrop-filter:blur(6px); }
     .lightbox-close{ right:10px; }
     .lightbox-prev{ left:10px; top:50%; transform:translateY(-50%); }
     .lightbox-next{ right:10px; top:50%; transform:translateY(-50%); }
 
-    #toTop{
-      position:fixed; bottom:2rem; right:2rem; width:44px; height:44px;
-      border-radius:50%; background:var(--blue); color:white; border:none;
-      font-size:1.2rem; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,.2);
-      opacity:0; transform:translateY(10px); transition:opacity .25s, transform .25s; z-index:200;
-    }
+    #toTop{ position:fixed; bottom:2rem; right:2rem; width:44px; height:44px; border-radius:50%; background:var(--blue); color:white; border:none; font-size:1.2rem; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,.2); opacity:0; transform:translateY(10px); transition:opacity .25s, transform .25s; z-index:200; }
     #toTop.visible{ opacity:1; transform:translateY(0); }
 
     .sim-wrap{ background:#fff; border:1px solid #e5e7eb; border-radius:18px; padding:1.5rem; overflow-x:auto; }
-    .sim-wrap svg{ min-width:560px; }
+    .sim-wrap svg{ min-width:580px; }
     .sim-controls{ display:flex; align-items:center; gap:10px; margin:10px 0 6px; flex-wrap:wrap; }
-    .sim-controls button{
-      padding:6px 16px; font-size:13px; font-weight:600;
-      border:1.5px solid var(--blue); border-radius:999px;
-      background:white; color:var(--blue); cursor:pointer; transition:background .15s, color .15s;
-    }
+    .sim-controls button{ padding:6px 16px; font-size:13px; font-weight:600; border:1.5px solid var(--blue); border-radius:999px; background:white; color:var(--blue); cursor:pointer; transition:background .15s, color .15s; }
     .sim-controls button:hover:not(:disabled){ background:var(--blue); color:white; }
     .sim-controls button:disabled{ opacity:.4; cursor:not-allowed; }
     .sim-controls select{ font-size:13px; padding:5px 10px; border-radius:999px; border:1.5px solid #e5e7eb; background:white; color:#0b1220; }
@@ -180,6 +154,15 @@
     .sim-badge.info{ background:#dbeafe; color:#1d4ed8; }
     .sim-badge.success{ background:#dcfce7; color:#15803d; }
     .sim-badge.warning{ background:#fef9c3; color:#92400e; }
+
+    .seq-state{ display:flex; gap:.75rem; align-items:flex-start; }
+    .seq-badge{ min-width:76px; font-size:.75rem; font-weight:700; padding:3px 8px; border-radius:999px; text-align:center; }
+    .seq-badge.idle   { background:#f1f5f9; color:#475569; }
+    .seq-badge.active { background:#dbeafe; color:#1d4ed8; }
+    .seq-badge.trans  { background:#fef9c3; color:#92400e; }
+    .seq-badge.done   { background:#dcfce7; color:#15803d; }
+    .seq-title{ font-size:.85rem; font-weight:600; color:#0f172a; }
+    .seq-desc { font-size:.8rem; color:#64748b; }
   </style>
 </head>
 <body>
@@ -227,10 +210,10 @@
   <div class="stats-banner">
     <div class="container stats-inner">
       <div class="stat"><span class="stat-num">46</span><span class="stat-label">Blog-Einträge</span></div>
-      <div class="stat"><span class="stat-num">32</span><span class="stat-label">Cocktails</span></div>
+      <div class="stat"><span class="stat-num">6</span><span class="stat-label">Dispenser</span></div>
       <div class="stat"><span class="stat-num">108</span><span class="stat-label">Git Commits</span></div>
       <div class="stat"><span class="stat-num">1,2</span><span class="stat-label">Abschlussnote</span></div>
-      <div class="stat"><span class="stat-num">S7-1500</span><span class="stat-label">Siemens SPS</span></div>
+      <div class="stat"><span class="stat-num">S7-1200</span><span class="stat-label">Siemens SPS</span></div>
     </div>
   </div>
 
@@ -272,73 +255,81 @@
       <p class="muted">Wähle ein Rezept und starte die Simulation um den vollautomatischen Ablauf der Anlage zu verstehen: Linearantrieb, Hubantrieb und LED-Visualisierung in Echtzeit.</p>
 
       <div class="sim-wrap">
-        <svg id="sim-svg" width="100%" viewBox="0 0 680 340">
-          <!-- Track -->
-          <rect x="40" y="242" width="600" height="5" rx="2.5" fill="#e2e8f0"/>
-          <rect id="led-strip" x="40" y="248" width="600" height="4" rx="2" fill="#94a3b8" opacity="0.3"/>
-          <rect x="40" y="237" width="600" height="2" rx="1" fill="#e2e8f0" opacity=".6"/>
-          <rect x="40" y="252" width="600" height="2" rx="1" fill="#e2e8f0" opacity=".6"/>
+        <svg width="100%" viewBox="0 0 720 320" style="min-width:580px">
 
-          <!-- Slot labels (Slot 1 links, Slot 6 rechts) -->
-          <text id="sl1" x="90"  y="30" text-anchor="middle" font-size="11" fill="#64748b">Slot 1</text>
-          <text id="sl2" x="190" y="30" text-anchor="middle" font-size="11" fill="#64748b">Slot 2</text>
-          <text id="sl3" x="290" y="30" text-anchor="middle" font-size="11" fill="#64748b">Slot 3</text>
-          <text id="sl4" x="390" y="30" text-anchor="middle" font-size="11" fill="#64748b">Slot 4</text>
-          <text id="sl5" x="490" y="30" text-anchor="middle" font-size="11" fill="#64748b">Slot 5</text>
-          <text id="sl6" x="590" y="30" text-anchor="middle" font-size="11" fill="#64748b">Slot 6</text>
+          <!-- Track: x=40..680, HOME bei x=680 -->
+          <rect x="40" y="230" width="640" height="5" rx="2.5" fill="#e2e8f0"/>
+          <rect id="led" x="40" y="236" width="640" height="4" rx="2" fill="#94a3b8" opacity=".3"/>
+          <rect x="40" y="225" width="640" height="2" rx="1" fill="#e2e8f0" opacity=".5"/>
+          <rect x="40" y="240" width="640" height="2" rx="1" fill="#e2e8f0" opacity=".5"/>
 
-          <!-- Bottles -->
-          <g><rect x="73"  y="42" width="34" height="78" rx="6" fill="#dbeafe" stroke="#e2e8f0" stroke-width=".5"/><rect x="80"  y="37" width="20" height="11" rx="3" fill="#93c5fd"/><rect x="84"  y="113" width="12" height="14" rx="2" fill="#60a5fa"/><text x="90"  y="84" text-anchor="middle" font-size="9" fill="#1d4ed8">Kirsch</text></g>
-          <g><rect x="173" y="42" width="34" height="78" rx="6" fill="#fef9c3" stroke="#e2e8f0" stroke-width=".5"/><rect x="180" y="37" width="20" height="11" rx="3" fill="#fde047"/><rect x="184" y="113" width="12" height="14" rx="2" fill="#facc15"/><text x="190" y="84" text-anchor="middle" font-size="9" fill="#92400e">Ginger</text></g>
-          <g><rect x="273" y="42" width="34" height="78" rx="6" fill="#dcfce7" stroke="#e2e8f0" stroke-width=".5"/><rect x="280" y="37" width="20" height="11" rx="3" fill="#86efac"/><rect x="284" y="113" width="12" height="14" rx="2" fill="#4ade80"/><text x="290" y="84" text-anchor="middle" font-size="9" fill="#15803d">Zitrone</text></g>
-          <g><rect x="373" y="42" width="34" height="78" rx="6" fill="#fef3c7" stroke="#e2e8f0" stroke-width=".5"/><rect x="380" y="37" width="20" height="11" rx="3" fill="#fcd34d"/><rect x="384" y="113" width="12" height="14" rx="2" fill="#f59e0b"/><text x="390" y="84" text-anchor="middle" font-size="9" fill="#92400e">Multivit</text></g>
-          <g><rect x="473" y="42" width="34" height="78" rx="6" fill="#f0f9ff" stroke="#e2e8f0" stroke-width=".5"/><rect x="480" y="37" width="20" height="11" rx="3" fill="#bae6fd"/><rect x="484" y="113" width="12" height="14" rx="2" fill="#38bdf8"/><text x="490" y="84" text-anchor="middle" font-size="9" fill="#075985">Tonic</text></g>
-          <g><rect x="573" y="42" width="34" height="78" rx="6" fill="#fce7f3" stroke="#e2e8f0" stroke-width=".5"/><rect x="580" y="37" width="20" height="11" rx="3" fill="#f9a8d4"/><rect x="584" y="113" width="12" height="14" rx="2" fill="#ec4899"/><text x="590" y="84" text-anchor="middle" font-size="9" fill="#9d174d">Grenadine</text></g>
+          <!-- HOME rechts -->
+          <line x1="680" y1="245" x2="680" y2="258" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="655" y="270" font-size="10" fill="#94a3b8">HOME</text>
 
-          <!-- Dispenser dots -->
-          <ellipse cx="90"  cy="130" rx="9" ry="4" fill="#94a3b8"/>
-          <ellipse cx="190" cy="130" rx="9" ry="4" fill="#94a3b8"/>
-          <ellipse cx="290" cy="130" rx="9" ry="4" fill="#94a3b8"/>
-          <ellipse cx="390" cy="130" rx="9" ry="4" fill="#94a3b8"/>
-          <ellipse cx="490" cy="130" rx="9" ry="4" fill="#94a3b8"/>
-          <ellipse cx="590" cy="130" rx="9" ry="4" fill="#94a3b8"/>
+          <!-- Slot labels -->
+          <text id="sl1" x="90"  y="22" text-anchor="middle" font-size="11" fill="#64748b">Slot 1</text>
+          <text id="sl2" x="180" y="22" text-anchor="middle" font-size="11" fill="#64748b">Slot 2</text>
+          <text id="sl3" x="270" y="22" text-anchor="middle" font-size="11" fill="#64748b">Slot 3</text>
+          <text id="sl4" x="360" y="22" text-anchor="middle" font-size="11" fill="#64748b">Slot 4</text>
+          <text id="sl5" x="450" y="22" text-anchor="middle" font-size="11" fill="#64748b">Slot 5</text>
+          <text id="sl6" x="540" y="22" text-anchor="middle" font-size="11" fill="#64748b">Slot 6</text>
 
-          <!-- Drop -->
-          <ellipse id="sim-drop" cx="650" cy="148" rx="4" ry="6" fill="#60a5fa" opacity="0"/>
+          <!-- Flaschen -->
+          <g><rect x="73"  y="32" width="34" height="72" rx="6" fill="#dbeafe" stroke="#e2e8f0" stroke-width=".5"/><rect x="80"  y="27" width="20" height="10" rx="3" fill="#93c5fd"/><rect x="84"  y="97" width="12" height="14" rx="2" fill="#60a5fa"/><text x="90"  y="72" text-anchor="middle" font-size="9" fill="#1d4ed8">Kirsch</text></g>
+          <g><rect x="163" y="32" width="34" height="72" rx="6" fill="#fef9c3" stroke="#e2e8f0" stroke-width=".5"/><rect x="170" y="27" width="20" height="10" rx="3" fill="#fde047"/><rect x="174" y="97" width="12" height="14" rx="2" fill="#facc15"/><text x="180" y="72" text-anchor="middle" font-size="9" fill="#92400e">Ginger</text></g>
+          <g><rect x="253" y="32" width="34" height="72" rx="6" fill="#dcfce7" stroke="#e2e8f0" stroke-width=".5"/><rect x="260" y="27" width="20" height="10" rx="3" fill="#86efac"/><rect x="264" y="97" width="12" height="14" rx="2" fill="#4ade80"/><text x="270" y="72" text-anchor="middle" font-size="9" fill="#15803d">Zitrone</text></g>
+          <g><rect x="343" y="32" width="34" height="72" rx="6" fill="#fef3c7" stroke="#e2e8f0" stroke-width=".5"/><rect x="350" y="27" width="20" height="10" rx="3" fill="#fcd34d"/><rect x="354" y="97" width="12" height="14" rx="2" fill="#f59e0b"/><text x="360" y="72" text-anchor="middle" font-size="9" fill="#92400e">Multivit</text></g>
+          <g><rect x="433" y="32" width="34" height="72" rx="6" fill="#f0f9ff" stroke="#e2e8f0" stroke-width=".5"/><rect x="440" y="27" width="20" height="10" rx="3" fill="#bae6fd"/><rect x="444" y="97" width="12" height="14" rx="2" fill="#38bdf8"/><text x="450" y="72" text-anchor="middle" font-size="9" fill="#075985">Tonic</text></g>
+          <g><rect x="523" y="32" width="34" height="72" rx="6" fill="#fce7f3" stroke="#e2e8f0" stroke-width=".5"/><rect x="530" y="27" width="20" height="10" rx="3" fill="#f9a8d4"/><rect x="534" y="97" width="12" height="14" rx="2" fill="#ec4899"/><text x="540" y="72" text-anchor="middle" font-size="9" fill="#9d174d">Grenadine</text></g>
 
-          <!-- HOME marker ganz rechts -->
-          <text x="618" y="302" font-size="9" fill="#94a3b8">HOME</text>
-          <line x1="650" y1="258" x2="650" y2="270" stroke="#cbd5e1" stroke-width="1"/>
+          <!-- Dispenser-Punkte -->
+          <ellipse cx="90"  cy="114" rx="8" ry="3.5" fill="#94a3b8"/>
+          <ellipse cx="180" cy="114" rx="8" ry="3.5" fill="#94a3b8"/>
+          <ellipse cx="270" cy="114" rx="8" ry="3.5" fill="#94a3b8"/>
+          <ellipse cx="360" cy="114" rx="8" ry="3.5" fill="#94a3b8"/>
+          <ellipse cx="450" cy="114" rx="8" ry="3.5" fill="#94a3b8"/>
+          <ellipse cx="540" cy="114" rx="8" ry="3.5" fill="#94a3b8"/>
 
-          <!-- Moving group: startet bei HOME = ganz rechts (translateX = 650-90 = 560px) -->
-          <g id="sim-moving" style="transform:translateX(560px);transition:transform 0.9s cubic-bezier(.4,0,.2,1)">
-            <!-- Hub arm -->
-            <g id="sim-hub-arm" style="transform:translateY(0px);transition:transform 0.4s ease-in-out">
-              <rect x="77" y="162" width="26" height="32" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
-              <rect x="83" y="167" width="14" height="3" rx="1" fill="#cbd5e1"/>
-              <rect x="83" y="176" width="14" height="3" rx="1" fill="#cbd5e1"/>
-              <rect x="83" y="185" width="14" height="3" rx="1" fill="#cbd5e1"/>
+          <!-- Tropfen: absolut positioniert, cx wird per JS gesetzt -->
+          <ellipse id="drop" cx="680" cy="128" rx="4" ry="6" fill="#60a5fa" opacity="0"/>
+
+          <!--
+            MOVING GROUP
+            Gruppenursprung = x=90 (Slot-1-Mitte)
+            translateX = targetAbsX - 90
+            HOME (x=680): translateX = 590px  → Becher steht rechts
+            Slot 1 (x=90): translateX = 0px
+            Slot 6 (x=540): translateX = 450px
+          -->
+          <g id="mg" style="transform:translateX(590px);transition:transform 0.95s cubic-bezier(.4,0,.2,1)">
+            <!-- Hub-Arm -->
+            <g id="ha" style="transform:translateY(0px);transition:transform 0.42s ease-in-out">
+              <rect x="77" y="148" width="26" height="28" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+              <rect x="83" y="153" width="14" height="3" rx="1" fill="#cbd5e1"/>
+              <rect x="83" y="161" width="14" height="3" rx="1" fill="#cbd5e1"/>
+              <rect x="83" y="169" width="14" height="3" rx="1" fill="#cbd5e1"/>
             </g>
-            <!-- Carriage -->
-            <rect x="71" y="260" width="38" height="8" rx="3" fill="#f1f5f9" stroke="#94a3b8" stroke-width=".8"/>
-            <!-- Cup -->
-            <path d="M77 258 L79 230 L101 230 L103 258Z" fill="white" stroke="#cbd5e1" stroke-width=".8"/>
-            <!-- Cup liquid -->
-            <rect id="sim-cup-fill" x="79.5" y="256" width="21" height="0" fill="#60a5fa" opacity=".7"/>
-            <text x="90" y="250" text-anchor="middle" font-size="10" fill="#94a3b8">1</text>
+            <!-- Schlitten -->
+            <rect x="72" y="244" width="36" height="8" rx="3" fill="#f1f5f9" stroke="#94a3b8" stroke-width=".8"/>
+            <!-- Becher -->
+            <path d="M78 242 L80 216 L100 216 L102 242Z" fill="white" stroke="#cbd5e1" stroke-width=".8"/>
+            <!-- Flüssigkeit -->
+            <rect id="cf" x="80.5" y="240" width="19" height="0" fill="#60a5fa" opacity=".75"/>
+            <text x="90" y="233" text-anchor="middle" font-size="9" fill="#94a3b8">1</text>
           </g>
 
-          <!-- State box -->
-          <rect x="40" y="292" width="600" height="38" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width=".5"/>
-          <text id="sim-state-main" x="340" y="307" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Bereit – Rezept auswählen und Start drücken</text>
-          <text id="sim-state-sub"  x="340" y="322" text-anchor="middle" font-size="10" fill="#64748b">State: IDLE · Position: HOME (rechts)</text>
+          <!-- State-Box -->
+          <rect x="40" y="278" width="640" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width=".5"/>
+          <text id="sm" x="360" y="292" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Bereit – Rezept wählen und starten</text>
+          <text id="ss" x="360" y="306" text-anchor="middle" font-size="10" fill="#64748b">State: IDLE · Position: HOME (rechts)</text>
         </svg>
 
         <div class="sim-controls">
-          <button id="sim-btn-start" onclick="simStart()">▶ Start Mixen</button>
-          <button id="sim-btn-reset" onclick="simReset()" disabled>↺ Reset</button>
+          <button id="btnS" onclick="simStart()">▶ Start Mixen</button>
+          <button id="btnR" onclick="simReset()" disabled>↺ Reset</button>
           <span style="font-size:13px;color:#64748b">Rezept:</span>
-          <select id="sim-recipe" onchange="simSelectRecipe(this.value)">
+          <select id="rsel" onchange="pickRecipe(this.value)">
             <option value="cherry">Cherry Spark (Slot 1, 3)</option>
             <option value="citrus">Citrus Fizz (Slot 2, 3, 5)</option>
             <option value="tropic">Tropic Breeze (Slot 1, 4, 6)</option>
@@ -347,11 +338,94 @@
         </div>
 
         <div class="sim-badges">
-          <span id="sim-ba"  class="sim-badge">BA: IDLE</span>
-          <span id="sim-lin" class="sim-badge">Linear: HOME</span>
-          <span id="sim-hub" class="sim-badge">Hub: IDLE</span>
-          <span id="sim-led" class="sim-badge success">LED: AUS</span>
+          <span id="bBA"  class="sim-badge">BA: IDLE</span>
+          <span id="bLin" class="sim-badge">Linear: HOME</span>
+          <span id="bHub" class="sim-badge">Hub: IDLE</span>
+          <span id="bLED" class="sim-badge success">LED: AUS</span>
         </div>
+      </div>
+
+      <!-- Sequenzer-Beschreibung -->
+      <div class="grid grid-2" style="margin-top:1.5rem">
+
+        <!-- Linearantrieb -->
+        <div class="card">
+          <h3 style="margin:0 0 .75rem;font-size:1.1rem;color:#0a2a66">⚙️ Linearantrieb – Sequenzer</h3>
+          <p style="font-size:.85rem;color:#475569;margin:0 0 1rem">Zustandsautomat in SCL programmiert. Pro MixStart-Flanke wird ein vollständiger Zyklus abgearbeitet.</p>
+          <div style="display:flex;flex-direction:column;gap:.6rem">
+
+            <div class="seq-state">
+              <span class="seq-badge idle">State 0</span>
+              <div><div class="seq-title">IDLE</div><div class="seq-desc">Sequenzer inaktiv. Wartet auf MixStart-Flanke vom HMI. Alle Bits zurückgesetzt.</div></div>
+            </div>
+
+            <div class="seq-state">
+              <span class="seq-badge active">State 10</span>
+              <div><div class="seq-title">FIND</div><div class="seq-desc">Durchsucht Positionsliste (Slot 1–6) nach nächster Hub-Anforderung (&gt; 0). Keine weiteren → Ziel = HOME.</div></div>
+            </div>
+
+            <div class="seq-state">
+              <span class="seq-badge active">State 20</span>
+              <div><div class="seq-title">SETBITS / WAIT_READY</div><div class="seq-desc">Antrieb bereit und Hub frei? → Positionsbits setzen. 500 ms Sicherheitszeit wird abgewartet.</div></div>
+            </div>
+
+            <div class="seq-state">
+              <span class="seq-badge trans">State 30</span>
+              <div><div class="seq-title">DELAY</div><div class="seq-desc">100 ms Verzögerung nach Bitsetzen — stellt sicher dass die Bits anliegen bevor der Startimpuls kommt.</div></div>
+            </div>
+
+            <div class="seq-state">
+              <span class="seq-badge trans">State 40</span>
+              <div><div class="seq-title">WAIT_DONE</div><div class="seq-desc">Antrieb fährt. Wartet auf „Bereit"-Rückmeldung. Bei HOME → IDLE. Bei Dispenser → State 50.</div></div>
+            </div>
+
+            <div class="seq-state">
+              <span class="seq-badge done">State 50</span>
+              <div><div class="seq-title">HUBS</div><div class="seq-desc">Hübe nacheinander ausführen. Hub gilt erst fertig wenn er aktiv war und wieder freigegeben ist. Danach → State 10.</div></div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Hubantrieb -->
+        <div class="card">
+          <h3 style="margin:0 0 .75rem;font-size:1.1rem;color:#0a2a66">🔧 Hubantrieb – Sequenzer</h3>
+          <p style="font-size:.85rem;color:#475569;margin:0 0 1rem">Zeitbasierte Steuerung ohne Endschalter über parametrierbare Zeiten: MoveUp, HoldTop, MoveDown, HoldBottom. Pro Anforderung genau ein vollständiger Hubzyklus.</p>
+          <div style="display:flex;flex-direction:column;gap:.6rem">
+
+            <div class="seq-state">
+              <span class="seq-badge idle">Zustand 0</span>
+              <div><div class="seq-title">IDLE</div><div class="seq-desc">Alle Ausgänge aus, Timer zurückgesetzt. Wartet auf Startanforderung und Freigabesignal iPosReady.</div></div>
+            </div>
+
+            <div class="seq-state">
+              <span class="seq-badge active">Zustand 20</span>
+              <div><div class="seq-title">FAHR_HOCH</div><div class="seq-desc">qDriveUp aktiv. Hub fährt zeitgesteuert nach oben (MoveUp-Zeit). Danach → WARTE_OBEN.</div></div>
+            </div>
+
+            <div class="seq-state">
+              <span class="seq-badge trans">Zustand 30</span>
+              <div><div class="seq-title">WARTE_OBEN</div><div class="seq-desc">Hub hält oben für HoldTop-Zeit — gibt dem Dispenser Zeit zur Dosierung. Danach → FAHR_RUNTER.</div></div>
+            </div>
+
+            <div class="seq-state">
+              <span class="seq-badge trans">Zustand 40</span>
+              <div><div class="seq-title">FAHR_RUNTER</div><div class="seq-desc">qDriveDown aktiv. Hub fährt zeitgesteuert nach unten (MoveDown-Zeit). Danach → WARTE_UNTEN.</div></div>
+            </div>
+
+            <div class="seq-state">
+              <span class="seq-badge done">Zustand 50</span>
+              <div><div class="seq-title">WARTE_UNTEN</div><div class="seq-desc">Hub hält unten für HoldBottom-Zeit — stellt sicher dass er in Endlage ist. Danach → IDLE. Linearfreigabe wird erteilt.</div></div>
+            </div>
+
+            <div style="margin-top:.25rem;padding:.65rem .85rem;background:#fef2f2;border-radius:10px;border-left:3px solid #f87171">
+              <div style="font-size:.8rem;font-weight:600;color:#991b1b;margin-bottom:.2rem">⚠️ Kollisionsschutz</div>
+              <div style="font-size:.78rem;color:#7f1d1d">Sobald der Linearantrieb fährt (iLinMoving), werden alle Hub-Ausgänge sofort abgeschaltet und der Hub gesperrt. Linearfreigabe nur wenn kein Hubzyklus aktiv und Hub nicht oben steht.</div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -470,7 +544,7 @@
       <p class="gallery-section-title">📷 Bilder</p>
       <div class="grid-auto" id="galleryGrid">
         <figure class="gallery-card"><a href="Ansicht Frontal Vorstellung.jpg" class="gallery-item" data-type="image" data-caption="DrinkOS Gesamtansicht – Schaltschrank links geöffnet, 6 Dispenser-Flaschen oben, Linearantrieb mit Becherhalter im Vordergrund, HMI zeigt Rezeptauswahl"><img src="Ansicht Frontal Vorstellung.jpg" alt="DrinkOS – Gesamtansicht der fertigen Anlage" loading="lazy"></a><figcaption class="gallery-caption">Fertige Anlage – Schaltschrank, 6 Dispenser, Linearantrieb und Siemens HMI</figcaption></figure>
-        <figure class="gallery-card"><a href="Schaltschrank mit LED.jpg" class="gallery-item" data-type="image" data-caption="Schaltschrank mit türkiser LED-Beleuchtung – S7-1500, SITOP PSU100S und Arduino LED-Board voll verdrahtet"><img src="Schaltschrank mit LED.jpg" alt="Schaltschrank mit LED-Beleuchtung" loading="lazy"></a><figcaption class="gallery-caption">Schaltschrank mit LED – S7-1200, SITOP, Arduino-Board fertig verdrahtet</figcaption></figure>
+        <figure class="gallery-card"><a href="Schaltschrank mit LED.jpg" class="gallery-item" data-type="image" data-caption="Schaltschrank mit türkiser LED-Beleuchtung – S7-1200, SITOP PSU100S und Arduino LED-Board voll verdrahtet"><img src="Schaltschrank mit LED.jpg" alt="Schaltschrank mit LED-Beleuchtung" loading="lazy"></a><figcaption class="gallery-caption">Schaltschrank mit LED – S7-1200, SITOP, Arduino-Board fertig verdrahtet</figcaption></figure>
         <figure class="gallery-card"><a href="Ansicht Grundbild.jpg" class="gallery-item" data-type="image" data-caption="HMI Grundbild im Automatikbetrieb – 6 Dispenser-Slots mit Füllstandsanzeige, Betriebsartenwahl BA-Hand / BA-Auto / RT-Mode"><img src="Ansicht Grundbild.jpg" alt="Siemens SIMATIC HMI – Grundbild Automatikbetrieb" loading="lazy"></a><figcaption class="gallery-caption">HMI Grundbild – BA-AUTO aktiv, 6 Slots mit Füllstandsanzeige</figcaption></figure>
         <figure class="gallery-card"><a href="Ansicht Cocktail auswahl.jpg" class="gallery-item" data-type="image" data-caption="HMI Rezeptauswahl – Cherry Spark, Citrus Fizz, Tropic Breeze, Tonic Twist u.v.m."><img src="Ansicht Cocktail auswahl.jpg" alt="Siemens SIMATIC HMI – Cocktailauswahl" loading="lazy"></a><figcaption class="gallery-caption">HMI Cocktailauswahl – 8 Grundrezepte, Mixen-Button und Freestylemode</figcaption></figure>
         <figure class="gallery-card"><a href="Anlage_frontal.jpeg" class="gallery-item" data-type="image" data-caption="Anlage frontal – Schaltschrank"><img src="Anlage_frontal.jpeg" alt="Anlage frontal – Schaltschrank" loading="lazy"></a><figcaption class="gallery-caption">Anlage frontal – Schaltschrank</figcaption></figure>
@@ -642,164 +716,149 @@
     })();
 
     /* ═══════════ SIMULATION ═══════════ */
-    // HOME ist ganz rechts (x=650), Slots gehen von links (x=90) nach rechts (x=590)
-    // moving-group Ursprung liegt bei x=90 (Slot 1 Mitte)
-    // translateX = targetX - HOME_X → negativ = nach links fahren
-    const SIM_SLOT_X  = [90, 190, 290, 390, 490, 590];
-    const SIM_HOME_X  = 650;
-    const SIM_START_X = SIM_HOME_X - SIM_SLOT_X[0]; // 560px = Startoffset
-    const SIM_COLORS  = ['#60a5fa','#fde047','#4ade80','#fcd34d','#38bdf8','#ec4899'];
-    const SIM_NAMES   = ['Kirsch','Ginger','Zitrone','Multivit','Tonic','Grenadine'];
-    const SIM_RECIPES = {
-      cherry:{ name:'Cherry Spark', slots:[1,3],   hubs:[2,1],   color:'#f43f5e' },
-      citrus:{ name:'Citrus Fizz',  slots:[2,3,5], hubs:[1,2,1], color:'#eab308' },
-      tropic:{ name:'Tropic Breeze',slots:[1,4,6], hubs:[1,1,2], color:'#10b981' },
-      tonic: { name:'Tonic Twist',  slots:[2,5],   hubs:[2,2],   color:'#3b82f6' }
+    const SX   = [90, 180, 270, 360, 450, 540]; // absolute SVG-x der Slots
+    const HOME = 680;                             // HOME ganz rechts
+    const G0   = 90;                              // Gruppenursprung = Slot-1-x
+    const SC   = ['#60a5fa','#fde047','#4ade80','#fcd34d','#38bdf8','#ec4899'];
+    const SN   = ['Kirsch','Ginger','Zitrone','Multivit','Tonic','Grenadine'];
+    const REC  = {
+      cherry:{ name:'Cherry Spark', slots:[1,3],   hubs:[2,1],   col:'#f43f5e' },
+      citrus:{ name:'Citrus Fizz',  slots:[2,3,5], hubs:[1,2,1], col:'#eab308' },
+      tropic:{ name:'Tropic Breeze',slots:[1,4,6], hubs:[1,1,2], col:'#10b981' },
+      tonic: { name:'Tonic Twist',  slots:[2,5],   hubs:[2,2],   col:'#3b82f6' }
     };
 
-    let simRecipe  = SIM_RECIPES.cherry;
-    let simRunning = false;
-    let simFill    = 0;
+    let rec = REC.cherry, running = false, fill = 0;
+    const zz = ms => new Promise(r => setTimeout(r, ms));
 
-    function simSleep(ms){ return new Promise(r => setTimeout(r, ms)); }
-
-    function simMove(targetX, ms){
-      const offset = targetX - SIM_HOME_X; // negativ = links vom HOME
-      const mg = document.getElementById('sim-moving');
-      mg.style.transition = `transform ${ms}ms cubic-bezier(.4,0,.2,1)`;
-      mg.style.transform  = `translateX(${offset}px)`;
+    function moveTo(absX, ms){
+      const g = document.getElementById('mg');
+      g.style.transition = `transform ${ms}ms cubic-bezier(.4,0,.2,1)`;
+      g.style.transform  = `translateX(${absX - G0}px)`;
     }
 
-    function simHubArm(yOffset){
-      const arm = document.getElementById('sim-hub-arm');
-      arm.style.transition = 'transform 0.4s ease-in-out';
-      arm.style.transform  = `translateY(${yOffset}px)`;
+    function hubArm(dy){
+      const a = document.getElementById('ha');
+      a.style.transition = 'transform .42s ease-in-out';
+      a.style.transform  = `translateY(${dy}px)`;
     }
 
-    function simAddFill(color){
-      simFill = Math.min(simFill + 7, 24);
-      const f = document.getElementById('sim-cup-fill');
-      f.setAttribute('y', String(256 - simFill));
-      f.setAttribute('height', String(simFill));
-      f.setAttribute('fill', color);
+    function addFill(col){
+      fill = Math.min(fill + 7, 22);
+      const f = document.getElementById('cf');
+      f.setAttribute('y', String(240 - fill));
+      f.setAttribute('height', String(fill));
+      f.setAttribute('fill', col);
     }
 
-    function simSetState(main, sub){
-      document.getElementById('sim-state-main').textContent = main;
-      document.getElementById('sim-state-sub').textContent  = sub;
+    function showDrop(si, visible){
+      const d = document.getElementById('drop');
+      d.setAttribute('cx', String(SX[si]));
+      d.setAttribute('fill', SC[si]);
+      d.setAttribute('opacity', visible ? '0.9' : '0');
     }
 
-    function simSetBadge(id, text, cls){
+    function setState(m, s){
+      document.getElementById('sm').textContent = m;
+      document.getElementById('ss').textContent = s;
+    }
+
+    function badge(id, txt, cls){
       const el = document.getElementById(id);
-      el.textContent = text;
-      el.className = 'sim-badge' + (cls ? ' ' + cls : '');
+      el.textContent = txt;
+      el.className = 'sim-badge' + (cls ? ' '+cls : '');
     }
 
-    function simSetLED(color, opacity){
-      const s = document.getElementById('led-strip');
-      s.setAttribute('fill', color);
-      s.setAttribute('opacity', opacity);
+    function setLED(col, op){
+      document.getElementById('led').setAttribute('fill', col);
+      document.getElementById('led').setAttribute('opacity', op);
     }
 
-    function simSelectRecipe(key){
-      if(simRunning) return;
-      simRecipe = SIM_RECIPES[key];
-      simReset();
-    }
+    function pickRecipe(k){ if(!running){ rec = REC[k]; simReset(); } }
 
-    async function simHubCycle(slotIdx, hubNum, totalHubs){
-      simSetState(
-        `Slot ${slotIdx+1} – Hub ${hubNum}/${totalHubs}: Dosiere ${SIM_NAMES[slotIdx]}...`,
-        `State: HUB · Dispenser ${slotIdx+1} aktiv`
-      );
-      simSetBadge('sim-hub','Hub: HOCH','warning');
-      simHubArm(-20);
-      await simSleep(430);
-
-      const d = document.getElementById('sim-drop');
-      d.setAttribute('cx', String(SIM_SLOT_X[slotIdx]));
-      d.setAttribute('fill', SIM_COLORS[slotIdx]);
-      d.setAttribute('opacity','0.9');
-      await simSleep(180);
-      d.setAttribute('opacity','0');
-      simAddFill(SIM_COLORS[slotIdx]);
-
-      simSetBadge('sim-hub','Hub: RUNTER','info');
-      simHubArm(0);
-      await simSleep(430);
-      simSetBadge('sim-hub','Hub: IDLE','');
+    async function hubCycle(si, n, tot){
+      setState(`Slot ${si+1} – Hub ${n}/${tot}: Dosiere ${SN[si]}…`, `State: HUB · Dispenser ${si+1} aktiv`);
+      badge('bHub','Hub: HOCH','warning');
+      hubArm(-22);
+      await zz(430);
+      showDrop(si, true);
+      await zz(200);
+      showDrop(si, false);
+      addFill(SC[si]);
+      badge('bHub','Hub: RUNTER','info');
+      hubArm(0);
+      await zz(430);
+      badge('bHub','Hub: IDLE','');
     }
 
     async function simStart(){
-      if(simRunning) return;
-      simRunning = true;
-      simFill = 0;
-      document.getElementById('sim-cup-fill').setAttribute('height','0');
-      document.getElementById('sim-btn-start').disabled = true;
-      document.getElementById('sim-btn-reset').disabled = false;
-      document.getElementById('sim-recipe').disabled    = true;
+      if(running) return;
+      running = true; fill = 0;
+      document.getElementById('cf').setAttribute('height','0');
+      document.getElementById('btnS').disabled = true;
+      document.getElementById('btnR').disabled = false;
+      document.getElementById('rsel').disabled = true;
 
-      const r = simRecipe;
-      simSetBadge('sim-ba','BA: AUTO','info');
-      simSetBadge('sim-led','LED: AUTO','success');
-      simSetLED(r.color, '0.6');
-      simSetState(`Rezept: ${r.name} – Starte Automatikbetrieb`, 'State: AUTO · Referenzfahrt OK');
-      await simSleep(600);
+      const r = rec;
+      badge('bBA','BA: AUTO','info');
+      badge('bLED','LED: AUTO','success');
+      setLED(r.col, '.65');
+      setState(`Rezept: ${r.name} – Starte Automatikbetrieb`, 'State: AUTO · Referenzfahrt OK');
+      await zz(700);
 
       for(let i = 0; i < r.slots.length; i++){
-        const slot    = r.slots[i];
-        const slotIdx = slot - 1;
-        const tx      = SIM_SLOT_X[slotIdx];
+        const si = r.slots[i] - 1;
+        const tx = SX[si];
 
-        simSetState(`Fahre zu Slot ${slot} (${SIM_NAMES[slotIdx]})`, `State: MOVE → Pos ${slot} · Linear läuft`);
-        simSetBadge('sim-lin', `Linear: → Slot ${slot}`, 'warning');
-        simMove(tx, 900);
-        await simSleep(950);
-        simSetBadge('sim-lin', `Linear: Slot ${slot} ✓`, 'success');
+        setState(`Fahre zu Slot ${si+1} (${SN[si]})`, `State: MOVE → Pos ${si+1} · Linear läuft`);
+        badge('bLin', `Linear: → Slot ${si+1}`, 'warning');
+        moveTo(tx, 900);
+        await zz(960);
+        badge('bLin', `Linear: Slot ${si+1} ✓`, 'success');
 
         for(let h = 0; h < r.hubs[i]; h++){
-          await simHubCycle(slotIdx, h+1, r.hubs[i]);
-          await simSleep(180);
+          await hubCycle(si, h+1, r.hubs[i]);
+          await zz(200);
         }
-        document.getElementById(`sl${slot}`).setAttribute('fill','#16a34a');
-        await simSleep(250);
+        document.getElementById(`sl${si+1}`).setAttribute('fill','#16a34a');
+        await zz(300);
       }
 
-      simSetState('Zurück zu HOME – Cocktail fertig!', 'State: HOME → IDLE · Fertig-Signal');
-      simSetBadge('sim-lin','Linear: → HOME','warning');
-      simMove(SIM_HOME_X, 900);
-      await simSleep(950);
+      setState('Zurück zu HOME – Cocktail fertig!', 'State: HOME → IDLE · Fertig-Signal');
+      badge('bLin','Linear: → HOME','warning');
+      moveTo(HOME, 900);
+      await zz(960);
 
-      simSetLED('#16a34a','0.8');
-      simSetBadge('sim-lin','Linear: HOME','');
-      simSetBadge('sim-ba','BA: IDLE','');
-      simSetBadge('sim-led','LED: FERTIG ✓','success');
-      simSetState(`Cocktail fertig: ${r.name}!`, 'State: IDLE · Bitte Becher entnehmen');
+      setLED('#16a34a','.85');
+      badge('bLin','Linear: HOME','');
+      badge('bBA','BA: IDLE','');
+      badge('bLED','LED: FERTIG ✓','success');
+      setState(`Cocktail fertig: ${r.name}!`, 'State: IDLE · Bitte Becher entnehmen');
 
-      simRunning = false;
-      document.getElementById('sim-btn-start').disabled = false;
-      document.getElementById('sim-recipe').disabled    = false;
+      running = false;
+      document.getElementById('btnS').disabled = false;
+      document.getElementById('rsel').disabled = false;
       for(let i=1;i<=6;i++) document.getElementById(`sl${i}`).setAttribute('fill','#64748b');
     }
 
     function simReset(){
-      if(simRunning) return;
-      simFill = 0;
-      document.getElementById('sim-cup-fill').setAttribute('height','0');
-      const mg = document.getElementById('sim-moving');
-      mg.style.transition = 'transform 0.5s ease';
-      mg.style.transform  = `translateX(${SIM_START_X}px)`;
-      simHubArm(0);
-      document.getElementById('sim-drop').setAttribute('opacity','0');
-      simSetLED('#94a3b8','0.3');
-      simSetBadge('sim-ba','BA: IDLE','');
-      simSetBadge('sim-lin','Linear: HOME','');
-      simSetBadge('sim-hub','Hub: IDLE','');
-      simSetBadge('sim-led','LED: AUS','success');
-      simSetState('Bereit – Rezept auswählen und Start drücken','State: IDLE · Position: HOME (rechts)');
-      document.getElementById('sim-btn-start').disabled = false;
-      document.getElementById('sim-btn-reset').disabled = true;
-      document.getElementById('sim-recipe').disabled    = false;
+      if(running) return;
+      fill = 0;
+      document.getElementById('cf').setAttribute('height','0');
+      const g = document.getElementById('mg');
+      g.style.transition = 'transform .5s ease';
+      g.style.transform  = `translateX(${HOME - G0}px)`;
+      hubArm(0);
+      showDrop(0, false);
+      setLED('#94a3b8','.3');
+      badge('bBA','BA: IDLE','');
+      badge('bLin','Linear: HOME','');
+      badge('bHub','Hub: IDLE','');
+      badge('bLED','LED: AUS','success');
+      setState('Bereit – Rezept wählen und starten','State: IDLE · Position: HOME (rechts)');
+      document.getElementById('btnS').disabled = false;
+      document.getElementById('btnR').disabled = true;
+      document.getElementById('rsel').disabled = false;
       for(let i=1;i<=6;i++) document.getElementById(`sl${i}`).setAttribute('fill','#64748b');
     }
   </script>
